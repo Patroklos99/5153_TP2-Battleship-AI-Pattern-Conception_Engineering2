@@ -1,0 +1,86 @@
+@startuml
+
+class Main {
+    + {static} main(args: String[])
+}
+
+abstract class Plateau
+
+abstract class Joueur
+
+class Jeu {
+}
+
+class PlateauBateau {
+}
+
+class PlateauTir {
+}
+
+class Bateau {
+}
+
+enum TailleBateau {
+    + 2
+    + 3
+    + 4
+    + 5
+}
+
+class Case {
+}
+
+enum Tir {
+    + aucun
+    + touche
+    + coule
+}
+
+class IA {
+}
+
+enum Difficulte {
+    + debutant
+    + avance
+}
+
+
+class ChargeurPartie {
+    + {static} chargerPartie(nomFichier: String)
+}
+
+class VisualiseurPartie {
+    + visualiserPartie(nomFichier: String)
+    + ajouterEtape(plateau : Plateau)
+}
+
+class AfficheurPartie {
+    + {static} afficherPartie(nomFichier: String)
+}
+
+class EnregistreurPartie {
+    + {static} enregistrerPartie(nomFichier: String, jeu: Jeu)
+}
+
+class Personne {
+}
+
+
+PlateauBateau -- "5" Bateau
+Bateau -left- TailleBateau
+Plateau <|-- PlateauBateau
+Plateau <|-- PlateauTir
+Jeu -left-> VisualiseurPartie
+Jeu --> EnregistreurPartie
+Jeu --> AfficheurPartie
+Jeu -> ChargeurPartie
+Main --> Jeu
+Jeu-- "4" Plateau
+Plateau -- "*" Case
+Case -- Tir
+IA -left- Difficulte
+Joueur <|- Personne
+Joueur <|-down- IA
+Jeu *-left-- "2" Joueur
+
+@enduml
