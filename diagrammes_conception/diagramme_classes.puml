@@ -4,20 +4,45 @@ class Main {
     + {static} main(args: String[])
 }
 
-abstract class Plateau
+abstract class Plateau{
+    - cases[][]: Case
+    + ajouterTir(coordonnee: pair): Tir
+}
 
-abstract class Joueur
+abstract class Joueur{
+    # determinerTir(): pair
+    + demanderTir(): pair
+    + demanderPlacerBateaux()
+    # determinerPlacerBateaux()
+}
+
+class MenuPrincipal{
+    + afficherMenu()
+    - jouerNouvellePartie()
+    - jouerPartieExistante(nomFichier: String)
+    - quitterJeu()
+}
 
 class Jeu {
+    + jouer()
+    - determinerModeJeu()
+    - actualiserPlateaux(coordonnee: pair, plateau: Plateau)
+    - effectuerProchainTour()
+    - determinerGagnant()
 }
 
 class PlateauBateau {
+    + placerBateau()
 }
 
 class PlateauTir {
+    - verifierTir(coordonnee: pair)
 }
 
 class Bateau {
+    - Position[]: pair
+    - PointDeVie: int
+    + estTouche(coordonnee: pair): Tir
 }
 
 enum TailleBateau {
@@ -32,30 +57,28 @@ class Case {
 
 enum Tir {
     + aucun
+    + rate
     + touche
     + coule
 }
 
-class IA {
+class IADebutant {
 }
 
-enum Difficulte {
-    + debutant
-    + avance
+class IAAvance{
 }
-
 
 class ChargeurPartie {
-    + {static} chargerPartie(nomFichier: String)
+    + {static} chargerPartie(nomFichier: String): Jeu
 }
 
 class VisualiseurPartie {
-    + visualiserPartie(nomFichier: String)
+    + visualiserPartie(nomFichier: String): pair<PlateauBateau,PlateauTir>
     + ajouterEtape(plateau : Plateau)
 }
 
 class AfficheurPartie {
-    + {static} afficherPartie(nomFichier: String)
+    + {static} afficherPartie(plateauBat: PlateauBateau, plateauTir: PlateauTir)
 }
 
 class EnregistreurPartie {
@@ -73,14 +96,16 @@ Plateau <|-- PlateauTir
 Jeu -left-> VisualiseurPartie
 Jeu --> EnregistreurPartie
 Jeu --> AfficheurPartie
-Jeu -> ChargeurPartie
-Main --> Jeu
+MenuPrincipal -> ChargeurPartie
+Main --> MenuPrincipal
+MenuPrincipal --> Jeu
 Jeu-- "4" Plateau
 Plateau -- "*" Case
-Case -- Tir
-IA -left- Difficulte
+Case -left- Tir
 Joueur <|- Personne
-Joueur <|-down- IA
+Joueur <|-down- IADebutant
+Joueur <|-down- IAAvance
 Jeu *-left-- "2" Joueur
+PlateauBateau <- PlateauTir
 
 @enduml
