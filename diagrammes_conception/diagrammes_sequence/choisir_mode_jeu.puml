@@ -1,0 +1,30 @@
+@startuml sequence_noter_panier
+hide footbox
+mainframe Choisir Mode de jeu
+
+actor Joueur_Main as joueur
+participant Menu
+
+joueur --> Menu : jouer()
+activate Menu
+activate joueur
+
+create Jeu
+Menu --> Jeu : new
+
+Menu --> Jeu : jouer()
+activate Jeu
+
+joueur --> Jeu : determinerModeJeu()
+alt Jouer contre humain
+ Jeu --> Jeu : Connecter autre joueur
+else Jouer contre ordinateur
+ alt Jouer contre ordinateur débutant
+   create IAdebutant
+   Jeu --> IAdebutant : new
+ else Jouer contre ordinateur avancé
+   create IAavance
+   Jeu --> IAavance : new
+ end
+end
+@enduml
