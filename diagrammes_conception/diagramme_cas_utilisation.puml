@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+package Joueurs {
+  actor Joueur1 as joueur1
+  actor Joueur2 as joueur2
+}
+
+package Ordinateur {
+  actor :IA Débutant: as iaDeb
+  actor :IA Avancé: as iaAv
+}
+
+rectangle Battleship {
+  usecase "Charger partie" as UC1
+  usecase "Commencer nouvelle partie" as UC2
+  usecase "Jouer" as UC3
+  usecase "Jouer contre un humain" as UC4
+  usecase "Jouer contre un ordinateur" as UC5
+  usecase "Jouer contre ordinateur débutant" as UC6
+  usecase "Jouer contre ordinateur avancé" as UC7
+  usecase "Visualiser partie" as UC8
+  usecase "Enregistrer partie" as UC9
+  usecase "Placer navire" as UC10
+  usecase "Tirer" as UC11
+  usecase "Choisir case" as UC12
+}
+
+Joueurs --> UC1
+Joueurs --> UC2
+Joueurs --> UC3
+Joueurs --> UC4
+Joueurs --> UC5
+Joueurs --> UC6
+Joueurs --> UC7
+Joueurs --> UC8
+Joueurs --> UC9
+Joueurs --> UC10
+Joueurs --> UC11
+Joueurs --> UC12
+
+Ordinateur --> UC10
+Ordinateur --> UC11
+
+@enduml
