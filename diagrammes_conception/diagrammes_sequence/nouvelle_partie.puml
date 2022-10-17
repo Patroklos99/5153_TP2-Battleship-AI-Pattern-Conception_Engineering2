@@ -1,0 +1,18 @@
+@startuml sequence_noter_panier
+hide footbox
+mainframe Nouvelle Partie
+
+actor Joueur_Main as joueur
+participant Menu
+
+joueur --> Menu : jouerNouvellePartie()
+activate Menu
+activate joueur
+
+create Jeu
+Menu --> Jeu : new
+activate Jeu
+
+Menu --> Jeu : jouer()
+
+@enduml
