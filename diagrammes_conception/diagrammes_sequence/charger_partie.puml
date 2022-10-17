@@ -1,0 +1,29 @@
+@startuml sequence_noter_panier
+hide footbox
+mainframe Charger Partie
+
+actor Joueur_Main as joueur
+participant Menu
+participant ChargeurPartie 
+participant Jeu
+
+joueur --> Menu : jouerPartieExistante()
+activate Menu
+activate joueur
+
+Menu --> ChargeurPartie : chargerPartie()
+activate ChargeurPartie
+
+ChargeurPartie --> ChargeurPartie : Récupérer Fichier
+ChargeurPartie --> ChargeurPartie : Lire Fichier
+ChargeurPartie --> ChargeurPartie : Récupérer JSON
+
+create Jeu
+ChargeurPartie --> Jeu : new
+activate Jeu
+ChargeurPartie --> Menu : return Jeu
+deactivate ChargeurPartie
+
+Menu --> Jeu : jouer()
+
+@enduml
