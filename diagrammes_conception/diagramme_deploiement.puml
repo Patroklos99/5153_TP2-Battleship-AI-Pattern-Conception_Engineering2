@@ -1,0 +1,19 @@
+@startuml
+
+node BaseDonnées{
+[JSON de sauvegarde]
+}
+
+node Serveur{
+[Jeu]
+}
+
+node Client{
+[Joueur 1]
+[Joueur 2]
+}
+
+BaseDonnées -- Serveur
+Serveur -- Client
+
+@enduml
