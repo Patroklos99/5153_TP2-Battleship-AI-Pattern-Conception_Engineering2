@@ -14,10 +14,7 @@ rectangle Battleship {
   usecase "Charger partie" as UC1
   usecase "Commencer nouvelle partie" as UC2
   usecase "Jouer" as UC3
-  usecase "Jouer contre un humain" as UC4
-  usecase "Jouer contre un ordinateur" as UC5
-  usecase "Jouer contre ordinateur débutant" as UC6
-  usecase "Jouer contre ordinateur avancé" as UC7
+  usecase "Choisir mode de jeu" as UC4
   usecase "Visualiser partie" as UC8
   usecase "Enregistrer partie" as UC9
   usecase "Placer navire" as UC10
@@ -29,9 +26,6 @@ Joueurs --> UC1
 Joueurs --> UC2
 Joueurs --> UC3
 Joueurs --> UC4
-Joueurs --> UC5
-Joueurs --> UC6
-Joueurs --> UC7
 Joueurs --> UC8
 Joueurs --> UC9
 Joueurs --> UC10

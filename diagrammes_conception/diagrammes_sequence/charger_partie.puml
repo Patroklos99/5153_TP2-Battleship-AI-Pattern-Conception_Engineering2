@@ -3,27 +3,27 @@ hide footbox
 mainframe Charger Partie
 
 actor Joueur_Main as joueur
-participant Menu
+participant MenuPrincipal
 participant ChargeurPartie 
 participant Jeu
 
-joueur --> Menu : jouerPartieExistante()
-activate Menu
+joueur -> MenuPrincipal : jouerPartieExistante(nomFichier)
+activate MenuPrincipal
 activate joueur
 
-Menu --> ChargeurPartie : chargerPartie()
+MenuPrincipal -> ChargeurPartie : chargerPartie(nomFichier)
 activate ChargeurPartie
 
-ChargeurPartie --> ChargeurPartie : Récupérer Fichier
-ChargeurPartie --> ChargeurPartie : Lire Fichier
-ChargeurPartie --> ChargeurPartie : Récupérer JSON
+ChargeurPartie -> ChargeurPartie : Récupérer Fichier
+ChargeurPartie -> ChargeurPartie : Lire Fichier
+ChargeurPartie -> ChargeurPartie : Récupérer JSON
 
 create Jeu
-ChargeurPartie --> Jeu : new
+ChargeurPartie -> Jeu : new
 activate Jeu
-ChargeurPartie --> Menu : return Jeu
+ChargeurPartie --> MenuPrincipal : return Jeu
 deactivate ChargeurPartie
 
-Menu --> Jeu : jouer()
+MenuPrincipal -> Jeu : jouer()
 
 @enduml

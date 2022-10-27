@@ -3,28 +3,30 @@ hide footbox
 mainframe Choisir Mode de jeu
 
 actor Joueur_Main as joueur
-participant Menu
+participant MenuPrincipal
 
-joueur --> Menu : jouer()
-activate Menu
+joueur -> MenuPrincipal : jouer()
+activate MenuPrincipal
 activate joueur
 
 create Jeu
-Menu --> Jeu : new
+MenuPrincipal -> Jeu : new
 
-Menu --> Jeu : jouer()
+MenuPrincipal -> Jeu : jouer()
+deactivate MenuPrincipal
 activate Jeu
 
-joueur --> Jeu : determinerModeJeu()
+Jeu -> Jeu : determinerModeJeu()
+joueur -> Jeu : réponse
 alt Jouer contre humain
- Jeu --> Jeu : Connecter autre joueur
+ Jeu -> Jeu : Connecter autre joueur
 else Jouer contre ordinateur
  alt Jouer contre ordinateur débutant
    create IAdebutant
-   Jeu --> IAdebutant : new
+   Jeu -> IAdebutant : new
  else Jouer contre ordinateur avancé
    create IAavance
-   Jeu --> IAavance : new
+   Jeu -> IAavance : new
  end
 end
 @enduml

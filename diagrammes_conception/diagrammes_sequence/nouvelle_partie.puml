@@ -3,16 +3,16 @@ hide footbox
 mainframe Nouvelle Partie
 
 actor Joueur_Main as joueur
-participant Menu
+participant MenuPrincipal
 
-joueur --> Menu : jouerNouvellePartie()
-activate Menu
+joueur -> MenuPrincipal : jouerNouvellePartie()
+activate MenuPrincipal
 activate joueur
 
 create Jeu
-Menu --> Jeu : new
+MenuPrincipal -> Jeu : new
 activate Jeu
 
-Menu --> Jeu : jouer()
+MenuPrincipal -> Jeu : jouer()
 
 @enduml
