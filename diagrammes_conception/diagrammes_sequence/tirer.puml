@@ -22,7 +22,7 @@ Jeu -> Jeu: determinerGagnant()
 alt Tous les bateaux de l'adversaire ont coulé
 Jeu --> joueur: Il est le gagnant de la partie
 else
-Jeu -> Jeu: effectuerProchainTour
+Jeu -> Jeu: effectuerProchainTour()
 
 end
 
