@@ -39,6 +39,7 @@ class EnregistreurPartie
 class ChargeurPartie
 
 MenuPrincipal --> ChargeurPartie
+VisualiseurPartie --> AfficheurPartie
 
 }
 
