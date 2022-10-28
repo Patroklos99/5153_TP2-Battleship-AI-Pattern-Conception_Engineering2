@@ -33,11 +33,27 @@ CHAL65550003, ...
 
 6 NOVEMBRE 2022
 </div>
-
+<div style="page-break-after: always;"></div>
 
 # TABLE DES MATIÈRES
 
-(à compléter à la fin)
+### Diagramme de cas d'utilisation
+### Diagramme de classes
+### Diagrammes de séquence
+&nbsp; **Charger la partie** <br/>
+&nbsp; **Choisir le mode de jeu** <br/>
+&nbsp; **Nouvelle partie** <br/>
+&nbsp; **Tirer** <br/>
+&nbsp; **Visualiser la partie** <br/>
+&nbsp; **Placer les navires** <br/>
+&nbsp; **Enregistrer la partie** <br/>
+&nbsp; **Choisir la case** <br/>
+&nbsp; **Jouer**
+### Diagramme de packages du système
+### Diagramme de composants
+### Diagramme de déploiement du système
+
+*(à compléter à la fin)*
 
 <div style="page-break-after: always;"></div>
 
@@ -50,7 +66,7 @@ CHAL65550003, ...
 ![Diagramme de classes](diagrammes_conception/images_diagrammes/diagramme_classes.png)<br/>
 ...
 
-# Diagrammes de séquences
+# Diagrammes de séquence
 ## Charger la partie
 ![Diagramme de séquence pour charger la partie](diagrammes_conception/images_diagrammes/charger_partie.png)<br/>
 ...
