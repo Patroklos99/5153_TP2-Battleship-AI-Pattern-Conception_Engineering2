@@ -102,7 +102,7 @@ PHILIPPE BÉLANGER BELP07119706 <br>
 ![Diagramme pour enregistrer la partie](diagrammes_conception/images_diagrammes/enregistrer_partie.png)<br/>
 
 ## Choisir la case
-![Diagramme de séquence pour visualiser la partie](diagrammes_conception/images_diagrammes/choisir_case.png)<br/>
+![Diagramme de séquence pour visualiser la case](diagrammes_conception/images_diagrammes/choisir_case.png)<br/>
 
 ## Jouer
 ...
