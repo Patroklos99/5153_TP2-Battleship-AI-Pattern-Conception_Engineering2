@@ -80,6 +80,7 @@ CHAL65550003, PARF04119608, SALR02089408 ET BELP07119706
 ...
 
 ## Tirer
+![Diagramme de séquence pour tirer](diagrammes_conception/images_diagrammes/tirer.png)<br/>
 ...
 
 ## Visualiser la partie
@@ -87,9 +88,11 @@ CHAL65550003, PARF04119608, SALR02089408 ET BELP07119706
 ...
 
 ## Placer les navires
+![Diagramme de séquence pour placer les navires](diagrammes_conception/images_diagrammes/placer_navire.png)<br/>
 ...
 
 ## Enregistrer la partie
+![Diagramme pour enregistrer la partie](diagrammes_conception/images_diagrammes/enregistrer_partie.png)<br/>
 ...
 
 ## Choisir la case
@@ -104,6 +107,7 @@ CHAL65550003, PARF04119608, SALR02089408 ET BELP07119706
 ...
 
 # Diagramme de composants
+![Diagramme de composants](diagrammes_conception/images_diagrammes/diagramme_composants.png)<br/>
 ...
 
 # Diagramme de déploiement du système
