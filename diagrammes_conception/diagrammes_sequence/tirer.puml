@@ -9,9 +9,10 @@ participant "afficheur: AfficheurPartie" as AfficheurPartie
 
 
 
-joueur -> Jeu : demanderTir()
+Jeu -> joueur : demanderTir()
 activate joueur
 activate Jeu
+joueur --> Jeu : coordonnees
 Jeu -> Jeu : actualiserPlateaux(coordonnees, plateauBateau)
 Jeu -> AfficheurPartie: afficherPartie(plateauBat, plateauTir)
 activate AfficheurPartie
