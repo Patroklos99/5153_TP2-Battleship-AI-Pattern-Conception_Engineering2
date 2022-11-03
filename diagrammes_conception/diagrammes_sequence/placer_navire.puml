@@ -10,9 +10,10 @@ participant "afficheur: AfficheurPartie" as AfficheurPartie
 
 
 loop tant qu'il reste des bateaux a placer
-joueur -> Jeu : demanderPlacerBateau()
-activate joueur
+Jeu -> joueur : demanderPlacerBateau()
 activate Jeu
+activate joueur
+joueur --> Jeu : coordonnees
 Jeu -> Jeu : actualiserPlateaux(coordonnees, plateauBateau)
 Jeu -> platBat : placerBateau()
 Jeu -> AfficheurPartie : afficherPartie(plateauBat, plateauTir)

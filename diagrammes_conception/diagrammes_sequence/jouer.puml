@@ -1,0 +1,26 @@
+@startuml
+hide footbox
+mainframe Jouer
+
+actor Joueur_Main as joueur
+participant Main
+participant EnregistreurPartie
+
+
+joueur -> Main : jouerPartie()
+activate Main
+Main -> EnregistreurPartie : enregistrerPartie(nomFichier,this)
+activate EnregistreurPartie
+EnregistreurPartie -> EnregistreurPartie : Séréaliser Main en JSON
+alt Fichier existe
+    EnregistreurPartie -> EnregistreurPartie: Écraser fichier JSON
+   else
+   EnregistreurPartie -> EnregistreurPartie: Créer fichier JSON
+end
+
+EnregistreurPartie --> Main
+deactivate EnregistreurPartie
+Main --> joueur
+deactivate Main
+
+@enduml
