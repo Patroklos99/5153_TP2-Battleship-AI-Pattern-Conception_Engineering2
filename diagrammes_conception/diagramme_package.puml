@@ -1,7 +1,7 @@
 @startuml
 
-package main {
-class Main
+package menuprincipal {
+class MenuPrincipal
 
 package jeu {
 class Jeu
@@ -15,7 +15,6 @@ class IAAvance
 abstract Plateau
 class PlateauTir
 class PlateauBateau
-class Case
 class Bateau
 
 Personne --|> Joueur
@@ -32,27 +31,18 @@ Bateau -- PlateauBateau
 
 package controlleurs {
 
-class MenuPrincipal
-class VisualiseurPartie
-class AfficheurPartie
-class EnregistreurPartie
 class ChargeurPartie
-
-MenuPrincipal --> ChargeurPartie
-VisualiseurPartie --> AfficheurPartie
-
+class EnregistreurPartie
+class VisualiseurPartie
 }
 
+package FrontEnd {
+class AfficheurPartie
 }
 
-package test{
-package controlleursTests {}
-package battleshipTests {}
-}
-
+VisualiseurPartie --> FrontEnd
 jeu ..> controlleurs
 jeu ..> battleship
-Main ..> controlleurs
-test ..> main
+MenuPrincipal ..> controlleurs
 
 @enduml

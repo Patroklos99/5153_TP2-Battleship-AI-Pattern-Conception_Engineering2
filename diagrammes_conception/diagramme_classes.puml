@@ -1,9 +1,5 @@
 @startuml
 
-class Main {
-    + {static} main(args: String[])
-}
-
 abstract class Plateau{
     - cases[][]: Case
     + ajouterTir(coordonnee: pair): Tir
@@ -17,6 +13,7 @@ abstract class Joueur{
 }
 
 class MenuPrincipal{
+    + {static} main(args: String[])
     + afficherMenu()
     - jouerNouvellePartie()
     - jouerPartieExistante(nomFichier: String)
@@ -98,7 +95,6 @@ Jeu -left-> VisualiseurPartie
 Jeu --> EnregistreurPartie
 Jeu --> AfficheurPartie
 MenuPrincipal -> ChargeurPartie
-Main --> MenuPrincipal
 MenuPrincipal --> Jeu
 Jeu-- "4" Plateau
 Plateau -- "*" Case
