@@ -63,8 +63,52 @@ PHILIPPE BÉLANGER BELP07119706 <br>
 
 # Diagramme de classes
 ![Diagramme de classes](diagrammes_conception/images_diagrammes/diagramme_classes.png)<br/>
-
 ------
+Le système est composé des éléments suivants:
+
+### Menu principal:
+Il s'agit du menu au tout début du programme qui permet d'initialiser une partie, soit en créant une nouvelle, ou en chargeant une. 
+Il s'agit donc d'un <u>créateur</u> de jeu.
+Le menu principal a aussi un <u>faible couplage</u> avec le reste du système, car le jeu ne dépend pas de celui-ci pour fonctionner.
+
+### Jeu:
+Une classe qui assure une <u>forte cohésion</u> dans le système. orchestrant les actions des autres classes.
+Cette classe sert essentiellement d'arbitre pour le jeu.
+
+
+### Joueur:
+La classe abstraite Joueur est <u>polymorphe</u>, elle peut jouer le rôle d'un joueur humain ou d'une intelligence artificielle.
+Les méthodes *demanderTir()* et *demanderPlacerBateaux* auront des implémentations différentes tout dépendant du type de IA ou si le joueur est humain.
+
+
+### Plateau:
+Plateau représente une grille où ont peut soit placer un bateau ou visualiser les tirs effectués contre l'adversaire. Alors chaque joueurs
+auront deux grilles assignés. Puisque les deux type de plateaux ont des responsabilités différentes, il s'agit d'une classe abstraite <u>polymorphe</u>.
+Plateau est aussi un <u>spécialiste de l'information</u> car il contient et gère les cases du jeu, ainsi que les bateau s'il s'agit d'un PlateauBateau.
+Lorsqu'un tir est effectué, on appelle ajouterTir() du PlateauTir du joueur, qui appelle à son tour ajouterTir() du PlateauBateau de l'adversaire. On assure une <u>forte cohésion</u> de cette
+manière, car on est certain que les deux plateaux soient mise à jour en un appel.
+
+### Bateau:
+Représente les bateaux placés par le joueur. Classe à <u>faible couplage</u> simple qui retourne si une coordonnée le touche ou non.
+
+### Case:
+Classe à <u>faible couplage</u> simple. Représente l'état d'une case, soit s'il y a déja eu un tir ou non, et si oui, si le tir à touché un bateau ou non.
+
+
+### VisualiseurPartie:
+Le VisualiseurPartie a la responsabilité d'afficher le déroulement de la partie à la fin de celle-ci. C'est un <u>spécialiste de l'information</u>
+puisqu'il contient la liste des plateaux en ordre chronologique de la partie, et il ne s'occupe pas de l'affichage directement, ça sera plutôt la
+responsabilité de AfficheurPartie.
+
+### AfficheurPartie:
+Classe statique à <u>faible couplage</u>. À comme seule tâche d'afficher à la console un PlateauBateau et un PlateauTir.
+
+
+### EnregistreurPartie:
+Classe statique à <u>faible couplage</u>. Séréalise un jeu en format JSON et le sauvegarde dans un fichier.
+
+### ChargeurPartie:
+Classe statique à <u>faible couplage</u>. Charge un fichier JSON et initialise un jeu avec les propriétés défini dans le fichier. 
 
 # Diagramme de packages du système
 ![Diagramme de packages](diagrammes_conception/images_diagrammes/diagramme_package.png)<br/>
