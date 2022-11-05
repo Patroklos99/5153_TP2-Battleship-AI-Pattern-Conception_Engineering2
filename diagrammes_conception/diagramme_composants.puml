@@ -1,42 +1,16 @@
 @startuml
 
-[Joueur]
-
-[Plateau]
-
-[Bateau]
-
 [Jeu]
 
-[EnregistreurPartie]
+[JSON]
 
-[ChargeurPartie]
+[Affichage]
 
-[AfficheurPartie]
-
-[VisualiseurPartie]
-
-[MenuPrincipal]
-
-AjouterTir - [Plateau]
-[Jeu] -> AjouterTir
-EstTouche -- [Bateau]
-[Plateau] --> EstTouche
-DemanderTir -- [Joueur]
-DemanderPlacerBateaux -left- [Joueur]
-Jeu --> DemanderPlacerBateaux
-Jeu -down-> DemanderTir
-
-[EnregistreurPartie] -- EnregistrerPartie
-EnregistrerPartie <-- [Jeu]
-[ChargeurPartie] -up- ChargerPartie
-[MenuPrincipal] --> ChargerPartie
-[AfficheurPartie] -left- AfficherPartie
-Jeu -> AfficherPartie
-[VisualiseurPartie] -left- VisualiserPartie
-[VisualiseurPartie] -> AfficherPartie
-[Jeu] -> VisualiserPartie
-[Jeu] -left- Jouer
-[MenuPrincipal] -> Jouer
+[Jeu] -> afficherPartie
+afficherPartie - [Affichage]
+[Jeu] --> sauvegarderPartie
+sauvegarderPartie -- [JSON]
+[JSON] -up-> chargerPartie
+chargerPartie -up- [Jeu]
 
 @enduml
