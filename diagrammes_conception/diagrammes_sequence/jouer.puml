@@ -1,0 +1,58 @@
+@startuml
+hide footbox
+mainframe Jouer
+
+actor Joueur_Main as joueur
+participant MenuPrincipal
+
+activate MenuPrincipal
+MenuPrincipal -> MenuPrincipal : afficherMenu()
+MenuPrincipal -> joueur : choixPartie
+joueur --> MenuPrincipal : jouerPartie()/chargerPartie
+create Jeu
+MenuPrincipal -> Jeu : new
+
+Jeu -> Jeu : determinerModeJeu()
+activate Jeu
+
+Jeu -> joueur : choixAdversaire
+joueur --> Jeu : humain/ordinateur
+
+create Joueur1
+Jeu -> Joueur1 : new
+create Ordinateur
+Jeu -> Ordinateur : new
+create PlateauBat
+Jeu -> PlateauBat : new
+create PlateauTir
+Jeu -> PlateauTir : new
+
+Jeu -> Joueur1 : demanderPlacerBateaux()
+activate Joueur1
+joueur --> Joueur1 : placerBateaux
+Joueur1 --> Jeu : coordonnee
+Jeu -> PlateauBat : placerBateaux()
+
+Jeu -> Joueur1 : demanderTir()
+joueur --> Joueur1 : tirer
+Joueur1 --> Jeu : coordonnee
+
+Jeu -> PlateauTir : ajouterTir()
+activate PlateauTir
+PlateauTir -> PlateauTir : verifierTir()
+deactivate PlateauTir
+
+Jeu -> Jeu : actualiserPlateaux()
+Jeu -> Jeu : afficherPlateaux()
+Jeu -> Jeu : effectuerProchainTour()
+Jeu -> Jeu : determinerGagnant()
+Jeu -> Jeu : visualiserPartie()
+
+destroy MenuPrincipal
+destroy Jeu
+destroy Joueur1
+destroy Ordinateur
+destroy PlateauBat
+destroy PlateauTir
+
+@enduml

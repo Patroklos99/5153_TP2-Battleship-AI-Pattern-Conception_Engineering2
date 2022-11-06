@@ -1,0 +1,18 @@
+@startuml
+hide footbox
+mainframe Nouvelle Partie
+
+actor Joueur_Main as joueur
+participant MenuPrincipal
+
+joueur -> MenuPrincipal : jouerNouvellePartie()
+activate MenuPrincipal
+activate joueur
+
+create Jeu
+MenuPrincipal -> Jeu : new
+activate Jeu
+
+MenuPrincipal -> Jeu : jouer()
+
+@enduml

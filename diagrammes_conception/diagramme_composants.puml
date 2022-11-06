@@ -1,0 +1,16 @@
+@startuml
+
+[Jeu]
+
+[JSON]
+
+[Affichage]
+
+[Jeu] -> afficherPartie
+afficherPartie - [Affichage]
+[Jeu] --> sauvegarderPartie
+sauvegarderPartie -- [JSON]
+[JSON] -up-> chargerPartie
+chargerPartie -up- [Jeu]
+
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+hide footbox
+mainframe Charger Partie
+
+actor Joueur_Main as joueur
+participant MenuPrincipal
+participant ChargeurPartie 
+participant Jeu
+
+joueur -> MenuPrincipal : jouerPartieExistante(nomFichier)
+activate MenuPrincipal
+activate joueur
+
+MenuPrincipal -> ChargeurPartie : chargerPartie(nomFichier)
+activate ChargeurPartie
+
+ChargeurPartie -> ChargeurPartie : Récupérer Fichier
+ChargeurPartie -> ChargeurPartie : Lire Fichier
+ChargeurPartie -> ChargeurPartie : Récupérer JSON
+
+create Jeu
+ChargeurPartie -> Jeu : new
+activate Jeu
+ChargeurPartie --> MenuPrincipal : return Jeu
+deactivate ChargeurPartie
+
+MenuPrincipal -> Jeu : jouer()
+
+@enduml

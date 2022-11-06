@@ -1,0 +1,109 @@
+@startuml
+
+abstract class Plateau{
+    - cases[][]: Case
+    + ajouterTir(coordonnee: pair): Tir
+}
+
+abstract class Joueur{
+    # determinerTir(): pair
+    + demanderTir(): pair
+    + demanderPlacerBateaux()
+    # determinerPlacerBateaux()
+}
+
+class MenuPrincipal{
+    + {static} main(args: String[])
+    + afficherMenu()
+    - jouerNouvellePartie()
+    - jouerPartieExistante(nomFichier: String)
+    - quitterJeu()
+}
+
+class Jeu {
+    + jouer()
+    - determinerModeJeu()
+    - actualiserPlateaux(coordonnee: pair, plateau: Plateau)
+    - effectuerProchainTour()
+    - determinerGagnant()
+}
+
+class PlateauBateau {
+    + placerBateau()
+}
+
+class PlateauTir {
+    - verifierTir(coordonnee: pair)
+}
+
+class Bateau {
+    - Position[]: pair
+    - PointDeVie: int
+    + estTouche(coordonnee: pair): Tir
+}
+
+enum TailleBateau {
+    + 2
+    + 3
+    + 4
+    + 5
+}
+
+class Case {
+}
+
+enum Tir {
+    + aucun
+    + rate
+    + touche
+    + coule
+}
+
+class IADebutant {
+}
+
+class IAAvance{
+}
+
+class ChargeurPartie {
+    + {static} chargerPartie(nomFichier: String): Jeu
+}
+
+class VisualiseurPartie {
+    - timelinePlateaux [ ]
+    + visualiserPartie(): pair<PlateauBateau,PlateauTir>
+    + ajouterEtape(plateau : Plateau)
+}
+
+class AfficheurPartie {
+    + {static} afficherPartie(plateauBat: PlateauBateau, plateauTir: PlateauTir)
+}
+
+class EnregistreurPartie {
+    + {static} enregistrerPartie(nomFichier: String, jeu: Jeu)
+}
+
+class Personne {
+}
+
+
+PlateauBateau -- "5" Bateau
+Bateau -left- TailleBateau
+Plateau <|-- PlateauBateau
+Plateau <|-- PlateauTir
+Jeu -left-> VisualiseurPartie
+Jeu --> EnregistreurPartie
+Jeu --> AfficheurPartie
+MenuPrincipal -> ChargeurPartie
+MenuPrincipal --> Jeu
+Jeu-- "4" Plateau
+Plateau -- "*" Case
+Case -left- Tir
+Joueur <|- Personne
+Joueur <|-down- IADebutant
+Joueur <|-down- IAAvance
+Jeu *-left-- "2" Joueur
+PlateauBateau <- PlateauTir
+VisualiseurPartie --> AfficheurPartie
+
+@enduml

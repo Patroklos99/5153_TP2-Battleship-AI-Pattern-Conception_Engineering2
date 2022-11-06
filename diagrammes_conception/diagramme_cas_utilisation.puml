@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+package Joueurs {
+  actor Joueur1 as joueur1
+  actor Joueur2 as joueur2
+}
+
+rectangle Battleship {
+  usecase "Charger partie" as UC1
+  usecase "Commencer nouvelle partie" as UC2
+  usecase "Jouer" as UC3
+  usecase "Choisir mode de jeu" as UC4
+  usecase "Visualiser partie" as UC8
+  usecase "Enregistrer partie" as UC9
+}
+
+Joueurs --> UC1
+Joueurs --> UC2
+Joueurs --> UC3
+Joueurs --> UC4
+Joueurs --> UC8
+Joueurs --> UC9
+
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+
+hide footbox
+
+mainframe Choisir Case
+
+participant MenuPrincipal
+create Jeu
+MenuPrincipal -> Jeu : new
+activate Jeu
+MenuPrincipal -> Jeu : jouer()
+create Joueur
+Jeu -> Joueur : new
+activate Joueur
+create PlateauTir
+Jeu -> PlateauTir : new
+activate PlateauTir
+PlateauTir -> PlateauTir : new [][] caseMatricePT
+create PlateauBateau
+Jeu -> PlateauBateau : new
+activate PlateauBateau
+PlateauBateau -> PlateauBateau : new [][] caseMatricePB
+Jeu -> Joueur : demanderTir(S)
+Joueur --> Jeu : coordonnees_pair
+Jeu -> PlateauTir : ajouterTir(coordonnee: pair)
+PlateauTir -> PlateauTir : verifierTir(coordonnee: pair)
+PlateauTir -> PlateauBateau : validerCase()
+PlateauBateau -> PlateauBateau : majCase()
+PlateauBateau --> PlateauTir : reponse
+PlateauTir -> PlateauTir : majCase()
+
+@enduml

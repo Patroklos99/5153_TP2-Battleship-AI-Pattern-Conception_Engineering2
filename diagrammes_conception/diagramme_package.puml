@@ -1,0 +1,48 @@
+@startuml
+
+package menuprincipal {
+class MenuPrincipal
+
+package jeu {
+class Jeu
+}
+
+package battleship {
+abstract Joueur
+class Personne
+class IADebutant
+class IAAvance
+abstract Plateau
+class PlateauTir
+class PlateauBateau
+class Bateau
+
+Personne --|> Joueur
+IAAvance --|> Joueur
+IADebutant --|> Joueur
+
+PlateauTir --|> Plateau
+PlateauBateau --|> Plateau
+
+Case - Plateau
+Bateau -- PlateauBateau
+
+}
+
+package controlleurs {
+
+class ChargeurPartie
+class EnregistreurPartie
+class VisualiseurPartie
+}
+
+package FrontEnd {
+class AfficheurPartie
+}
+
+VisualiseurPartie --> FrontEnd
+jeu ..> controlleurs
+jeu ..> battleship
+MenuPrincipal ..> controlleurs
+
+@enduml

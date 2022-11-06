@@ -1,0 +1,32 @@
+@startuml
+hide footbox
+mainframe Choisir Mode de jeu
+
+actor Joueur_Main as joueur
+participant MenuPrincipal
+
+joueur -> MenuPrincipal : jouer()
+activate MenuPrincipal
+activate joueur
+
+create Jeu
+MenuPrincipal -> Jeu : new
+
+MenuPrincipal -> Jeu : jouer()
+deactivate MenuPrincipal
+activate Jeu
+
+Jeu -> Jeu : determinerModeJeu()
+joueur -> Jeu : réponse
+alt Jouer contre humain
+ Jeu -> Jeu : Connecter autre joueur
+else Jouer contre ordinateur
+ alt Jouer contre ordinateur débutant
+   create IAdebutant
+   Jeu -> IAdebutant : new
+ else Jouer contre ordinateur avancé
+   create IAavance
+   Jeu -> IAavance : new
+ end
+end
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+hide footbox
+mainframe Visualiser Partie
+
+participant Jeu
+participant VisualiseurPartie
+participant AfficheurPartie
+
+-> Jeu : jouer()
+activate Jeu
+Jeu -> VisualiseurPartie : visualiserPartie()
+activate VisualiseurPartie
+loop pour chaque Plateaux dans timelinePlateau:
+    VisualiseurPartie -> AfficheurPartie : afficherPartie(pBateau,pTir)
+    activate AfficheurPartie
+    AfficheurPartie -> AfficheurPartie : Afficher Plateaux
+    AfficheurPartie --> VisualiseurPartie
+    deactivate AfficheurPartie
+end
+VisualiseurPartie --> Jeu
+deactivate VisualiseurPartie
+
+@enduml
