@@ -126,9 +126,18 @@ Classe statique à <u>faible couplage</u>. Charge un fichier JSON et initialise 
 # Diagrammes de séquence
 ## Charger la partie
 ![Diagramme de séquence pour charger la partie](diagrammes_conception/images_diagrammes/charger_partie.png)<br/>
+Le joueur décide de jouer une partie existante, à partir d'un fichier JSON. On peut remarquer le
+<u>faible couplage</u> puisque chaque objet a sa propre responsabilité. Dans ce cas, le menu agit aussi comme
+un <u>contrôleur</u>, puisqu'il prend les commandes de l'acteur et délègue ensuite la responsabilité aux objets
+concernés. Le ChargeurPartie appelle ensuite des librairies pour effectuer la gestion du fichier, ce qui réduit
+d'avantage le couplage. Le Jeu est ensuite instancié à partir du fichier, et est retourné pour reprendre la partie.
 
 ## Choisir le mode de jeu
 ![Diagramme de séquence pour choisir le mode de jeu](diagrammes_conception/images_diagrammes/choisir_mode_jeu.png)<br/>
+Avant de commencer une partie, le joueur doit décider s'il veut jouer contre un humain ou un ordinateur. lorsque le
+joueur envoie sa réponse, l'objet Jeu instancie alors les objets nécessaires. Dans le diagramme, on remarque que le Jeu
+instancie l'IAdebutant ou l'IAavance, ce qui resppecte le patron <u>créateur</u>. Puisque le Jeu contient des instances
+de ces classes, c'est celui-ci qui les instancie.
 
 ## Nouvelle partie
 ![Diagramme de séquence pour commencer une nouvelle partie](diagrammes_conception/images_diagrammes/nouvelle_partie.png)<br/>
