@@ -165,7 +165,9 @@ contenus dans la classe jeu.
 
 ## Enregistrer la partie
 ![Diagramme pour enregistrer la partie](diagrammes_conception/images_diagrammes/enregistrer_partie.png)<br/>
-
+À tout moment, lors de son tour, le joueur peut demander au jeu d'enregistrer la partie. Le jeu fait alors appel à un 
+enregistreur de partie, qui fera appel aux mêmes librairies que le chargeur de partie pour enregistrer l'état du 
+jeu sous forme de JSON. Encore une fois, ce mécanisme favorise un <u>faible couplage.</u> 
 ## Choisir la case
 ![Diagramme de séquence pour visualiser la case](diagrammes_conception/images_diagrammes/choisir_case.png)<br/>
 
