@@ -2,7 +2,7 @@
 
 ## _Équipe_
 Ce fichier contient des informations pertinentes sur la charte de travail et
-la compositon globale de l'équipe.
+la composition globale de l'équipe.
 
 ## Charte de Travail
 - Le travail sera séparé en partie égales.
@@ -13,7 +13,7 @@ la compositon globale de l'équipe.
 - La coopération lors d'un besoin d'aide d'un coéquipier est exigé pour le
   bon développement du code et l'harmonie du groupe.
 ## Terminé
-- La signification dans notre équipe est que la fonctionalité est lisible, maintenable et elle passe tous ses tests 
+- La signification dans notre équipe est que la fonctionnalité est lisible, maintenable et elle passe tous ses tests 
   unitaires correctement.
 
 ## Particularités de l'équipe
@@ -25,7 +25,7 @@ la compositon globale de l'équipe.
 # Équipiers
 | Nom               | Code Permanent | Courrier                               | Forces                                    | Faiblesses                | Compétences techniques     |
 |-------------------|----------------|----------------------------------------|-------------------------------------------|---------------------------|----------------------------|
-| Félix Paradis     | PARF04119608   | paradis.felix@courrier.uqam.ca         | Collaboration Ponctualité Efficace        | Conceoption Algorithmes   | Java Json Maven Git Junit5 |
+| Félix Paradis     | PARF04119608   | paradis.felix@courrier.uqam.ca         | Collaboration Ponctualité Efficace        | Conception Algorithmes   | Java Json Maven Git Junit5 |
 | Renzo Salcedo     | SALR02089408   | salcedo_salcedo.renzo@courrier.uqam.ca | Gestion_de_projet Programmer Code.lisible | Dernière minute           | Java Json Maven Git Junit5 |
 | Lysanne Chagnon   | CHAL65550003   | chagnon.lysanne@courrier.uqam.ca       | Conception Programmer                     | Communication Orale       | Java Json Maven Git Junit5 |
 | Philippe Bélanger | BELP07119706   | belanger.philippe.10@courrier.uqam.ca  | Rapide code_efficace Algorithmes          | Junit Code.non.refactorié | Java Json Maven Git Junit5 |

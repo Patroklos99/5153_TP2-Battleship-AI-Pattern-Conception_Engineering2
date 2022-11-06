@@ -72,19 +72,19 @@ Il s'agit donc d'un <u>créateur</u> de jeu.
 Le menu principal a aussi un <u>faible couplage</u> avec le reste du système, car le jeu ne dépend pas de celui-ci pour fonctionner.
 
 ### Jeu:
-Une classe qui assure une <u>forte cohésion</u> dans le système. orchestrant les actions des autres classes.
+Une classe qui assure une <u>forte cohésion</u> dans le système, orchestrant les actions des autres classes.
 Cette classe sert essentiellement d'arbitre pour le jeu.
 
 
 ### Joueur:
 La classe abstraite Joueur est <u>polymorphe</u>, elle peut jouer le rôle d'un joueur humain ou d'une intelligence artificielle.
-Les méthodes *demanderTir()* et *demanderPlacerBateaux* auront des implémentations différentes tout dépendant du type de IA ou si le joueur est humain.
+Les méthodes *demanderTir()* et *demanderPlacerBateaux* auront des implémentations différentes tout dépendant du type d'IA ou si le joueur est humain.
 
 
 ### Plateau:
-Plateau représente une grille où ont peut soit placer un bateau ou visualiser les tirs effectués contre l'adversaire. Alors chaque joueurs
-auront deux grilles assignés. Puisque les deux type de plateaux ont des responsabilités différentes, il s'agit d'une classe abstraite <u>polymorphe</u>.
-Plateau est aussi un <u>spécialiste de l'information</u> car il contient et gère les cases du jeu, ainsi que les bateau s'il s'agit d'un PlateauBateau.
+Plateau représente une grille où on peut soit placer un bateau ou visualiser les tirs effectués contre l'adversaire. Alors, chaque joueur
+aura deux grilles assignées. Puisque les deux types de plateaux ont des responsabilités différentes, il s'agit d'une classe abstraite <u>polymorphe</u>.
+Plateau est aussi un <u>spécialiste de l'information</u> car il contient et gère les cases du jeu, ainsi que les bateaux s'il s'agit d'un PlateauBateau.
 Lorsqu'un tir est effectué, on appelle ajouterTir() du PlateauTir du joueur, qui appelle à son tour ajouterTir() du PlateauBateau de l'adversaire. On assure une <u>forte cohésion</u> de cette
 manière, car on est certain que les deux plateaux soient mise à jour en un appel.
 
@@ -92,7 +92,7 @@ manière, car on est certain que les deux plateaux soient mise à jour en un app
 Représente les bateaux placés par le joueur. Classe à <u>faible couplage</u> simple qui retourne si une coordonnée le touche ou non.
 
 ### Case:
-Classe à <u>faible couplage</u> simple. Représente l'état d'une case, soit s'il y a déja eu un tir ou non, et si oui, si le tir à touché un bateau ou non.
+Classe à <u>faible couplage</u> simple. Représente l'état d'une case, soit s'il y a déjà eu un tir ou non, et si oui, si le tir a touché un bateau ou non.
 
 
 ### VisualiseurPartie:
@@ -105,7 +105,7 @@ Classe statique à <u>faible couplage</u>. À comme seule tâche d'afficher à l
 
 
 ### EnregistreurPartie:
-Classe statique à <u>faible couplage</u>. Séréalise un jeu en format JSON et le sauvegarde dans un fichier.
+Classe statique à <u>faible couplage</u>. Sérialise un jeu en format JSON et le sauvegarde dans un fichier.
 
 ### ChargeurPartie:
 Classe statique à <u>faible couplage</u>. Charge un fichier JSON et initialise un jeu avec les propriétés défini dans le fichier. 
@@ -134,9 +134,9 @@ d'avantage le couplage. Le Jeu est ensuite instancié à partir du fichier, et e
 
 ## Choisir le mode de jeu
 ![Diagramme de séquence pour choisir le mode de jeu](diagrammes_conception/images_diagrammes/choisir_mode_jeu.png)<br/>
-Avant de commencer une partie, le joueur doit décider s'il veut jouer contre un humain ou un ordinateur. lorsque le
+Avant de commencer une partie, le joueur doit décider s'il veut jouer contre un humain ou un ordinateur. Lorsque le
 joueur envoie sa réponse, l'objet Jeu instancie alors les objets nécessaires. Dans le diagramme, on remarque que le Jeu
-instancie l'IAdebutant ou l'IAavance, ce qui resppecte le patron <u>créateur</u>. Puisque le Jeu contient des instances
+instancie l'IAdebutant ou l'IAavance, ce qui respecte le patron <u>créateur</u>. Puisque le Jeu contient des instances
 de ces classes, c'est celui-ci qui les instancie.
 
 ## Nouvelle partie
@@ -173,7 +173,7 @@ jeu sous forme de JSON. Encore une fois, ce mécanisme favorise un <u>faible cou
 Ce diagramme illustre la manière dont les coordonnées envoyées par le joueur au jeu au moment de tirer sont traitées
 par les plateaux. Les instanciations des objets dont le jeu a besoin se font par celui-ci. On remarque alors que le jeu
 représente le patron <u>créateur</u>, ainsi que <u>contrôleur</u>. Le <u>principe de connaissance minimale</u> est aussi appliqué, 
-puisque seuls les plateaux en ayant besoin communiquent entre-eux, soit les plateaux de tir qui connaissent les
+puisque seuls les plateaux en ayant besoin communiquent entre eux, soit les plateaux de tir qui connaissent les
 plateaux de bateaux de l'ennemi.
 ## Creer matriceCase -- Extension de 'Choisir la case'
 ![Diagramme de séquence pour visualiser la case](diagrammes_conception/images_diagrammes/creer_matriceCase.png)<br/>
