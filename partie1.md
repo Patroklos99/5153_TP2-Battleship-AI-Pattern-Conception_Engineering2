@@ -170,13 +170,19 @@ enregistreur de partie, qui fera appel aux mêmes librairies que le chargeur de 
 jeu sous forme de JSON. Encore une fois, ce mécanisme favorise un <u>faible couplage.</u> 
 ## Choisir la case
 ![Diagramme de séquence pour visualiser la case](diagrammes_conception/images_diagrammes/choisir_case.png)<br/>
-
+Ce diagramme illustre la manière dont les coordonnées envoyées par le joueur au jeu au moment de tirer sont traitées
+par les plateaux. Les instanciations des objets dont le jeu a besoin se font par celui-ci. On remarque alors que le jeu
+représente le patron <u>créateur</u>, ainsi que <u>contrôleur</u>. Le <u>principe de connaissance minimale</u> est aussi appliqué, 
+puisque seuls les plateaux en ayant besoin communiquent entre-eux, soit les plateaux de tir qui connaissent les
+plateaux de bateaux de l'ennemi.
 ## Creer matriceCase -- Extension de 'Choisir la case'
 ![Diagramme de séquence pour visualiser la case](diagrammes_conception/images_diagrammes/creer_matriceCase.png)<br/>
-
+Ce diagramme représente l'instanciation des cases des différents plateaux. On peut remarquer le <u>faible couplage</u>
+des différents objets.
 ## Jouer
 ![Diagramme de séquence pour jouer](diagrammes_conception/images_diagrammes/jouer.png)<br/>
-
+Étant moins granulaire, ce diagramme représente une vue d'ensemble du déroulement du jeu. Chacun des mécanismes est décrit 
+plus en détail par tous les diagrammes plus haut.
 
 
 
