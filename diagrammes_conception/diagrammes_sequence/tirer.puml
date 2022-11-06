@@ -5,6 +5,7 @@ mainframe Tirer
 actor Joueur_Main as joueur
 participant "jeu: Jeu" as Jeu
 participant "plateauBat: PlateauBateau" as platBat
+participant "plateauTir: PlateauTir" as platTir
 participant "afficheur: AfficheurPartie" as AfficheurPartie
 
 
@@ -14,6 +15,11 @@ activate joueur
 activate Jeu
 joueur --> Jeu : coordonnees
 Jeu -> Jeu : actualiserPlateaux(coordonnees, plateauBateau)
+Jeu -> platTir : ajouterTir(coordonnee)
+activate platTir
+platTir -> platTir : verifierTir(coordonnee)
+platTir -> platBat : verifierCase
+deactivate platTir
 Jeu -> AfficheurPartie: afficherPartie(plateauBat, plateauTir)
 activate AfficheurPartie
 AfficheurPartie -> AfficheurPartie: Afficher Plateaux
