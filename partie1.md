@@ -151,7 +151,11 @@ qui validera le tir avec les plateaux. On a alors un <u>faible couplage</u> éta
 que par le jeu. Le jeu vérifie ensuite si tous les bateaux ont coulé avant de passer au prochain tour.
 ## Visualiser la partie
 ![Diagramme de séquence pour visualiser la partie](diagrammes_conception/images_diagrammes/visualiser_partie.png)<br/>
-
+La visualisation de la partie se déroule à la fin du jeu, lorsqu'un gagnant a été déterminé par le jeu. Le jeu fait 
+alors appel au visualiseur de partie, qui contient chacun des tours du jeu. On remarque encore le patron <u>Spécialiste
+de l'information</u>, puisque c'est celui-ci qui contient les informations nécessaires à son fonctionnement. 
+Le visualiseur délègue alors l'affichage de chaque tour de la partie à l'afficheur de partie, ce qui résulte 
+en un <u>faible couplage</u>.
 ## Placer les navires
 ![Diagramme de séquence pour placer les navires](diagrammes_conception/images_diagrammes/placer_navire.png)<br/>
 
