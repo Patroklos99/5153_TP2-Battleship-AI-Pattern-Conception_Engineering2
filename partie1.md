@@ -141,10 +141,14 @@ de ces classes, c'est celui-ci qui les instancie.
 
 ## Nouvelle partie
 ![Diagramme de séquence pour commencer une nouvelle partie](diagrammes_conception/images_diagrammes/nouvelle_partie.png)<br/>
+Illustre le cas ou le joueur commence une nouvelle partie. C'est alors le menu principal qui instancie le jeu.
 
 ## Tirer
 ![Diagramme de séquence pour tirer](diagrammes_conception/images_diagrammes/tirer.png)<br/>
-
+Lorsque c'est au tour du joueur d'effectuer un tir, le jeu lui demande les coordonnées. Ceci respecte le <u>principe de 
+connaissance minimale</u> puisque le joueur ne fournit que des coordonnées. C'est ensuite le jeu
+qui validera le tir avec les plateaux. On a alors un <u>faible couplage</u> étant donné que les plateaux ne sont connus
+que par le jeu. Le jeu vérifie ensuite si tous les bateaux ont coulé avant de passer au prochain tour.
 ## Visualiser la partie
 ![Diagramme de séquence pour visualiser la partie](diagrammes_conception/images_diagrammes/visualiser_partie.png)<br/>
 
