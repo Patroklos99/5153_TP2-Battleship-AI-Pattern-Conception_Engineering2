@@ -148,6 +148,9 @@ Classe statique à <u>faible couplage</u>. Charge un fichier JSON et initialise 
 ## Choisir la case
 ![Diagramme de séquence pour visualiser la case](diagrammes_conception/images_diagrammes/choisir_case.png)<br/>
 
+## Creer matriceCase -- Extension de 'Choisir la case'
+![Diagramme de séquence pour visualiser la case](diagrammes_conception/images_diagrammes/creer_matriceCase.png)<br/>
+
 ## Jouer
 ...
 

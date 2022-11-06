@@ -5,26 +5,28 @@ hide footbox
 mainframe Choisir Case
 
 participant MenuPrincipal
-participant Jeu as jeu
-participant Joueur as j
-participant PlateauTir as pt
-participant PlateauBateau as pb
-MenuPrincipal -> jeu : new
-activate jeu
-MenuPrincipal -> jeu : jouer()
-jeu -> pt : new
-activate pt
-pt -> pt : new [][] caseMatricePT
-jeu -> pb : new
-activate pb
-pb -> pb : new [][] caseMatricePB
-jeu -> j : demanderTir(S)
-j --> jeu : coordonnees_pair
-jeu -> pt : ajouterTir(coordonnee: pair)
-pt -> pt : verifierTir(coordonnee: pair)
-pt -> pb : validerCase()
-pb -> pb : majCase()
-pb --> pt : reponse
-pt -> pt : majCase()
+create Jeu
+MenuPrincipal -> Jeu : new
+activate Jeu
+MenuPrincipal -> Jeu : jouer()
+create Joueur
+Jeu -> Joueur : new
+activate Joueur
+create PlateauTir
+Jeu -> PlateauTir : new
+activate PlateauTir
+PlateauTir -> PlateauTir : new [][] caseMatricePT
+create PlateauBateau
+Jeu -> PlateauBateau : new
+activate PlateauBateau
+PlateauBateau -> PlateauBateau : new [][] caseMatricePB
+Jeu -> Joueur : demanderTir(S)
+Joueur --> Jeu : coordonnees_pair
+Jeu -> PlateauTir : ajouterTir(coordonnee: pair)
+PlateauTir -> PlateauTir : verifierTir(coordonnee: pair)
+PlateauTir -> PlateauBateau : validerCase()
+PlateauBateau -> PlateauBateau : majCase()
+PlateauBateau --> PlateauTir : reponse
+PlateauTir -> PlateauTir : majCase()
 
 @enduml

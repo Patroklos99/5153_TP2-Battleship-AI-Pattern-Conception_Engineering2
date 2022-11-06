@@ -1,0 +1,28 @@
+@startuml
+
+hide footbox
+
+mainframe Creer matrice_case
+
+participant MenuPrincipal
+create Jeu
+MenuPrincipal -> Jeu : new
+activate Jeu
+create PlateauTir
+Jeu -> PlateauTir : new
+activate PlateauTir
+create Case
+PlateauTir -> Case : new [][] caseMatricePT
+activate Case
+Case --> PlateauTir
+PlateauTir --> Jeu
+create PlateauBateau
+Jeu -> PlateauBateau : new
+activate PlateauBateau
+PlateauBateau -> Case : new [][] caseMatricePB
+participant Case
+Case --> PlateauBateau
+PlateauBateau --> Jeu
+deactivate Case
+
+@enduml
