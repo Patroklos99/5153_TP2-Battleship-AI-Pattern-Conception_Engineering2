@@ -152,7 +152,7 @@ Classe statique à <u>faible couplage</u>. Charge un fichier JSON et initialise 
 ![Diagramme de séquence pour visualiser la case](diagrammes_conception/images_diagrammes/creer_matriceCase.png)<br/>
 
 ## Jouer
-...
+![Diagramme de séquence pour jouer](diagrammes_conception/images_diagrammes/jouer.png)<br/>
 
 
 
