@@ -158,6 +158,10 @@ Le visualiseur délègue alors l'affichage de chaque tour de la partie à l'affi
 en un <u>faible couplage</u>.
 ## Placer les navires
 ![Diagramme de séquence pour placer les navires](diagrammes_conception/images_diagrammes/placer_navire.png)<br/>
+Au début du jeu, celui-ci demande au joueur de placer ses navires. Une boucle tourne jusqu'à ce que l'entièreté de 
+ceux-ci aient été placés. On remarque encore une fois le patron <u>contrôleur</u>, représenté par le jeu,
+qui gère toutes les communications avec le joueur et effectue les actions souhaitées sur les objets plateaux,
+contenus dans la classe jeu. 
 
 ## Enregistrer la partie
 ![Diagramme pour enregistrer la partie](diagrammes_conception/images_diagrammes/enregistrer_partie.png)<br/>
