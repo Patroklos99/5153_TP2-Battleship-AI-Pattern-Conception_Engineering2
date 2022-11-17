@@ -2,7 +2,7 @@ package menuprincipal.battleship.joueur;
 
 import javafx.util.Pair;
 
-public class Joueur {
+public abstract class Joueur {
     public Pair<Double, Double> determinerTir() {
         Pair<Double, Double> tir = null;
         return null;
