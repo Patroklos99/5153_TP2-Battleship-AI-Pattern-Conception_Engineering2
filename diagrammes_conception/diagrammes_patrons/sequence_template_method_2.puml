@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+mainframe Placer navire
+
+actor Personne as personne
+participant "joueur: Joueur" as joueur
+participant "jeu: Jeu" as Jeu
+participant "plateauBat: PlateauBateau" as platBat
+participant "afficheur: AfficheurPartie" as AfficheurPartie
+
+
+
+loop tant qu'il reste des bateaux a placer
+Jeu -> joueur : demanderPlacerBateau()
+activate Jeu
+activate joueur
+joueur -> personne : determinerTir()
+activate personne
+personne --> joueur
+joueur --> Jeu : coordonnees
+Jeu -> Jeu : actualiserPlateaux(coordonnees, plateauBateau)
+Jeu -> platBat : placerBateau()
+Jeu -> AfficheurPartie : afficherPartie(plateauBat, plateauTir)
+activate AfficheurPartie
+AfficheurPartie -> AfficheurPartie: Afficher Plateaux
+AfficheurPartie --> Jeu
+deactivate AfficheurPartie
+end
+@enduml
