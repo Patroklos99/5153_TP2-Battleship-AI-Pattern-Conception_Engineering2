@@ -1,0 +1,28 @@
+@startuml
+
+class ChargeurPartie {
+    + {static} chargerPartie(nomFichier: String)
+}
+
+class EnregistreurPartie {
+    + {static} enregistrerPartie(nomFichier: String)
+}
+
+class MenuPrincipal{
+    + {static} main(args: String[])
+    + afficherMenu()
+}
+
+class Jeu {
+    - {static} instanceJeu: Jeu
+    - Jeu()
+    + {static} getInstance(): Jeu
+    + chargerTirs(coordonnéesTirés: Liste<pair>)
+    + jouer()
+}
+
+MenuPrincipal -> ChargeurPartie
+MenuPrincipal --> Jeu
+Jeu --> EnregistreurPartie
+
+@enduml
