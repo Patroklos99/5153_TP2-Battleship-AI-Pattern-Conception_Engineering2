@@ -2,7 +2,7 @@ stages:
   - build
 
 build and test:
-  image: maven:3.8-jdk-11
+  image: maven:3.8-jdk-18
   stage: build
   script:
     - mvn clean package
