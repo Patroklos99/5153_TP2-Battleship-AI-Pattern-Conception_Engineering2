@@ -21,13 +21,15 @@ public class MenuPrincipal {
     private static void afficherMenu(){ System.out.print(MENU); }
 
     private static Jeu choisirOption(){
-        Scanner scanner = new Scanner(System.in);
-        int choix = 0;
+        int choix;
         do {
             afficherMenu();
             try {
-                choix = scanner.nextInt();
-            } catch(InputMismatchException e){ return choisirOption(); }
+                choix = new Scanner(System.in).nextInt();
+            } catch(InputMismatchException e){
+                System.out.print(ERREUR);
+                return choisirOption();
+            }
 
             if (choix == 1) return new Jeu();
             if (choix == 2) return ChargeurPartie.chargerPartie("test");
@@ -39,5 +41,6 @@ public class MenuPrincipal {
 
     public static void main(String[] args) {
         Jeu battleship = choisirOption();
+
     }
 }
