@@ -6,7 +6,8 @@ import menuprincipal.battleship.plateau.Plateau;
 
 @Data
 public class Jeu {
-    static void jouer() {
+
+    public void jouer() {
 
     }
 

@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 public class ChargeurPartie {
 
-    public static Jeu chargerPartie(String nomFichier) {
-        return new Jeu();
+    public static Jeu chargerPartie() {
+        return null;
     }
 
 }

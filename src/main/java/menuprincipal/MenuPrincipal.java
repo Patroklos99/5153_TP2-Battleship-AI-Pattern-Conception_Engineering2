@@ -32,7 +32,7 @@ public class MenuPrincipal {
             }
 
             if (choix == 1) return new Jeu();
-            if (choix == 2) return ChargeurPartie.chargerPartie("test");
+            if (choix == 2) return ChargeurPartie.chargerPartie();
             if (choix == 3) System.exit(0);
 
             System.out.print(ERREUR);
@@ -41,6 +41,6 @@ public class MenuPrincipal {
 
     public static void main(String[] args) {
         Jeu battleship = choisirOption();
-
+        battleship.jouer();
     }
 }
