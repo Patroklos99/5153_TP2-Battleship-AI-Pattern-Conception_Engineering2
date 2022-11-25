@@ -7,6 +7,17 @@ import menuprincipal.battleship.plateau.Plateau;
 @Data
 public class Jeu {
 
+    private Jeu instanceJeu = null;
+
+    private Jeu() {}
+
+    public static Jeu getInstance() {
+        if(instanceJeu == null)
+            instanceJeu = Jeu();
+
+        return instanceJeu;
+    }
+
     public void jouer() {
 
     }
