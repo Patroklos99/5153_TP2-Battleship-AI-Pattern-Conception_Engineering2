@@ -10,37 +10,50 @@ public class MenuPrincipal {
 
     private static final String MENU =
             " ****************************\n" +
-            " ****** MENU PRINCIPAL ******\n" +
-            " ****************************\n" +
-            " 1 - Jouer une nouvelle partie\n" +
-            " 2 - Jouer une partie existante\n" +
-            " 3 - Quitter\n";
+                    " ****** MENU PRINCIPAL ******\n" +
+                    " ****************************\n" +
+                    " 1 - Jouer une nouvelle partie\n" +
+                    " 2 - Jouer une partie existante\n" +
+                    " 3 - Quitter\n";
 
     private static final String ERREUR = "Veuillez entrer un choix valide\n";
 
-    private static void afficherMenu(){ System.out.print(MENU); }
+    public static void afficherMenu() {
+        System.out.print(MENU);
+    }
 
-    private static Jeu choisirOption(){
-        int choix;
+    private static void choisirOption() {
+        int choix = -1;
         do {
             afficherMenu();
             try {
                 choix = new Scanner(System.in).nextInt();
-            } catch(InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.print(ERREUR);
-                return choisirOption();
+                System.exit(1);
             }
 
-            if (choix == 1) return new Jeu();
-            if (choix == 2) return ChargeurPartie.chargerPartie();
-            if (choix == 3) System.exit(0);
+            switch (choix) {
+                case 1:
+                    Jeu.getInstance().jouer();
 
-            System.out.print(ERREUR);
-        }while(true);
+                case 2:
+                    ChargeurPartie.chargerPartie();
+                    Jeu.getInstance().jouer();
+                    break;
+
+                case 3:
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.print(ERREUR);
+            }
+        } while (true);
     }
 
     public static void main(String[] args) {
-        Jeu battleship = choisirOption();
-        battleship.jouer();
+        choisirOption();
+
     }
 }
