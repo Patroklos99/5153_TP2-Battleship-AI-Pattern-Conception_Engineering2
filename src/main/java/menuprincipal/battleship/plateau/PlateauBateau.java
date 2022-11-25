@@ -4,7 +4,7 @@ import javafx.util.Pair;
 
 public class PlateauBateau extends Plateau {
     @Override
-    public void ajouterTir(Pair<Double, Double> coordonee) {
+    public void ajouterTir(Pair<Integer, Integer> coordonee) {
         super.ajouterTir(coordonee);
     }
 

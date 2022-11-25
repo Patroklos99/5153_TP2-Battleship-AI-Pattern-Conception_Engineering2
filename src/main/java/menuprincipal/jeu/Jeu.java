@@ -6,15 +6,18 @@ import menuprincipal.battleship.joueur.Joueur;
 import menuprincipal.battleship.plateau.Plateau;
 import menuprincipal.battleship.plateau.PlateauBateau;
 import menuprincipal.battleship.plateau.PlateauTir;
+import menuprincipal.frontend.AfficheurPartie;
 
 @Data
 public class Jeu {
 
     private static Jeu instanceJeu = null;
 
-    private Joueur joueur1, joueur2;
-    private PlateauBateau plateauBateau_joueur1, plateauBateau_joueur2;
-    private PlateauTir plateauTir_joueur1, plateauTir_joueur2;
+    final int MAX_JOUEURS = 2;
+
+    private Joueur[] joueurs;
+    private PlateauBateau[] plateauBateaux;
+    private PlateauTir[] plateauTirs;
 
 
     private Jeu() {}
@@ -36,10 +39,8 @@ public class Jeu {
             effectuerProchaintour();
             gagnant = determinerGagnant();
         }
-        
+
     }
-
-
 
     private void determinerModeJeu() {
         //TODO: Initialiser les joueurs basé sur le choix de l'utilisateur.
@@ -52,12 +53,19 @@ public class Jeu {
         //TODO: Demander aux joueurs de placer tout les bateaux.
     }
 
-    private void actualiserPlateau(Pair<Integer, Integer> pair, PlateauTir plateau) {
-        //TODO: actualiser la case d'un plateau, avec le tir choisi par un joueur.
+    private void effectuerProchaintour() {
+        demanderTirJoueur(0);
+        demanderTirJoueur(1);
     }
 
-    private void effectuerProchaintour() {
-        //TODO: Demander aux deux joueurs de choisir une case où tirer.
+    private void demanderTirJoueur(int numeroJoueur){
+        Pair<Integer,Integer> coordonnees;
+
+        coordonnees = joueurs[numeroJoueur].demanderTir();
+        plateauTirs[numeroJoueur].ajouterTir(coordonnees);
+
+        //TODO: Afficher seulement si le joueur est humain
+        AfficheurPartie.afficherPartie(plateauBateaux[numeroJoueur],plateauTirs[numeroJoueur]);
     }
 
     private Joueur determinerGagnant() {

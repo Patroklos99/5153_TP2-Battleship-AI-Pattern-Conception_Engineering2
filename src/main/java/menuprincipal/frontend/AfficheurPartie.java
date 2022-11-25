@@ -4,7 +4,7 @@ import menuprincipal.battleship.plateau.PlateauBateau;
 import menuprincipal.battleship.plateau.PlateauTir;
 
 public class AfficheurPartie {
-    static void afficherPartie (PlateauBateau pb, PlateauTir plateauTir) {
+    public static void afficherPartie (PlateauBateau pb, PlateauTir plateauTir) {
 
     }
 }
