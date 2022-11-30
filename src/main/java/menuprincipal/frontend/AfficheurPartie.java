@@ -1,10 +1,9 @@
 package menuprincipal.frontend;
 
-import menuprincipal.battleship.plateau.PlateauBateau;
-import menuprincipal.battleship.plateau.PlateauTir;
+import menuprincipal.battleship.plateau.Plateau;
 
 public class AfficheurPartie {
-    public static void afficherPartie (PlateauBateau pb, PlateauTir plateauTir) {
+    public static void afficherPartie (Plateau pb, Plateau plateauTir) {
 
     }
 }

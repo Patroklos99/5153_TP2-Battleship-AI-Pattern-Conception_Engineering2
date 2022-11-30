@@ -36,16 +36,13 @@ public class MenuPrincipal {
             switch (choix) {
                 case 1:
                     Jeu.getInstance().jouer();
-
                 case 2:
                     ChargeurPartie.chargerPartie();
                     Jeu.getInstance().jouer();
                     break;
-
                 case 3:
                     System.exit(0);
                     break;
-
                 default:
                     System.out.print(ERREUR);
             }
@@ -54,6 +51,5 @@ public class MenuPrincipal {
 
     public static void main(String[] args) {
         choisirOption();
-
     }
 }

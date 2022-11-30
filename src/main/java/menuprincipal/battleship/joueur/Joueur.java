@@ -2,6 +2,8 @@ package menuprincipal.battleship.joueur;
 
 import javafx.util.Pair;
 
+import java.util.ArrayList;
+
 public abstract class Joueur {
     public Pair<Integer, Integer> determinerTir() {
         Pair<Integer, Integer> tir = null;
@@ -13,8 +15,9 @@ public abstract class Joueur {
         return null;
     }
 
-    public void demanderPlacerBateau() {
-
+    public ArrayList<Pair<Integer, Integer>> demanderPlacerBateau() {
+        ArrayList<Pair<Integer, Integer>> test = new ArrayList<>();
+        return test;
     }
 
     public void determinerPlacerBateau() {
