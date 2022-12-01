@@ -3,6 +3,7 @@ package menuprincipal.jeu;
 import javafx.util.Pair;
 import lombok.Data;
 import menuprincipal.battleship.joueur.Joueur;
+import menuprincipal.battleship.joueur.Personne;
 import menuprincipal.battleship.plateau.Case;
 import menuprincipal.battleship.plateau.PlateauBateau;
 import menuprincipal.battleship.plateau.PlateauTir;
@@ -19,7 +20,7 @@ public class Jeu {
     final int MAX_JOUEURS = 2;
     final int MAX_PLATEAUX = 2;
 
-    private Joueur[] joueurs;
+    private Joueur[] joueurs = new Joueur[MAX_JOUEURS];
     private PlateauBateau[] plateauBateaux = new PlateauBateau[MAX_PLATEAUX];
     private PlateauTir[] plateauTirs = new PlateauTir[MAX_PLATEAUX];
 
@@ -48,6 +49,8 @@ public class Jeu {
 
     private void determinerModeJeu() {
         //TODO: Initialiser les joueurs basé sur le choix de l'utilisateur.
+        joueurs[0] = new Personne();
+        joueurs[1] = new Personne();
     }
 
     private void initialiserPlateaux() {
@@ -56,6 +59,12 @@ public class Jeu {
         plateauBateaux[1] = (PlateauBateau) plateauxFactory.makePlateau(plateauBateaux[0]);
         plateauTirs[0] = (PlateauTir) plateauxFactory.makePlateau(plateauBateaux[0]);
         plateauTirs[1] = (PlateauTir) plateauxFactory.makePlateau(plateauBateaux[0]);
+
+        //TEMPORAIRE: À supprimer après que PlateauFactory soit réglé
+        plateauBateaux[0] = new PlateauBateau();
+        plateauBateaux[1] = new PlateauBateau();
+        plateauTirs[0] = new PlateauTir(plateauBateaux[1]);
+        plateauTirs[1] = new PlateauTir(plateauBateaux[0]);
     }
 
     private void placerBateaux() {
@@ -77,6 +86,10 @@ public class Jeu {
 
     private Pair<Integer, Integer> demanderTirJoueur(int numeroJoueur) {
         Pair<Integer, Integer> coordonnees = joueurs[numeroJoueur].demanderTir();
+
+        //TEMPORAIRE: À supprimer arpès que demanderTir() soit implémenté
+        coordonnees = new Pair<Integer,Integer>(2,2);
+
         plateauTirs[numeroJoueur].ajouterTir(coordonnees); ////// <<<<<<<<<<<<<<<<<<<<<<<<
 
         //TODO: Afficher seulement si le joueur est humain

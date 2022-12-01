@@ -9,7 +9,8 @@ public class PlateauxFactory {
             return new PlateauBateau();
 
         if (typePlateau instanceof PlateauTir)
-            return new PlateauTir();
+            //mettre plateauBateau de l'adversaire dans le constructeur de PlateauTir
+            return new PlateauTir(new PlateauBateau());
 
         return null;
     }

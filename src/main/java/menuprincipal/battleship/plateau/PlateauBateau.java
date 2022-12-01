@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class PlateauBateau extends Plateau {
-    @Override
+
     public void ajouterTir(Pair<Integer, Integer> coordonee) {
         super.ajouterTir(coordonee);
     }

@@ -1,4 +1,4 @@
 package menuprincipal.battleship.joueur;
 
-public class Personne {
+public class Personne extends Joueur{
 }
