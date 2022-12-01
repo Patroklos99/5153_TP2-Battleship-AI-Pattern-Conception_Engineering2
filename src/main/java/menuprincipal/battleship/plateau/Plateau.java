@@ -11,8 +11,9 @@ public abstract class Plateau {
         cases[coordonee.getValue()][coordonee.getKey()] = Case.TOUCHE;
     }
 
-    protected void initialiserPlateau() {
-        for (Case[] jay : cases)
-            Arrays.fill(jay, Case.AUCUN);
+    public Plateau() {
+        for (Case[] row : cases)
+            Arrays.fill(row, Case.AUCUN);
     }
+
 }

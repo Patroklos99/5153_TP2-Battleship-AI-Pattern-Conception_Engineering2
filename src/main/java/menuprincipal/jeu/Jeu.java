@@ -54,10 +54,10 @@ public class Jeu {
 
     private void initialiserPlateaux() {
         PlateauxFactory plateauxFactory = new PlateauxFactory();
-        plateauBateaux[0] = (PlateauBateau) plateauxFactory.makePlateau(plateauBateaux);
-        plateauBateaux[1] = (PlateauBateau) plateauxFactory.makePlateau(plateauBateaux);
-        plateauTirs[0] = (PlateauTir) plateauxFactory.makePlateau(plateauTirs);
-        plateauTirs[1] = (PlateauTir) plateauxFactory.makePlateau(plateauTirs);
+        plateauBateaux[0] = (PlateauBateau) plateauxFactory.makePlateau(plateauBateaux, plateauBateaux[1]);
+        plateauBateaux[1] = (PlateauBateau) plateauxFactory.makePlateau(plateauBateaux, plateauBateaux[1]);
+        plateauTirs[0] = (PlateauTir) plateauxFactory.makePlateau(plateauTirs, plateauBateaux[1]);
+        plateauTirs[1] = (PlateauTir) plateauxFactory.makePlateau(plateauTirs, plateauBateaux[0]);
     }
 
     private void placerBateaux() {

@@ -3,7 +3,6 @@ package menuprincipal.battleship.plateau;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class PlateauBateau extends Plateau {
 
@@ -12,8 +11,7 @@ public class PlateauBateau extends Plateau {
     }
 
     public PlateauBateau() {
-        for (Case[] row : cases)
-            Arrays.fill(row, Case.AUCUN);
+        super();
     }
 
     public void placerBateau(ArrayList<Pair<Integer, Integer>> localisatonBateaux) {
