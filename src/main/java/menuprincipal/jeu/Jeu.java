@@ -3,7 +3,7 @@ package menuprincipal.jeu;
 import javafx.util.Pair;
 import lombok.Data;
 import menuprincipal.battleship.joueur.Joueur;
-import menuprincipal.battleship.plateau.Plateau;
+import menuprincipal.battleship.plateau.Case;
 import menuprincipal.battleship.plateau.PlateauBateau;
 import menuprincipal.battleship.plateau.PlateauTir;
 import menuprincipal.battleship.plateau.PlateauxFactory;
@@ -21,24 +21,25 @@ public class Jeu {
 
     private Joueur[] joueurs;
     private PlateauBateau[] plateauBateaux = new PlateauBateau[MAX_PLATEAUX];
-    private Plateau[] plateauTirs = new PlateauTir[MAX_PLATEAUX];
+    private PlateauTir[] plateauTirs = new PlateauTir[MAX_PLATEAUX];
 
 
-    private Jeu() {}
+    private Jeu() {
+    }
+
     public static Jeu getInstance() {
-        if(instanceJeu == null)
+        if (instanceJeu == null)
             instanceJeu = new Jeu();
-
         return instanceJeu;
     }
 
     public void jouer() {
+        Joueur gagnant = null;
         determinerModeJeu();
         initialiserPlateaux();
         placerBateaux();
 
-        Joueur gagnant = null;
-        while(gagnant == null){
+        while (gagnant == null) {
             effectuerProchaintour();
             gagnant = determinerGagnant();
         }
@@ -53,30 +54,34 @@ public class Jeu {
         PlateauxFactory plateauxFactory = new PlateauxFactory();
         plateauBateaux[0] = (PlateauBateau) plateauxFactory.makePlateau(plateauBateaux[0]);
         plateauBateaux[1] = (PlateauBateau) plateauxFactory.makePlateau(plateauBateaux[0]);
-        plateauTirs [0] = plateauxFactory.makePlateau(plateauBateaux[0]);
-        plateauTirs [1] = plateauxFactory.makePlateau(plateauBateaux[0]);
+        plateauTirs[0] = (PlateauTir) plateauxFactory.makePlateau(plateauBateaux[0]);
+        plateauTirs[1] = (PlateauTir) plateauxFactory.makePlateau(plateauBateaux[0]);
     }
 
     private void placerBateaux() {
-        ArrayList<Pair<Integer,Integer>> localisatonBateaux = joueurs[0].demanderPlacerBateau();
-        plateauBateaux[0].placerBateau(localisatonBateaux);
-        joueurs[1].demanderPlacerBateau();
-        //TODO: Demander aux joueurs de placer tout les bateaux.
+        // Demander aux joueurs de placer tout les bateaux.
+        ArrayList<Pair<Integer, Integer>> localisatonBateaux_1 = joueurs[0].demanderPlacerBateau();
+        plateauBateaux[0].placerBateau(localisatonBateaux_1);
+        ArrayList<Pair<Integer, Integer>> localisatonBateaux_2 = joueurs[1].demanderPlacerBateau();
+        plateauBateaux[1].placerBateau(localisatonBateaux_2);
     }
 
     private void effectuerProchaintour() {
-        demanderTirJoueur(0);
-        demanderTirJoueur(1);
+        Pair<Integer, Integer> coordonnees_1 = demanderTirJoueur(0);
+        Pair<Integer, Integer> coordonnees_2 = demanderTirJoueur(1);
+        if (!plateauTirs[0].verifierTir(coordonnees_1, plateauBateaux[1]))
+            plateauBateaux[0].cases[coordonnees_1.getKey()][coordonnees_1.getValue()] = Case.BATEAU;
+        if (!plateauTirs[1].verifierTir(coordonnees_2, plateauBateaux[0]))
+            plateauBateaux[1].cases[coordonnees_2.getKey()][coordonnees_2.getValue()] = Case.BATEAU;
     }
 
-    private void demanderTirJoueur(int numeroJoueur){
-        Pair<Integer,Integer> coordonnees;
-
-        coordonnees = joueurs[numeroJoueur].demanderTir();
-        plateauTirs[numeroJoueur].ajouterTir(coordonnees);
+    private Pair<Integer, Integer> demanderTirJoueur(int numeroJoueur) {
+        Pair<Integer, Integer> coordonnees = joueurs[numeroJoueur].demanderTir();
+        plateauTirs[numeroJoueur].ajouterTir(coordonnees); ////// <<<<<<<<<<<<<<<<<<<<<<<<
 
         //TODO: Afficher seulement si le joueur est humain
-        AfficheurPartie.afficherPartie(plateauBateaux[numeroJoueur],plateauTirs[numeroJoueur]);
+        AfficheurPartie.afficherPartie(plateauBateaux[numeroJoueur], plateauTirs[numeroJoueur]);
+        return coordonnees;
     }
 
     private Joueur determinerGagnant() {

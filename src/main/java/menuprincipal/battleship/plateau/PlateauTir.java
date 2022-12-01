@@ -5,8 +5,9 @@ import javafx.util.Pair;
 import java.util.Arrays;
 
 public class PlateauTir extends Plateau {
-    private void verifierTir(Pair<Integer, Integer> coordonoee) {
-        
+
+    public boolean verifierTir(Pair<Integer, Integer> coordonoee, PlateauBateau plateauBateau) {
+        return plateauBateau.cases[coordonoee.getKey()][coordonoee.getValue()] == Case.BATEAU;
     }
 
     public PlateauTir() {

@@ -16,14 +16,11 @@ public class PlateauBateau extends Plateau {
             Arrays.fill(row, Case.AUCUN);
     }
 
-    public boolean placerBateau(ArrayList<Pair<Integer, Integer>> localisatonBateaux) {
+    public void placerBateau(ArrayList<Pair<Integer, Integer>> localisatonBateaux) {
         for (var test : localisatonBateaux) {
-            if(cases[test.getKey()][test.getValue()] != Case.AUCUN)
-                return false;
-            else
+            if(cases[test.getKey()][test.getValue()] == Case.AUCUN)
                 cases[test.getKey()][test.getValue()] = Case.BATEAU;
         }
-        return true;
     }
 
 }
