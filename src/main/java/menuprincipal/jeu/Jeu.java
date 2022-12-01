@@ -25,7 +25,7 @@ public class Jeu {
     private PlateauTir[] plateauTirs = new PlateauTir[MAX_PLATEAUX];
 
 
-    private Jeu() {
+    public Jeu() {
     }
 
     public static Jeu getInstance() {
@@ -44,7 +44,6 @@ public class Jeu {
             effectuerProchaintour();
             gagnant = determinerGagnant();
         }
-
     }
 
     private void determinerModeJeu() {
@@ -55,16 +54,10 @@ public class Jeu {
 
     private void initialiserPlateaux() {
         PlateauxFactory plateauxFactory = new PlateauxFactory();
-        plateauBateaux[0] = (PlateauBateau) plateauxFactory.makePlateau(plateauBateaux[0]);
-        plateauBateaux[1] = (PlateauBateau) plateauxFactory.makePlateau(plateauBateaux[0]);
-        plateauTirs[0] = (PlateauTir) plateauxFactory.makePlateau(plateauBateaux[0]);
-        plateauTirs[1] = (PlateauTir) plateauxFactory.makePlateau(plateauBateaux[0]);
-
-        //TEMPORAIRE: À supprimer après que PlateauFactory soit réglé
-        plateauBateaux[0] = new PlateauBateau();
-        plateauBateaux[1] = new PlateauBateau();
-        plateauTirs[0] = new PlateauTir(plateauBateaux[1]);
-        plateauTirs[1] = new PlateauTir(plateauBateaux[0]);
+        plateauBateaux[0] = (PlateauBateau) plateauxFactory.makePlateau(plateauBateaux);
+        plateauBateaux[1] = (PlateauBateau) plateauxFactory.makePlateau(plateauBateaux);
+        plateauTirs[0] = (PlateauTir) plateauxFactory.makePlateau(plateauTirs);
+        plateauTirs[1] = (PlateauTir) plateauxFactory.makePlateau(plateauTirs);
     }
 
     private void placerBateaux() {

@@ -2,13 +2,14 @@ package menuprincipal.battleship.plateau;
 
 public class PlateauxFactory {
 
-    public Plateau makePlateau(Plateau typePlateau) {
+    public Plateau makePlateau(Plateau[] typePlateau) {
         Plateau plateau = null;
 
-        if (typePlateau instanceof PlateauBateau)
+        String test = typePlateau.getClass().getName();
+        if (typePlateau.getClass().getName().contains("PlateauBateau"))
             return new PlateauBateau();
 
-        if (typePlateau instanceof PlateauTir)
+        if (typePlateau.getClass().getName().contains("PlateauTir"))
             //mettre plateauBateau de l'adversaire dans le constructeur de PlateauTir
             return new PlateauTir(new PlateauBateau());
 
