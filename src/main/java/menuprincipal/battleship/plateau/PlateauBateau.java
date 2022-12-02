@@ -2,7 +2,7 @@ package menuprincipal.battleship.plateau;
 
 import javafx.util.Pair;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class PlateauBateau extends Plateau {
 
@@ -14,10 +14,12 @@ public class PlateauBateau extends Plateau {
         super();
     }
 
-    public void placerBateau(ArrayList<Pair<Integer, Integer>> localisatonBateaux) {
-        for (var test : localisatonBateaux) {
-            if(cases[test.getKey()][test.getValue()] == Case.AUCUN)
-                cases[test.getKey()][test.getValue()] = Case.BATEAU;
+    public void placerBateau(List<List<Pair<Integer, Integer>>> localisatonBateaux) {
+        for (var listeListe : localisatonBateaux) {
+            for (var listeCoord : listeListe) {
+                if (cases[listeCoord.getKey()][listeCoord.getValue()] == Case.AUCUN)
+                    cases[listeCoord.getKey()][listeCoord.getValue()] = Case.BATEAU;
+            }
         }
     }
 
