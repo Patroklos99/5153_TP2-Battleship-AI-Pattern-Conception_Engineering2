@@ -21,19 +21,4 @@ public class PlateauBateau extends Plateau {
         }
     }
 
-    @Override
-    public String toString() {
-        String plateau = "";
-        for(Case[] row : cases){
-            for(Case c : row){
-                if(c == Case.AUCUN) {
-                    plateau += "_ ";
-                }else{
-                    plateau += "B ";
-                }
-            }
-            plateau += "\n";
-        }
-        return plateau;
-    }
 }
