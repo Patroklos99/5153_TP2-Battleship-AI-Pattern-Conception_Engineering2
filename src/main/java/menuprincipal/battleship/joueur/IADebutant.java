@@ -1,4 +1,4 @@
 package menuprincipal.battleship.joueur;
 
-public class IADebutant {
+public class IADebutant extends Joueur{
 }

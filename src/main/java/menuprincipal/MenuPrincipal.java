@@ -36,6 +36,7 @@ public class MenuPrincipal {
             switch (choix) {
                 case 1:
                     Jeu.getInstance().jouer();
+                    break;
                 case 2:
                     ChargeurPartie.chargerPartie();
                     Jeu.getInstance().jouer();
