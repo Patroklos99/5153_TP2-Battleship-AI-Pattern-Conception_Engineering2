@@ -22,6 +22,7 @@ public class PlateauBateau extends Plateau {
     }
 
     public boolean estCaseInnoccupee(Pair<Integer, Integer> coord){
+        if(coord.getKey() >= TAILLE_PLATEAU || coord.getValue() >= TAILLE_PLATEAU ) return false;
         Case c = cases[coord.getKey()][coord.getValue()];
         return c == Case.AUCUN || c == Case.RATE;
     }
