@@ -14,32 +14,58 @@ public class Personne extends Joueur{
     private static final String ENONCE_TORPILLEUR = "Veuillez entrer les coordonnées du torpilleur qui utilise 2 cases de gauche à droite ou de haut en bas (exemple: E1 E2):";
 
 
+    private boolean verifierEntreeBateau(String[] plusieursCoordonnees, int tailleBateau){
+        Boolean estCorrect = true;
+        //...........................................
+        return estCorrect;
+    }
 
+    private String[] obtenirEntreeUtilisateurBateau(){
+        Scanner entreePersonne = new Scanner(System.in);
+        String coordonnee;
+        coordonnee = entreePersonne.nextLine();
+        coordonnee.toLowerCase();
+
+        return coordonnee.split(" ");
+    }
 
     @Override
     protected void determinerPlacerBateau(List<Pair<Integer, Integer>> coordonneBateau, int numeroBateau) {
+        boolean estCorrect = false;
+        String[] coordonnees;
+        do{
+            switch(numeroBateau){
+                case 0:
+                    System.out.println(ENONCE_PORTE_AVION);
+                    coordonnees = obtenirEntreeUtilisateurBateau();
+                    estCorrect = verifierEntreeBateau(coordonnees,5);
+                    break;
+                case 1:
+                    System.out.println(ENONCE_CROISEUR);
+                    coordonnees = obtenirEntreeUtilisateurBateau();
+                    estCorrect = verifierEntreeBateau(coordonnees,4);
+                    break;
+                case 2:
+                    System.out.println(ENONCE_CONTRE_TOR);
+                    coordonnees = obtenirEntreeUtilisateurBateau();
+                    estCorrect = verifierEntreeBateau(coordonnees,3);
+                    break;
+                case 3:
+                    System.out.println(ENONCE_SOUS_MARIN);
+                    coordonnees = obtenirEntreeUtilisateurBateau();
+                    estCorrect = verifierEntreeBateau(coordonnees,3);
+                    break;
+                case 4:
+                    System.out.println(ENONCE_TORPILLEUR);
+                    coordonnees = obtenirEntreeUtilisateurBateau();
+                    estCorrect = verifierEntreeBateau(coordonnees,2);
+                    break;
+            }
+        }while(!estCorrect);
+
+
+
         /**
-        switch(numeroBateau){
-            case 0:
-
-                break;
-            case 1:
-
-                break;
-            case 2:
-
-                break;
-            case 3:
-
-                break;
-            case 4:
-
-                break;
-        }
-         */
-
-
-
         Scanner entreePersonne = new Scanner(System.in);
         String coordonnee;
 
@@ -60,23 +86,13 @@ public class Personne extends Joueur{
             }
         }
 
-
-
-
-
-
-        /**
-        System.out.println("Veuillez entrer les coordonnées du croiseur qui utilise 4 cases de gauche à droite ou de haut en bas (exemple: B1 B2 B3 B4):");
-        coordonnee = entreePersonne.nextLine();
-
-        System.out.println("Veuillez entrer les coordonnées du contre-torpilleurs qui utilise 3 cases de gauche à droite ou de haut en bas (exemple: C1 C2 C3):");
-        coordonnee = entreePersonne.nextLine();
-
-        System.out.println("Veuillez entrer les coordonnées du sous-marin qui utilise 3 cases de gauche à droite ou de haut en bas (exemple: D1 D2 D3):");
-        coordonnee = entreePersonne.nextLine();
-
-        System.out.println("Veuillez entrer les coordonnées du torpilleur qui utilise 2 cases de gauche à droite ou de haut en bas (exemple: E1 E2):");
-        coordonnee = entreePersonne.nextLine();
          */
+
+
+
+
+
+
+
     }
 }
