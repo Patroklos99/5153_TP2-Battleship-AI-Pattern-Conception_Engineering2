@@ -32,6 +32,7 @@ public class Jeu {
     private static final String FIN_PARTIE = "Fin de la partie.";
     private static final String CHOIX_INVALIDE = "Choix invalide";
     private static final String METHODE_NON_IMP = "Cette fonction n'est pas encore implémentée.";
+    private static final String POSITION_INVALIDE = "Position invalide.";
 
 
     final int JOUEUR_1 = 0;
@@ -129,17 +130,23 @@ public class Jeu {
         boolean estValide;
         List<Pair<Integer, Integer>> coords;
         for(int i = 0; i < BATEAUX_MAX; ++i){
-            do{
-                coords = joueurs[JOUEUR_1].demanderPlacerBateau();
-                estValide = estPlacementValide(coords, joueurs[JOUEUR_1]);
-            }while(!estValide);
+            AfficheurPartie.afficherPartie(plateauBateaux[JOUEUR_1], plateauTirs[JOUEUR_1]);
+            coords = demanderPlacerBateau(joueurs[JOUEUR_1]);
             placerBateau(coords, joueurs[JOUEUR_1]);
-            do{
-                coords = joueurs[JOUEUR_2].demanderPlacerBateau();
-                estValide = estPlacementValide(coords, joueurs[JOUEUR_2]);
-            }while(!estValide);
+            coords = demanderPlacerBateau(joueurs[JOUEUR_2]);
             placerBateau(coords, joueurs[JOUEUR_2]);
         }
+    }
+
+    private List<Pair<Integer, Integer>> demanderPlacerBateau(Joueur joueur){
+        List<Pair<Integer, Integer>> coords;
+        boolean estValide;
+        do{
+            coords = joueur.demanderPlacerBateau();
+            estValide = estPlacementValide(coords, joueur);
+            if(!estValide) System.out.println(POSITION_INVALIDE);
+        }while(!estValide);
+        return coords;
     }
 
     private boolean estPlacementValide(List<Pair<Integer, Integer>> coords, Joueur joueur){
