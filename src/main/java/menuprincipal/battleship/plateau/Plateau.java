@@ -16,4 +16,26 @@ public abstract class Plateau {
             Arrays.fill(row, Case.AUCUN);
     }
 
+    @Override
+    public String toString() {
+        String plateau = "";
+        for(Case[] row : cases){
+            for(Case c : row){
+                if(c == Case.AUCUN) {
+                    plateau += "_ ";
+                }else if(c == Case.BATEAU){
+                    plateau += "B ";
+                }else if(c == Case.TOUCHE){
+                    plateau += "T ";
+                }else if(c == Case.COULE){
+                    plateau += "C ";
+                }else if(c == Case.RATE){
+                    plateau += "R ";
+                }
+            }
+            plateau += "\n";
+        }
+        return plateau;
+    }
+
 }
