@@ -10,6 +10,7 @@ import menuprincipal.battleship.plateau.PlateauTir;
 import menuprincipal.battleship.plateau.PlateauxFactory;
 import menuprincipal.frontend.AfficheurPartie;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -23,7 +24,6 @@ public class Jeu {
     private Joueur[] joueurs = new Joueur[MAX_JOUEURS];
     private PlateauBateau[] plateauBateaux = new PlateauBateau[MAX_PLATEAUX];
     private PlateauTir[] plateauTirs = new PlateauTir[MAX_PLATEAUX];
-
 
     public Jeu() {
     }
@@ -62,9 +62,9 @@ public class Jeu {
 
     private void placerBateaux() {
         // Demander aux joueurs de placer tout les bateaux.
-        List<List<Pair<Integer, Integer>>> localisatonBateaux_1 = joueurs[0].demanderPlacerBateau();
+        ArrayList<Pair<Integer, Integer>> localisatonBateaux_1 = joueurs[0].demanderPlacerBateau();
         plateauBateaux[0].placerBateau(localisatonBateaux_1);
-        List<List<Pair<Integer, Integer>>> localisatonBateaux_2 = joueurs[1].demanderPlacerBateau();
+        ArrayList<Pair<Integer, Integer>> localisatonBateaux_2 = joueurs[1].demanderPlacerBateau();
         plateauBateaux[1].placerBateau(localisatonBateaux_2);
     }
 
