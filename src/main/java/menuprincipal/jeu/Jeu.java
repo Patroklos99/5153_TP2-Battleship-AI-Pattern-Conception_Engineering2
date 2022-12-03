@@ -32,10 +32,9 @@ public class Jeu {
     private static final String FIN_PARTIE = "Fin de la partie.";
     private static final String CHOIX_INVALIDE = "Choix invalide";
     private static final String METHODE_NON_IMP = "Cette fonction n'est pas encore implémentée.";
+    private static final String POSITION_INVALIDE = "Position invalide.";
+    private static final String PLACER_PROCHAIN_BATEAU = "Appuyez sur 1 pour placer le prochain bateau";
 
-
-    final int JOUEUR_1 = 0;
-    final int JOUEUR_2 = 1;
 
     final int MAX_JOUEURS = 2;
     final int MAX_PLATEAUX = 2;
@@ -43,6 +42,9 @@ public class Jeu {
     private Joueur[] joueurs = new Joueur[MAX_JOUEURS];
     private PlateauBateau[] plateauBateaux = new PlateauBateau[MAX_PLATEAUX];
     private PlateauTir[] plateauTirs = new PlateauTir[MAX_PLATEAUX];
+
+    private final int JOUEUR_1 = 0;
+    private final int JOUEUR_2 = 1;
 
     private Jeu() {
     }
@@ -125,10 +127,47 @@ public class Jeu {
     }
 
     private void placerBateaux() {
-        ArrayList<Pair<Integer, Integer>> localisatonBateaux_1 = joueurs[0].demanderPlacerBateau();
-        plateauBateaux[0].placerBateau(localisatonBateaux_1);
-        ArrayList<Pair<Integer, Integer>> localisatonBateaux_2 = joueurs[1].demanderPlacerBateau();
-        plateauBateaux[1].placerBateau(localisatonBateaux_2);
+        final int BATEAUX_MAX = 5;
+        List<Pair<Integer, Integer>> coords;
+        for(int i = 0; i < BATEAUX_MAX; ++i){
+            AfficheurPartie.afficherPartie(plateauBateaux[0], plateauTirs[0]);
+            coords = demanderPlacerBateau(JOUEUR_1, i);
+            plateauBateaux[JOUEUR_1].placerBateau(coords);
+            coords = demanderPlacerBateau(JOUEUR_2, i);
+            plateauBateaux[JOUEUR_2].placerBateau(coords);
+            demanderPlacerProchainBateau();
+        }
+    }
+    
+    private void demanderPlacerProchainBateau(){
+        int choix = -1;
+        do{
+            System.out.println(PLACER_PROCHAIN_BATEAU);
+            try {
+                choix = new Scanner(System.in).nextInt();
+            } catch (InputMismatchException e) {
+                System.out.print(CHOIX_INVALIDE);
+            }
+            if(choix != 1) System.out.print(CHOIX_INVALIDE);
+        }while(choix != 1);
+    }
+
+    private List<Pair<Integer, Integer>> demanderPlacerBateau(int joueur, int numeroBateau){
+        List<Pair<Integer, Integer>> coords;
+        boolean estValide;
+        do{
+            coords = joueurs[joueur].demanderPlacerBateau(numeroBateau);
+            estValide = estPlacementValide(coords, joueur);
+            if(!estValide) System.out.println(POSITION_INVALIDE);
+        }while(!estValide);
+        return coords;
+    }
+
+    private boolean estPlacementValide(List<Pair<Integer, Integer>> coords, int joueur){
+        for(Pair<Integer, Integer> coord : coords){
+            if(!plateauBateaux[joueur].estCaseInnoccupee(coord)) return false;
+        }
+        return true;
     }
 
     private void effectuerProchaintour() {
