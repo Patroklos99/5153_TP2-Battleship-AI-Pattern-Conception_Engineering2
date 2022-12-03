@@ -125,10 +125,29 @@ public class Jeu {
     }
 
     private void placerBateaux() {
-        ArrayList<Pair<Integer, Integer>> localisatonBateaux_1 = joueurs[0].demanderPlacerBateau();
-        plateauBateaux[0].placerBateau(localisatonBateaux_1);
-        ArrayList<Pair<Integer, Integer>> localisatonBateaux_2 = joueurs[1].demanderPlacerBateau();
-        plateauBateaux[1].placerBateau(localisatonBateaux_2);
+        final int BATEAUX_MAX = 5;
+        boolean estValide;
+        List<Pair<Integer, Integer>> coords;
+        for(int i = 0; i < BATEAUX_MAX; ++i){
+            do{
+                coords = joueurs[JOUEUR_1].demanderPlacerBateau();
+                estValide = estPlacementValide(coords, joueurs[JOUEUR_1]);
+            }while(!estValide);
+            placerBateau(coords, joueurs[JOUEUR_1]);
+            do{
+                coords = joueurs[JOUEUR_2].demanderPlacerBateau();
+                estValide = estPlacementValide(coords, joueurs[JOUEUR_2]);
+            }while(!estValide);
+            placerBateau(coords, joueurs[JOUEUR_2]);
+        }
+    }
+
+    private boolean estPlacementValide(List<Pair<Integer, Integer>> coords, Joueur joueur){
+        return true;
+    }
+
+    private void placerBateau(List<Pair<Integer, Integer>> coords, Joueur joueur){
+
     }
 
     private void effectuerProchaintour() {
