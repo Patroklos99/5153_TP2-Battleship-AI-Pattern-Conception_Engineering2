@@ -5,7 +5,10 @@ import javafx.util.Pair;
 import java.util.Arrays;
 
 public abstract class Plateau {
-    public Case[][] cases = new Case[40][40];
+
+    protected static final int TAILLE_PLATEAU = 10;
+
+    public Case[][] cases = new Case[TAILLE_PLATEAU][TAILLE_PLATEAU];
 
     public void ajouterTir(Pair<Integer, Integer> coordonee) {
         cases[coordonee.getValue()][coordonee.getKey()] = Case.TOUCHE;
