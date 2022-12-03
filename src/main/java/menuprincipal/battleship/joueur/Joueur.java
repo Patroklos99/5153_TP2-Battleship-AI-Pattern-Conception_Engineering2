@@ -3,6 +3,7 @@ package menuprincipal.battleship.joueur;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Joueur {
     public Pair<Integer, Integer> determinerTir() {
@@ -15,12 +16,14 @@ public abstract class Joueur {
         return null;
     }
 
-    public ArrayList<Pair<Integer, Integer>> demanderPlacerBateau() {
-        ArrayList<Pair<Integer, Integer>> test = new ArrayList<>();
-        return test;
+    public List<Pair<Integer, Integer>> demanderPlacerBateau(int numeroBateau) {
+        List<Pair<Integer,Integer>> bateau = new ArrayList<>();
+
+        this.determinerPlacerBateau(bateau, numeroBateau);
+        return bateau;
     }
 
-    public void determinerPlacerBateau() {
-
+    protected void determinerPlacerBateau(List<Pair<Integer,Integer>> coordonneBateau, int numeroBateau) {
+        coordonneBateau.addAll(List.of(new Pair<>(0,0), new Pair<>(0,1), new Pair<>(0,2), new Pair<>(0,3), new Pair<>(0,4)));
     }
 }

@@ -131,9 +131,9 @@ public class Jeu {
         List<Pair<Integer, Integer>> coords;
         for(int i = 0; i < BATEAUX_MAX; ++i){
             AfficheurPartie.afficherPartie(plateauBateaux[0], plateauTirs[0]);
-            coords = demanderPlacerBateau(JOUEUR_1);
+            coords = demanderPlacerBateau(JOUEUR_1, i);
             plateauBateaux[JOUEUR_1].placerBateau(coords);
-            coords = demanderPlacerBateau(JOUEUR_2);
+            coords = demanderPlacerBateau(JOUEUR_2, i);
             plateauBateaux[JOUEUR_2].placerBateau(coords);
             demanderPlacerProchainBateau();
         }
@@ -152,11 +152,11 @@ public class Jeu {
         }while(choix != 1);
     }
 
-    private List<Pair<Integer, Integer>> demanderPlacerBateau(int joueur){
+    private List<Pair<Integer, Integer>> demanderPlacerBateau(int joueur, int numeroBateau){
         List<Pair<Integer, Integer>> coords;
         boolean estValide;
         do{
-            coords = joueurs[joueur].demanderPlacerBateau();
+            coords = joueurs[joueur].demanderPlacerBateau(numeroBateau);
             estValide = estPlacementValide(coords, joueur);
             if(!estValide) System.out.println(POSITION_INVALIDE);
         }while(!estValide);
