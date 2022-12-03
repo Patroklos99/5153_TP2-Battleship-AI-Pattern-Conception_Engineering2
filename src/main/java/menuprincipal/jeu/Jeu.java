@@ -35,15 +35,15 @@ public class Jeu {
     private static final String POSITION_INVALIDE = "Position invalide.";
 
 
-    final int JOUEUR_1 = 0;
-    final int JOUEUR_2 = 1;
-
     final int MAX_JOUEURS = 2;
     final int MAX_PLATEAUX = 2;
 
     private Joueur[] joueurs = new Joueur[MAX_JOUEURS];
     private PlateauBateau[] plateauBateaux = new PlateauBateau[MAX_PLATEAUX];
     private PlateauTir[] plateauTirs = new PlateauTir[MAX_PLATEAUX];
+
+    private Joueur JOUEUR_1 = joueurs[0];
+    private Joueur JOUEUR_2 = joueurs[1];
 
     private Jeu() {
     }
@@ -80,10 +80,10 @@ public class Jeu {
 
             switch (choix) {
                 case 1:
-                    joueurs[JOUEUR_2] = new IADebutant();
+                    JOUEUR_2 = new IADebutant();
                     break;
                 case 2:
-                    joueurs[JOUEUR_2] = new IAAvance();
+                    JOUEUR_2 = new IAAvance();
                     break;
                 default:
                     System.out.print(CHOIX_INVALIDE);
@@ -93,7 +93,7 @@ public class Jeu {
 
     private void determinerModeJeu() {
         int choix = -1;
-        joueurs[JOUEUR_1] = new Personne();
+        JOUEUR_1 = new Personne();
         do {
             System.out.print(DEMANDER_MODE_JEU);
             try {
@@ -130,11 +130,11 @@ public class Jeu {
         boolean estValide;
         List<Pair<Integer, Integer>> coords;
         for(int i = 0; i < BATEAUX_MAX; ++i){
-            AfficheurPartie.afficherPartie(plateauBateaux[JOUEUR_1], plateauTirs[JOUEUR_1]);
-            coords = demanderPlacerBateau(joueurs[JOUEUR_1]);
-            placerBateau(coords, joueurs[JOUEUR_1]);
-            coords = demanderPlacerBateau(joueurs[JOUEUR_2]);
-            placerBateau(coords, joueurs[JOUEUR_2]);
+            AfficheurPartie.afficherPartie(plateauBateaux[0], plateauTirs[0]);
+            coords = demanderPlacerBateau(JOUEUR_1);
+            placerBateau(coords, JOUEUR_1);
+            coords = demanderPlacerBateau(JOUEUR_2);
+            placerBateau(coords, JOUEUR_2);
         }
     }
 
