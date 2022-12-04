@@ -1,6 +1,8 @@
 package menuprincipal.battleship.bateau;
 
 import javafx.util.Pair;
+import menuprincipal.battleship.plateau.Case;
+import menuprincipal.battleship.plateau.Coordonnee;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -9,26 +11,57 @@ import java.util.List;
 
 public class Bateau {
     private int pointDeVie;
-    private List<Pair<Integer, Integer>> positions;
-    private Dictionary<Pair<Integer, Integer>,Boolean> caseEstTouche;
+    private Dictionary<Coordonnee,Boolean> coordonneeEstTouche;
 
-    public Bateau(List<Pair<Integer, Integer>> positions){
-        this.positions = new ArrayList<Pair<Integer, Integer>>(positions);
-        initCaseEstTouche();
-        pointDeVie = this.positions.size();
-    }
+    /**
+     * Objet représentant bateau sur un plateau.
+     *
+     * @param coordonnees Liste de coordonnees représentant la position du bateau.
+     * */
+    public Bateau(List<Coordonnee> coordonnees){
 
-    private void initCaseEstTouche(){
-        caseEstTouche = new Hashtable<Pair<Integer, Integer>,Boolean>();
-        for(Pair<Integer, Integer> coord: positions){
-            caseEstTouche.put(coord,false);
+        coordonneeEstTouche = new Hashtable<Coordonnee,Boolean>();
+        for(Coordonnee coord: coordonnees){
+            coordonneeEstTouche.put(coord,false);
         }
+
+        pointDeVie = coordonnees.size();
     }
 
-    public boolean estTouche () {
-        return false;
+    /**
+     * Tir sur le bateau, puis vérifie si le tir touche le bateau et s'il est coulé.
+     *
+     * @param tir Coordonnée du tir.
+     * @return Case.RATE, Case.TOUCHE, ou Case.COULE, tout dépendant du tir et de l'état du bateau.
+     * */
+    public Case tirerSur (Coordonnee tir) {
+        Boolean estTouche = coordonneeEstTouche.get(tir);
+
+        // Si coordonnée ne fait pas partie du bateau, retourne "raté".
+        if(estTouche == null){
+            return Case.RATE;
+        }
+
+        // Si coordonnée n'est pas encore touchée, on le touche, décrémente les points de vie.
+        if(!estTouche) {
+            pointDeVie--;
+            coordonneeEstTouche.put(tir,true);
+
+            if(estCoule())
+                return Case.COULE;
+
+            return Case.TOUCHE;
+        }
+
+        // Si coordonnée est déjà touchée, retourne "raté".
+        return Case.RATE;
     }
 
+    /**
+     * Retourne si le bateau est coulé ou non.
+     *
+     * @return true si bateau coulé, sinon false.
+     * */
     public boolean estCoule() {
         return (pointDeVie == 0);
     }
