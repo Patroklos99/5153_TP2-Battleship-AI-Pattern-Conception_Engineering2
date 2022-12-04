@@ -11,11 +11,25 @@ public class PlateauTir extends Plateau {
         super.ajouterTir(coordonee);
     }
 
+    public Case ajouterTir(Coordonnee coordonnee){
+        Case resultat = plateauBateauAdversaire.ajouterTir(coordonnee);
+        setCase(coordonnee,resultat);
+        return resultat;
+    }
+
+    /**
+     * Représente le plateau supérieur qui contient les tirs effectués par le joueur.
+     * */
     public PlateauTir(PlateauBateau plateauAdversaire_) {
         super();
         plateauBateauAdversaire = plateauAdversaire_;
     }
 
+    /**
+     * @deprecated
+     *
+     * Utilisez ajouterTir(Coordonnee coordonnee) à la place.
+     * */
     public boolean verifierTir(Pair<Integer, Integer> coordonoee, PlateauBateau plateauBateau) {
         return plateauBateau.cases[coordonoee.getKey()][coordonoee.getValue()] == Case.BATEAU;
     }
