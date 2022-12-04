@@ -3,6 +3,7 @@ package menuprincipal.battleship.joueur;
 import javafx.util.Pair;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Personne extends Joueur{
@@ -12,6 +13,40 @@ public class Personne extends Joueur{
     private static final String ENONCE_CONTRE_TOR = "Veuillez entrer les coordonnées du contre-torpilleurs qui utilise 3 cases de gauche à droite ou de haut en bas (exemple: C1 C2 C3):";
     private static final String ENONCE_SOUS_MARIN = "Veuillez entrer les coordonnées du sous-marin qui utilise 3 cases de gauche à droite ou de haut en bas (exemple: D1 D2 D3):";
     private static final String ENONCE_TORPILLEUR = "Veuillez entrer les coordonnées du torpilleur qui utilise 2 cases de gauche à droite ou de haut en bas (exemple: E1 E2):";
+
+    private static final String MSG_ERREUR = "Erreur, votre entrée n'est pas valide!";
+
+
+    //---------cette méthode n'a pas été testé (je suis trop lazy pour le faire lol), mais la logique est correcte--------------- -> à enlever après l'avoir testé
+    //c'est aussi une méthode qu'on peut refactor si ça nous tente
+    /**
+     * Vérifie si les coordonnées du bateau se suivent
+     * @param coordonneBateau les coordonnées du bateau
+     * @return si c'est valide
+     */
+    private boolean verifierPositionCoordBateau(List<Pair<Integer, Integer>> coordonneBateau){
+        boolean estCorrect = true;
+        int precedent;
+        int courant;
+        if(Objects.equals(coordonneBateau.get(0).getKey(), coordonneBateau.get(1).getKey())){
+            for (int i = 1; i < coordonneBateau.size(); i++){
+                precedent = coordonneBateau.get(i - 1).getValue();
+                courant = coordonneBateau.get(i).getValue();
+                if(precedent + 1 != courant)
+                    estCorrect = false;
+            }
+        }else if(Objects.equals(coordonneBateau.get(0).getValue(), coordonneBateau.get(1).getValue())){
+            for (int i = 1; i < coordonneBateau.size(); i++){
+                precedent = coordonneBateau.get(i - 1).getKey();
+                courant = coordonneBateau.get(i).getKey();
+                if(precedent + 1 != courant)
+                    estCorrect = false;
+            }
+        }else{
+            estCorrect = false;
+        }
+        return estCorrect;
+    }
 
     /**
      * Vérifie si l'entrée de l'utilisateur est du bon format
@@ -40,11 +75,13 @@ public class Personne extends Joueur{
         int colonne;
         int rangee;
         for(String coor: plusieursCoordonnees){
+            //TODO cette partie va être refactor pour pouvoir être utilisé pour les tirs (Lysanne fera ça) (et oui, j'ai écrit à la 3e personne pour que ce soit clair que c'est moi qui l'a écrit XD)
             colonne = coor.charAt(0) - 'a';
             if(coor.length() == 3)
                 rangee = 9;
             else
                 rangee = coor.charAt(1) - '1';
+            //_________________________________________________________________________________________________
             coordonneBateau.add(new Pair<>(colonne, rangee));
         }
     }
@@ -64,8 +101,9 @@ public class Personne extends Joueur{
             estCorrect = verifierFormatEntreeBateau(plusieursCoordonnees);
         }
         if(estCorrect){
-            //méthode pour transformer en coordonneBateau et vérifie si ça se suit
+            //méthodes pour transformer en coordonneBateau et vérifie si ça se suit
             changerFormatEntreeBateau(plusieursCoordonnees,coordonneBateau);
+            estCorrect = verifierPositionCoordBateau(coordonneBateau);
         }
         return estCorrect;
     }
@@ -115,38 +153,9 @@ public class Personne extends Joueur{
                     estCorrect = verifierEntreeBateau(coordonnees,2, coordonneBateau);
                     break;
             }
+            if(!estCorrect)
+                System.out.println(MSG_ERREUR);
         }while(!estCorrect);
-
-
-
-        /**
-        Scanner entreePersonne = new Scanner(System.in);
-        String coordonnee;
-
-        System.out.println("Veuillez entrer les coordonnées du porte-avion qui utilise 5 cases de gauche à droite ou de haut en bas (exemple: A1 A2 A3 A4 A5):");
-        coordonnee = entreePersonne.nextLine();
-        coordonnee.toLowerCase();
-
-        String[] plusieursCoordonnees = coordonnee.split(" ");
-        Boolean entreeCorrecte = true;
-        if(plusieursCoordonnees.length != 5)
-            entreeCorrecte = false;
-        for(String coor: plusieursCoordonnees){
-            if(!Character.isAlphabetic(coor.charAt(0)) || !Character.isDigit(coor.charAt(1)) || (coor.length() == 3 && !Character.isDigit(coor.charAt(2)))
-            || (coor.length() != 2 && coor.length() != 3) || (coor.length() == 3 && !(coor.charAt(1) == '1' && coor.charAt(2) == '0'))
-                    || (coor.charAt(0) < 'a' && coor.charAt(0) > 'j' )){
-                entreeCorrecte = false;
-                break;
-            }
-        }
-
-         */
-
-
-
-
-
-
 
     }
 }
