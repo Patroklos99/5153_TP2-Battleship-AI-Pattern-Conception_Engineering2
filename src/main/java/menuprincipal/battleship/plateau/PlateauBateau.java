@@ -10,10 +10,6 @@ public class PlateauBateau extends Plateau {
 
     private ArrayList<Bateau> bateaux;
 
-    public void ajouterTir(Pair<Integer, Integer> coordonee) {
-        super.ajouterTir(coordonee);
-    }
-
     /**
      * Représente le plateau inférieur qui contient les bateaux du joueur.
      * */
@@ -21,6 +17,45 @@ public class PlateauBateau extends Plateau {
         super();
         bateaux = new ArrayList<Bateau>();
     }
+
+
+    @Override
+    public Case ajouterTir(Coordonnee coordonnee){
+        Case caseTouche = getCase(coordonnee);
+
+        // Retourne Rate s'il n'y a pas de bateau à la coordonnée
+        if(caseTouche == Case.AUCUN){
+            setCase(coordonnee,Case.RATE);
+            return Case.RATE;
+        }
+
+        // Retourne Touche ou Coule s'il y a un bateau.
+        if(caseTouche == Case.BATEAU){
+            Case resultat = Case.RATE;
+            for(Bateau b : bateaux){
+                resultat = b.tirerSur(coordonnee);
+                if(resultat != Case.RATE)
+                    break;
+            }
+            setCase(coordonnee,resultat);
+            return resultat;
+        }
+
+        // Par défaut, retourne l'état de la case en tant que tel.
+        return caseTouche;
+    }
+
+
+    /**
+     * @deprecated
+     *
+     * Utilisez la version qui prend un objet Coordonnee en paramètre.
+     * */
+    public void ajouterTir(Pair<Integer, Integer> coordonee) {
+        super.ajouterTir(coordonee);
+    }
+
+
 
     /**
      * @deprecated
@@ -44,7 +79,7 @@ public class PlateauBateau extends Plateau {
      * */
     public void placerNouveauBateau(List<Coordonnee> coords) {
         for(Coordonnee coord : coords){
-            cases[coord.posH][coord.posV] = Case.BATEAU;
+            setCase(coord, Case.BATEAU);
         }
         bateaux.add(new Bateau(coords));
     }
@@ -67,7 +102,7 @@ public class PlateauBateau extends Plateau {
      * */
     public boolean estCaseInnoccupee(Coordonnee coord){
         if(coord.posH >= TAILLE_PLATEAU || coord.posV >= TAILLE_PLATEAU ) return false;
-        Case c = cases[coord.posH][coord.posV];
+        Case c = getCase(coord);
         return c == Case.AUCUN || c == Case.RATE;
     }
 

@@ -10,13 +10,52 @@ public abstract class Plateau {
 
     public Case[][] cases = new Case[TAILLE_PLATEAU][TAILLE_PLATEAU];
 
+    /**
+     * Classe abstraite représentant un des plateaux du jeu (plateau de tir supérieur ou plateau de bateaux inférieur)
+     * */
+    public Plateau() {
+        for (Case[] row : cases)
+            Arrays.fill(row, Case.AUCUN);
+    }
+
+    /**
+     * @deprecated
+     *
+     * Utilisez la version qui prend un objet Coordonnee en paramètre.
+     * */
     public void ajouterTir(Pair<Integer, Integer> coordonee) {
         cases[coordonee.getValue()][coordonee.getKey()] = Case.TOUCHE;
     }
 
-    public Plateau() {
-        for (Case[] row : cases)
-            Arrays.fill(row, Case.AUCUN);
+    /**
+     * Tirer sur une coordonnee du plateau. Retourne le type de case touché.
+     * Stock aussi l'état de la case après le tir (Ratée, Touché, Coulé).
+     *
+     * @param coordonnee Cordonnee à tirer.
+     * @return Case.RATE, Case.TOUCHE, ou Case.COULE, tout dépendant si le bateau touché est coulé ou non.
+     */
+    abstract public Case ajouterTir(Coordonnee coordonnee);
+
+
+    /**
+     * Assigne un état à la case situé dans une coordonnée.
+     *
+     * @param coordonnee Coordonnee de la case.
+     * @param caseEtat Nouvel état de la case.
+     * */
+    protected void setCase(Coordonnee coordonnee, Case caseEtat){
+        cases[coordonnee.posH][coordonnee.posV] = caseEtat;
+    }
+
+    /**
+     * Reçois l'état de la case situé dans une coordonnée.
+     *
+     * @param coordonnee Coordonnee de la case.
+     *
+     * @return État de la case.
+     * */
+    protected Case getCase(Coordonnee coordonnee){
+        return cases[coordonnee.posH][coordonnee.posV];
     }
 
     @Override
@@ -29,11 +68,11 @@ public abstract class Plateau {
                 }else if(c == Case.BATEAU){
                     plateau += "B ";
                 }else if(c == Case.TOUCHE){
-                    plateau += "T ";
+                    plateau += "X ";
                 }else if(c == Case.COULE){
-                    plateau += "C ";
+                    plateau += "X ";
                 }else if(c == Case.RATE){
-                    plateau += "R ";
+                    plateau += "O ";
                 }
             }
             plateau += "\n";
