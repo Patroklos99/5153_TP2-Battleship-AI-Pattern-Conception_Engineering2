@@ -11,6 +11,7 @@ import menuprincipal.battleship.plateau.PlateauBateau;
 import menuprincipal.battleship.plateau.PlateauTir;
 import menuprincipal.battleship.plateau.PlateauxFactory;
 import menuprincipal.frontend.AfficheurPartie;
+import menuprincipal.jeu.SelecteurModeJeu;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -21,24 +22,9 @@ public class Jeu {
 
     private static Jeu instanceJeu = null;
 
-    private static final String DEMANDER_MODE_JEU =
-            " ****************************\n" +
-                    " ****** MODE DE JEU ******\n" +
-                    " ****************************\n" +
-                    " 1 - Jouer contre un ordinateur\n" +
-                    " 2 - Jouer contre un humain\n";
-    private static final String DEMANDER_DIFFICULTE =
-            " ****************************\n" +
-                    " ****** DIFFICULTÉ ******\n" +
-                    " ****************************\n" +
-                    " 1 - Ordinateur débutant\n" +
-                    " 2 - Ordinateur avancé\n";
     private static final String FIN_PARTIE = "Fin de la partie.";
-    private static final String CHOIX_INVALIDE = "Choix invalide";
-    private static final String METHODE_NON_IMP = "Cette fonction n'est pas encore implémentée.";
     private static final String POSITION_INVALIDE = "Position invalide.";
     private static final String PLACER_PROCHAIN_BATEAU = "Appuyez sur 1 pour placer le prochain bateau";
-
 
 
     final int MAX_JOUEURS = 2;
@@ -74,54 +60,9 @@ public class Jeu {
         }
     }
 
-    private void determinerDifficulte(){
-        int choix = -1;
-        do {
-            System.out.print(DEMANDER_DIFFICULTE);
-            try {
-                choix = new Scanner(System.in).nextInt();
-            } catch (InputMismatchException e) {
-                System.out.print(CHOIX_INVALIDE);
-                System.exit(1);
-            }
-
-            switch (choix) {
-                case 1:
-                    joueurs[JOUEUR_2] = new IADebutant();
-                    break;
-                case 2:
-                    joueurs[JOUEUR_2] = new IAAvance();
-                    break;
-                default:
-                    System.out.print(CHOIX_INVALIDE);
-            }
-        } while (choix == -1);
-    }
-
     private void determinerModeJeu() {
-        int choix = -1;
         joueurs[JOUEUR_1] = new Personne();
-        do {
-            System.out.print(DEMANDER_MODE_JEU);
-            try {
-                choix = new Scanner(System.in).nextInt();
-            } catch (InputMismatchException e) {
-                System.out.print(CHOIX_INVALIDE);
-                System.exit(1);
-            }
-
-            switch (choix) {
-                case 1:
-                    determinerDifficulte();
-                    break;
-                case 2:
-                    System.out.println(METHODE_NON_IMP);
-                    System.exit(1);
-                    break;
-                default:
-                    System.out.print(CHOIX_INVALIDE);
-            }
-        } while (choix == -1);
+        joueurs[JOUEUR_2] = SelecteurModeJeu.determinerModeJeu();
     }
 
     private void initialiserPlateaux() {
@@ -139,8 +80,10 @@ public class Jeu {
             AfficheurPartie.afficherPartie(plateauBateaux[0], plateauTirs[0]);
             coords = demanderPlacerBateau(JOUEUR_1, i);
             plateauBateaux[JOUEUR_1].placerBateau(coords);
-            coords = demanderPlacerBateau(JOUEUR_2, i);
-            plateauBateaux[JOUEUR_2].placerBateau(coords);
+
+            //TODO Décommenter lorsque placer bateau pour l'ordinateur est implémenté
+            //coords = demanderPlacerBateau(JOUEUR_2, i);
+            //plateauBateaux[JOUEUR_2].placerBateau(coords);
             demanderPlacerProchainBateau();
         }
     }
