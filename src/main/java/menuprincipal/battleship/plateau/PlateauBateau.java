@@ -1,11 +1,14 @@
 package menuprincipal.battleship.plateau;
 
 import javafx.util.Pair;
+import menuprincipal.battleship.bateau.Bateau;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlateauBateau extends Plateau {
+
+    private ArrayList<Bateau> bateaux;
 
     public void ajouterTir(Pair<Integer, Integer> coordonee) {
         super.ajouterTir(coordonee);
@@ -13,6 +16,7 @@ public class PlateauBateau extends Plateau {
 
     public PlateauBateau() {
         super();
+        bateaux = new ArrayList<Bateau>();
     }
 
     public void placerBateau(List<Pair<Integer, Integer>> coords) {
