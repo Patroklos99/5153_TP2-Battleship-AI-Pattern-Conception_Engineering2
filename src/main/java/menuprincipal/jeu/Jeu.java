@@ -2,12 +2,16 @@ package menuprincipal.jeu;
 
 import javafx.util.Pair;
 import lombok.Data;
-import menuprincipal.battleship.joueur.*;
-import menuprincipal.battleship.plateau.*;
-import menuprincipal.controlleurs.ChargeurPartie;
+import menuprincipal.battleship.joueur.IAAvance;
+import menuprincipal.battleship.joueur.IADebutant;
+import menuprincipal.battleship.joueur.Joueur;
+import menuprincipal.battleship.joueur.Personne;
+import menuprincipal.battleship.plateau.Case;
+import menuprincipal.battleship.plateau.PlateauBateau;
+import menuprincipal.battleship.plateau.PlateauTir;
+import menuprincipal.battleship.plateau.PlateauxFactory;
 import menuprincipal.frontend.AfficheurPartie;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -36,8 +40,10 @@ public class Jeu {
     private static final String PLACER_PROCHAIN_BATEAU = "Appuyez sur 1 pour placer le prochain bateau";
 
 
+
     final int MAX_JOUEURS = 2;
     final int MAX_PLATEAUX = 2;
+    final int NB_BATEAUX = 5;
 
     private Joueur[] joueurs = new Joueur[MAX_JOUEURS];
     private PlateauBateau[] plateauBateaux = new PlateauBateau[MAX_PLATEAUX];
@@ -140,16 +146,7 @@ public class Jeu {
     }
     
     private void demanderPlacerProchainBateau(){
-        int choix = -1;
-        do{
             System.out.println(PLACER_PROCHAIN_BATEAU);
-            try {
-                choix = new Scanner(System.in).nextInt();
-            } catch (InputMismatchException e) {
-                System.out.print(CHOIX_INVALIDE);
-            }
-            if(choix != 1) System.out.print(CHOIX_INVALIDE);
-        }while(choix != 1);
     }
 
     private List<Pair<Integer, Integer>> demanderPlacerBateau(int joueur, int numeroBateau){

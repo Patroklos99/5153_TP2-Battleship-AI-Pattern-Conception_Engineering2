@@ -15,7 +15,6 @@ public class MenuPrincipal {
                     " 1 - Jouer une nouvelle partie\n" +
                     " 2 - Jouer une partie existante\n" +
                     " 3 - Quitter\n";
-
     private static final String ERREUR = "Veuillez entrer un choix valide\n";
 
     public static void afficherMenu() {
