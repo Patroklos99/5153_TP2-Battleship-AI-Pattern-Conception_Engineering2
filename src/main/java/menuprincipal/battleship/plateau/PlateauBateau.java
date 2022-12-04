@@ -106,4 +106,17 @@ public class PlateauBateau extends Plateau {
         return c == Case.AUCUN || c == Case.RATE;
     }
 
+    /**
+     * Vérifie si tous les bateaux sont coulés, ce qui signifierait une défaite de la part du joueur.
+     *
+     * @return true si tous les bateaux sont coulés, sinon false.
+     * */
+    public boolean bateauxTousCoules(){
+        for(Bateau b : bateaux){
+            if(!b.estCoule())
+                return false;
+        }
+        return true;
+    }
+
 }
