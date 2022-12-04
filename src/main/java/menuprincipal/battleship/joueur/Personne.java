@@ -116,7 +116,7 @@ public class Personne extends Joueur{
         Scanner entreePersonne = new Scanner(System.in);
         String coordonnee;
         coordonnee = entreePersonne.nextLine();
-        coordonnee.toLowerCase();
+        coordonnee = coordonnee.toLowerCase();
 
         return coordonnee.split(" ");
     }
