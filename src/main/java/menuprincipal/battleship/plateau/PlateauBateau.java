@@ -78,9 +78,8 @@ public class PlateauBateau extends Plateau {
      * @param coords Liste de coordonnées représentant la position du bateau.
      * */
     public void placerNouveauBateau(List<Coordonnee> coords) {
-        for(Coordonnee coord : coords){
+        for(Coordonnee coord : coords)
             setCase(coord, Case.BATEAU);
-        }
         bateaux.add(new Bateau(coords));
     }
 
