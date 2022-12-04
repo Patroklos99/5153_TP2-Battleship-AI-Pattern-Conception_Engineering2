@@ -153,8 +153,11 @@ public class Personne extends Joueur{
                     estCorrect = verifierEntreeBateau(coordonnees,2, coordonneBateau);
                     break;
             }
-            if(!estCorrect)
+            if(!estCorrect){
                 System.out.println(MSG_ERREUR);
+                coordonneBateau.clear();
+            }
+
         }while(!estCorrect);
 
     }
