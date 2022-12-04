@@ -32,10 +32,28 @@ public class Personne extends Joueur{
     }
 
     /**
+     * Reformater l'entrée de l'utilisateur pour que ce soit des coordonnées
+     * @param plusieursCoordonnees l'entrée de l'utilisateur
+     * @param coordonneBateau les coordonnées du bateau
+     */
+    private void changerFormatEntreeBateau(String[] plusieursCoordonnees, List<Pair<Integer, Integer>> coordonneBateau){
+        int colonne;
+        int rangee;
+        for(String coor: plusieursCoordonnees){
+            colonne = coor.charAt(0) - 'a';
+            if(coor.length() == 3)
+                rangee = 9;
+            else
+                rangee = coor.charAt(1) - '1';
+            coordonneBateau.add(new Pair<>(colonne, rangee));
+        }
+    }
+
+    /**
      * Vérifie si l'entrée de l'utlisateur est valide
      * @param plusieursCoordonnees l'entrée de l'utilisateur
      * @param tailleBateau la taille du bateau demandé
-     * @param coordonneBateau les coordonneesBateau
+     * @param coordonneBateau les coordonnées du bateau
      * @return si c'est correct
      */
     private boolean verifierEntreeBateau(String[] plusieursCoordonnees, int tailleBateau, List<Pair<Integer, Integer>> coordonneBateau){
@@ -47,6 +65,7 @@ public class Personne extends Joueur{
         }
         if(estCorrect){
             //méthode pour transformer en coordonneBateau et vérifie si ça se suit
+            changerFormatEntreeBateau(plusieursCoordonnees,coordonneBateau);
         }
         return estCorrect;
     }
