@@ -16,16 +16,7 @@ public class EnregistreurPartie {
     public static void enregistrerPartie(String nomFichier, Jeu jeu) {
         JSONObject etatJeu = new JSONObject();
         etatJeu.put("plateaux", enregistrerPlateaux(jeu.getPlateauBateaux(), jeu.getPlateauTirs()));
-        try {
-            File partie = new File("/sauvegardes"+ nomFichier + ".json");
-            FileWriter writer = new FileWriter(partie);
-            writer.write(etatJeu.toString(2));
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("Une erreur est survenue lors de la sauvegarde.");
-            System.exit(1);
-        }
+        ecrireFichier(nomFichier, etatJeu);
         System.out.println("Partie sauvegardée.");
         System.exit(0);
     }
@@ -48,6 +39,19 @@ public class EnregistreurPartie {
         platJoueur.put(platTirJoueur);
 
         return platJoueur;
+    }
+
+    static void ecrireFichier(String nomFichier, JSONObject etatJeu){
+        try {
+            File partie = new File("./sauvegardes/"+ nomFichier);
+            FileWriter writer = new FileWriter(partie);
+            writer.write(etatJeu.toString(2));
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Une erreur est survenue lors de la sauvegarde.");
+            System.exit(1);
+        }
     }
 
 }
