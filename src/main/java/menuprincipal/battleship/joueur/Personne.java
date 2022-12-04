@@ -58,7 +58,7 @@ public class Personne extends Joueur{
         for(String coor: plusieursCoordonnees){
             if(!Character.isAlphabetic(coor.charAt(0)) || !Character.isDigit(coor.charAt(1)) || (coor.length() == 3 && !Character.isDigit(coor.charAt(2)))
                     || (coor.length() != 2 && coor.length() != 3) || (coor.length() == 3 && !(coor.charAt(1) == '1' && coor.charAt(2) == '0'))
-                    || (coor.charAt(0) < 'a' && coor.charAt(0) > 'j' )){
+                    || (coor.charAt(0) < 'a' && coor.charAt(0) > 'j' ) || (coor.length() == 2 && coor.charAt(1) == '0')){
                 estCorrect = false;
                 break;
             }
