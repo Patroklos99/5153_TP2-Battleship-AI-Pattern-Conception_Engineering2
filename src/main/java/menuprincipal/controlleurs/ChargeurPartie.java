@@ -2,10 +2,7 @@ package menuprincipal.controlleurs;
 
 import menuprincipal.jeu.Jeu;
 import lombok.Data;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONStringer;
-import org.json.JSONTokener;
+import org.json.*;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -19,11 +16,14 @@ public class ChargeurPartie {
         Jeu jeu = Jeu.getInstance();
         JSONObject partie = chargerFichier();
 
-        JSONObject joueur1 = partie.getJSONObject("joueur1");
-        JSONObject joueur2 = partie.getJSONObject("joueur2");
-
-        System.out.println(joueur1);
-        System.out.println(joueur2);
+        try {
+            JSONObject plateaux = partie.getJSONObject("plateaux");
+            JSONArray joueur1 = plateaux.getJSONArray("joueur1");
+            JSONArray joueur2 = plateaux.getJSONArray("joueur2");
+        }catch (JSONException e){
+            System.out.println("Fichier invalide...");
+            System.exit(1);
+        }
 
     }
 
@@ -42,5 +42,4 @@ public class ChargeurPartie {
         }
         return partie;
     }
-
 }
