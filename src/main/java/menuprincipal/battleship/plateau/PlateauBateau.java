@@ -110,7 +110,7 @@ public class PlateauBateau extends Plateau {
      *
      * @return true si tous les bateaux sont coulés, sinon false.
      * */
-    public boolean bateauxTousCoules(){
+    public boolean validerAllBateauCoules(){
         for(Bateau b : bateaux){
             if(!b.estCoule())
                 return false;
