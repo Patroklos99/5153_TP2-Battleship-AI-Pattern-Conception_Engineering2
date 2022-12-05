@@ -2,8 +2,6 @@ package menuprincipal.jeu;
 
 import javafx.util.Pair;
 import lombok.Data;
-import menuprincipal.battleship.joueur.IAAvance;
-import menuprincipal.battleship.joueur.IADebutant;
 import menuprincipal.battleship.joueur.Joueur;
 import menuprincipal.battleship.joueur.Personne;
 import menuprincipal.battleship.plateau.Case;
@@ -11,11 +9,8 @@ import menuprincipal.battleship.plateau.PlateauBateau;
 import menuprincipal.battleship.plateau.PlateauTir;
 import menuprincipal.battleship.plateau.PlateauxFactory;
 import menuprincipal.frontend.AfficheurPartie;
-import menuprincipal.jeu.SelecteurModeJeu;
 
-import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Scanner;
 
 @Data
 public class Jeu {
@@ -124,11 +119,10 @@ public class Jeu {
 
         //TEMPORAIRE: À supprimer arpès que demanderTir() soit implémenté
         coordonnees = new Pair<Integer,Integer>(2,2);
+        plateauTirs[numeroJoueur].ajouterTir(coordonnees);
 
-        plateauTirs[numeroJoueur].ajouterTir(coordonnees); ////// <<<<<<<<<<<<<<<<<<<<<<<<
-
-        //TODO: Afficher seulement si le joueur est humain
-        AfficheurPartie.afficherPartie(plateauBateaux[numeroJoueur], plateauTirs[numeroJoueur]);
+        if (joueurs[numeroJoueur] instanceof Personne) //Afficher si jouer humain,
+            AfficheurPartie.afficherPartie(plateauBateaux[numeroJoueur], plateauTirs[numeroJoueur]);
         return coordonnees;
     }
 

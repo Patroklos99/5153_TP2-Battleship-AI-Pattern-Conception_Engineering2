@@ -3,7 +3,6 @@ package menuprincipal.jeu;
 import menuprincipal.battleship.joueur.IAAvance;
 import menuprincipal.battleship.joueur.IADebutant;
 import menuprincipal.battleship.joueur.Joueur;
-import menuprincipal.battleship.joueur.Personne;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -26,33 +25,26 @@ public class SelecteurModeJeu {
     private static final String CHOIX_INVALIDE = "Choix invalide";
     private static final String METHODE_NON_IMP = "Cette fonction n'est pas encore implémentée.";
 
-    private static Joueur determinerDifficulte(){
-        Joueur joueur = null;
+    private static Joueur determinerDifficulte() {
         int choix = -1;
-        do {
-            System.out.print(DEMANDER_DIFFICULTE);
+        System.out.print(DEMANDER_DIFFICULTE);
+        while (true) {
             try {
                 choix = new Scanner(System.in).nextInt();
             } catch (InputMismatchException e) {
                 System.out.print(CHOIX_INVALIDE);
-                System.exit(1);
             }
-
             switch (choix) {
-                case 1:
-                    return new IADebutant();
-                case 2:
-                    return  new IAAvance();
-                default:
-                    System.out.println(CHOIX_INVALIDE);
+                case 1 : return new IADebutant();
+                case 2 : return new IAAvance();
+                default : System.out.println(CHOIX_INVALIDE);
             }
-        } while (true);
+        }
     }
 
     public static Joueur determinerModeJeu() {
-        Joueur joueur = null;
         int choix = -1;
-        do {
+        while (true) {
             System.out.print(DEMANDER_MODE_JEU);
             try {
                 choix = new Scanner(System.in).nextInt();
@@ -67,10 +59,9 @@ public class SelecteurModeJeu {
                 case 2:
                     System.out.println(METHODE_NON_IMP);
                     System.exit(1);
-                    break;
                 default:
                     System.out.println(CHOIX_INVALIDE);
             }
-        } while (true);
+        }
     }
 }
