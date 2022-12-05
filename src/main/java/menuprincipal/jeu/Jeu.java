@@ -82,8 +82,8 @@ public class Jeu {
             plateauBateaux[JOUEUR_1].placerBateau(coords);
 
             //TODO Décommenter lorsque placer bateau pour l'ordinateur est implémenté
-            //coords = demanderPlacerBateau(JOUEUR_2, i);
-            //plateauBateaux[JOUEUR_2].placerBateau(coords);
+            coords = demanderPlacerBateau(JOUEUR_2, i);
+            plateauBateaux[JOUEUR_2].placerBateau(coords);
             demanderPlacerProchainBateau();
         }
     }
