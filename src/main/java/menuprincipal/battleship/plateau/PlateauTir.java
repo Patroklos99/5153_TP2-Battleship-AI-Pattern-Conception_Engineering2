@@ -6,6 +6,15 @@ public class PlateauTir extends Plateau {
 
     private PlateauBateau plateauBateauAdversaire;
 
+
+    /**
+     * Représente le plateau supérieur qui contient les tirs effectués par le joueur.
+     * */
+    public PlateauTir(PlateauBateau plateauAdversaire_) {
+        super();
+        plateauBateauAdversaire = plateauAdversaire_;
+    }
+
     public void ajouterTir(Pair<Integer, Integer> coordonee) {
         plateauBateauAdversaire.ajouterTir(coordonee);
         super.ajouterTir(coordonee);
@@ -15,14 +24,6 @@ public class PlateauTir extends Plateau {
         Case resultat = plateauBateauAdversaire.ajouterTir(coordonnee);
         setCase(coordonnee,resultat);
         return resultat;
-    }
-
-    /**
-     * Représente le plateau supérieur qui contient les tirs effectués par le joueur.
-     * */
-    public PlateauTir(PlateauBateau plateauAdversaire_) {
-        super();
-        plateauBateauAdversaire = plateauAdversaire_;
     }
 
     /**
