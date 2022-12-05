@@ -6,7 +6,7 @@ public class AfficheurPartie {
 
     private static final String PLATEAU_BATEAU = "Plateau de bateaux: ";
     private static final String PLATEAU_TIR = "Tirs effectués : ";
-    private static final String COLUMN_LETTRES = "   A B C D E F G H I J";
+    private static final String COLUMN_LETTRES = "  1 2 3 4 5 6 7 8 9 10";
 
     public static void afficherPartie (Plateau plateau_b, Plateau plateau_t) {
         System.out.println(PLATEAU_BATEAU);
