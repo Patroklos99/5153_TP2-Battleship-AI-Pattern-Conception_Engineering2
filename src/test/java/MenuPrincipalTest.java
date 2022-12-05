@@ -1,8 +1,8 @@
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class MenuPrincipalTest {
 
-    @org.junit.jupiter.api.Test
+    @Test
     void main() {
     }
 }
