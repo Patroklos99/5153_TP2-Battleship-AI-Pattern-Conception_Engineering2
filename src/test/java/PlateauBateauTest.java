@@ -111,7 +111,7 @@ public class PlateauBateauTest {
         plateauBateau.ajouterTir(new Coordonnee(3,1));
         plateauBateau.ajouterTir(new Coordonnee(3,2));
 
-        Boolean resultat = plateauBateau.bateauxTousCoules();
+        Boolean resultat = plateauBateau.validerAllBateauCoules();
         Assertions.assertEquals(resultat,true);
     }
 
@@ -133,7 +133,7 @@ public class PlateauBateauTest {
         plateauBateau.ajouterTir(new Coordonnee(1,2));
         plateauBateau.ajouterTir(new Coordonnee(3,1));
 
-        Boolean resultat = plateauBateau.bateauxTousCoules();
+        Boolean resultat = plateauBateau.validerAllBateauCoules();
         Assertions.assertEquals(resultat,false);
     }
 
