@@ -22,7 +22,7 @@ public class EnregistreurPartie {
     }
 
     static String demanderFichier(){
-        System.out.print("Entrez le chemin vers le fichier de sauvegarde: ");
+        System.out.print("Entrez le nom du fichier de sauvegarde: ");
         return new Scanner(System.in).nextLine();
     }
 
