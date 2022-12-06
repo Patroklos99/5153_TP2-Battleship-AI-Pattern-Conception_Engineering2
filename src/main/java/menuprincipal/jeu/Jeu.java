@@ -5,6 +5,8 @@ import lombok.Data;
 import menuprincipal.battleship.joueur.Joueur;
 import menuprincipal.battleship.joueur.Personne;
 import menuprincipal.battleship.plateau.*;
+import menuprincipal.controlleurs.EnregistreurPartie;
+import menuprincipal.controlleurs.VisualiseurPartie;
 import menuprincipal.frontend.AfficheurPartie;
 
 import java.util.List;
@@ -30,6 +32,8 @@ public class Jeu {
     private final int JOUEUR_1 = 0;
     private final int JOUEUR_2 = 1;
 
+    private final VisualiseurPartie visualiseurPartie = new VisualiseurPartie();
+
     private Jeu() {
     }
 
@@ -44,12 +48,15 @@ public class Jeu {
         determinerModeJeu();
         initialiserPlateaux();
         placerBateaux();
+        visualiseurPartie.ajouterEtape(plateauBateaux[0], plateauTirs[0]);
 
         while (gagnant == null) {
             effectuerProchaintour();
             gagnant = determinerGagnant();
             if (gagnant != null) System.out.println(FIN_PARTIE);
         }
+        EnregistreurPartie.enregistrerPartie();
+        visualiseurPartie.visualiserPartie();
     }
 
     private void determinerModeJeu() {
@@ -102,6 +109,7 @@ public class Jeu {
 
         Coordonnee coordonnees_2 = demanderTirJoueur(1);
         plateauTirs[1].ajouterTir(coordonnees_2);
+        visualiseurPartie.ajouterEtape(plateauBateaux[0], plateauTirs[0]);
     }
 
 
