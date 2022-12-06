@@ -1,6 +1,5 @@
 package menuprincipal.controlleurs;
 
-import menuprincipal.jeu.Jeu;
 import lombok.Data;
 import org.json.*;
 
@@ -13,18 +12,24 @@ import java.util.Scanner;
 public class ChargeurPartie {
 
     public static void chargerPartie() {
-        Jeu jeu = Jeu.getInstance();
         JSONObject partie = chargerFichier();
-
+        JSONArray plateaux = new JSONArray();
         try {
-            JSONArray plateaux = partie.getJSONArray("plateaux");
-            JSONArray joueur1 = plateaux.getJSONArray("joueur1");
-            JSONArray joueur2 = plateaux.getJSONArray("joueur2");
+            plateaux = partie.getJSONArray("plateaux");
         }catch (JSONException e){
-            System.out.println("Fichier invalide...");
+            System.out.println("Fichier invalide.");
             System.exit(1);
         }
+        visualiserPartie(plateaux);
+    }
 
+    static void visualiserPartie(JSONArray plateaux){
+        VisualiseurPartie visualiseurPartie = new VisualiseurPartie();
+        for (int i = 0; i < plateaux.length(); i++) {
+            visualiseurPartie.ajouterEtapeChargee(plateaux.getString(i));
+        }
+        visualiseurPartie.visualiserPartie();
+        System.exit(0);
     }
 
     static String demanderFichier(){
@@ -39,6 +44,7 @@ public class ChargeurPartie {
             partie = new JSONObject(sauvegarde);
         } catch (IOException e) {
             System.out.println("Erreur lors du chargement.");
+            System.exit(1);
         }
         return partie;
     }

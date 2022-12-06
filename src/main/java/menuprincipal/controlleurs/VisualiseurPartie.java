@@ -34,4 +34,8 @@ public class VisualiseurPartie {
     public void ajouterEtape(PlateauBateau plateauBateau, PlateauTir plateauTir) {
         timelinePlateau.add(plateauBateau.toString() + "\n" + plateauTir.toString());
     }
+
+    public void ajouterEtapeChargee(String plateaux) {
+        timelinePlateau.add(plateaux);
+    }
 }
