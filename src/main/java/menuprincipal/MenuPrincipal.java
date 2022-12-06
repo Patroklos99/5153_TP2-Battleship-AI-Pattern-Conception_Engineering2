@@ -13,7 +13,7 @@ public class MenuPrincipal {
                     " ****** MENU PRINCIPAL ******\n" +
                     " ****************************\n" +
                     " 1 - Jouer une nouvelle partie\n" +
-                    " 2 - Jouer une partie existante\n" +
+                    " 2 - Visualiser une partie \n" +
                     " 3 - Quitter\n";
     private static final String ERREUR = "Veuillez entrer un choix valide\n";
 
@@ -38,7 +38,6 @@ public class MenuPrincipal {
                     break;
                 case 2:
                     ChargeurPartie.chargerPartie();
-                    Jeu.getInstance().jouer();
                     break;
                 case 3:
                     System.exit(0);
