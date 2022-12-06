@@ -61,7 +61,10 @@ public abstract class Plateau {
     @Override
     public String toString() {
         String plateau = "";
+        int numero = 1;
         for(Case[] row : cases){
+            if (numero < 10) plateau += numero++ + "  ";
+            else plateau += numero++ + " ";
             for(Case c : row){
                 if(c == Case.AUCUN) {
                     plateau += "_ ";

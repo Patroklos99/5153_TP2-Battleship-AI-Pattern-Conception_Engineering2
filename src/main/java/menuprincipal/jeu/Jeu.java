@@ -51,7 +51,7 @@ public class Jeu {
         while (gagnant == null) {
             effectuerProchaintour();
             gagnant = determinerGagnant();
-            if(gagnant != null) System.out.println(FIN_PARTIE);
+            if (gagnant != null) System.out.println(FIN_PARTIE);
         }
     }
 
@@ -71,36 +71,30 @@ public class Jeu {
     private void placerBateaux() {
         final int BATEAUX_MAX = 5;
         List<Pair<Integer, Integer>> coords;
-        for(int i = 0; i < BATEAUX_MAX; ++i){
+        for (int i = 0; i < BATEAUX_MAX; ++i) {
             AfficheurPartie.afficherPartie(plateauBateaux[0], plateauTirs[0]);
             coords = demanderPlacerBateau(JOUEUR_1, i);
             plateauBateaux[JOUEUR_1].placerBateau(coords);
 
-            //TODO Décommenter lorsque placer bateau pour l'ordinateur est implémenté
             coords = demanderPlacerBateau(JOUEUR_2, i);
             plateauBateaux[JOUEUR_2].placerBateau(coords);
-            demanderPlacerProchainBateau();
         }
     }
-    
-    private void demanderPlacerProchainBateau(){
-            System.out.println(PLACER_PROCHAIN_BATEAU);
-    }
 
-    private List<Pair<Integer, Integer>> demanderPlacerBateau(int joueur, int numeroBateau){
+    private List<Pair<Integer, Integer>> demanderPlacerBateau(int joueur, int numeroBateau) {
         List<Pair<Integer, Integer>> coords;
         boolean estValide;
-        do{
+        do {
             coords = joueurs[joueur].demanderPlacerBateau(numeroBateau);
             estValide = estPlacementValide(coords, joueur);
-            if(!estValide) System.out.println(POSITION_INVALIDE);
-        }while(!estValide);
+            if (!estValide) System.out.println(POSITION_INVALIDE);
+        } while (!estValide);
         return coords;
     }
 
-    private boolean estPlacementValide(List<Pair<Integer, Integer>> coords, int joueur){
-        for(Pair<Integer, Integer> coord : coords){
-            if(!plateauBateaux[joueur].estCaseInnoccupee(coord)) return false;
+    private boolean estPlacementValide(List<Pair<Integer, Integer>> coords, int joueur) {
+        for (Pair<Integer, Integer> coord : coords) {
+            if (!plateauBateaux[joueur].estCaseInnoccupee(coord)) return false;
         }
         return true;
     }
@@ -118,7 +112,7 @@ public class Jeu {
         Pair<Integer, Integer> coordonnees = joueurs[numeroJoueur].demanderTir();
 
         //TEMPORAIRE: À supprimer arpès que demanderTir() soit implémenté
-        coordonnees = new Pair<Integer,Integer>(2,2);
+        coordonnees = new Pair<Integer, Integer>(2, 2);
         plateauTirs[numeroJoueur].ajouterTir(coordonnees);
 
         if (joueurs[numeroJoueur] instanceof Personne) //Afficher si jouer humain,
@@ -127,9 +121,9 @@ public class Jeu {
     }
 
     private Joueur determinerGagnant() {
-        //TODO: Faire un check pour voir si un joueur est gagnant
-        //Retourner le joueur gagnant, sinon, retourne null.
-        //Retourne une Personne pour que le jeu s'arrête après avoir placé les bateaux
-        return new Personne();
+        if (plateauBateaux[0].validerAllBateauCoules() || plateauBateaux[1].validerAllBateauCoules())
+            return new Personne();
+        return null;
     }
+
 }

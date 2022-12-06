@@ -37,7 +37,6 @@ public class SelecteurModeJeu {
             switch (choix) {
                 case 1 : return new IADebutant();
                 case 2 : return new IAAvance();
-                default : System.out.println(CHOIX_INVALIDE);
             }
         }
     }
