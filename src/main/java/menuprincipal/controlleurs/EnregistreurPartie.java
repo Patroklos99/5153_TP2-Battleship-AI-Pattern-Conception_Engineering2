@@ -17,8 +17,13 @@ public class EnregistreurPartie {
     public static void enregistrerPartie(VisualiseurPartie visualiseurPartie) {
         JSONObject partie = new JSONObject();
         partie.put("plateaux", enregistrerPlateaux(visualiseurPartie));
-        ecrireFichier(demanderNomFichier(), partie);
+        ecrireFichier(demanderFichier(), partie);
         System.out.println("Partie sauvegardée.");
+    }
+
+    static String demanderFichier(){
+        System.out.print("Entrez le chemin vers le fichier de sauvegarde: ");
+        return new Scanner(System.in).nextLine();
     }
 
     static JSONArray enregistrerPlateaux(VisualiseurPartie visualiseurPartie) {

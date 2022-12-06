@@ -55,7 +55,7 @@ public class Jeu {
             gagnant = determinerGagnant();
             if (gagnant != null) System.out.println(FIN_PARTIE);
         }
-        EnregistreurPartie.enregistrerPartie();
+        EnregistreurPartie.enregistrerPartie(visualiseurPartie);
         visualiseurPartie.visualiserPartie();
     }
 
