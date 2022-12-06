@@ -49,10 +49,6 @@
             <version>20220924</version>
         </dependency>
 
-
-
-=======
->>>>>>> development
     </dependencies>
 
     <build>
