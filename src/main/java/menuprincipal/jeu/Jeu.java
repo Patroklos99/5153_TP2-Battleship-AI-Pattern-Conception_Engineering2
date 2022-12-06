@@ -128,7 +128,7 @@ public class Jeu {
     private Joueur determinerGagnant() {
         if (plateauBateaux[0].validerAllBateauCoules() || plateauBateaux[1].validerAllBateauCoules())
             return new Personne();
-        return new Personne();
+        return null;
     }
 
 }

@@ -21,6 +21,10 @@ public class VisualiseurPartie {
         timelinePlateau = new ArrayList<>();
     }
 
+    /**
+     * Affiche à l'écran le contenu de timelinePlateau.
+     *
+     */
     public void visualiserPartie() {
         System.out.println(VISUALISER);
         for(String s : timelinePlateau){
@@ -31,10 +35,24 @@ public class VisualiseurPartie {
         System.out.println(FIN_VISUALISATION);
     }
 
+    /**
+     * Ajoute une étape au timelinePlateau à partir des
+     * plateaux passés en argument.
+     *
+     * @param plateauBateau Le plateau de bateau du joueur
+     * @param plateauTir Le plateau de tir du joueur
+     */
     public void ajouterEtape(PlateauBateau plateauBateau, PlateauTir plateauTir) {
         timelinePlateau.add(plateauBateau.toString() + "\n" + plateauTir.toString());
     }
 
+    /**
+     * Ajoute une étape au timelinePlateau à partir des
+     * String passés en argument.
+     *
+     * @param plateaux Le plateau de bateau et de tir, sous forme
+     *                de String.
+     */
     public void ajouterEtapeChargee(String plateaux) {
         timelinePlateau.add(plateaux);
     }

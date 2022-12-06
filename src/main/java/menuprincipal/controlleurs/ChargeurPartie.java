@@ -11,6 +11,12 @@ import java.util.Scanner;
 @Data
 public class ChargeurPartie {
 
+
+    /**
+     * Charge une partie à partir d'un fichier de sauvegarde
+     * json.
+     *
+     */
     public static void chargerPartie() {
         JSONObject partie = chargerFichier();
         JSONArray plateaux = new JSONArray();
@@ -23,6 +29,12 @@ public class ChargeurPartie {
         visualiserPartie(plateaux);
     }
 
+    /**
+     * Ajoute le contenu du fichier au visualiseur de partie,
+     * puis visualise celle-ci.
+     *
+     * @param plateaux Les plateaux à ajouter.
+     */
     static void visualiserPartie(JSONArray plateaux){
         VisualiseurPartie visualiseurPartie = new VisualiseurPartie();
         for (int i = 0; i < plateaux.length(); i++) {
@@ -32,11 +44,18 @@ public class ChargeurPartie {
         System.exit(0);
     }
 
+    /**
+     * Demande à l'utilisateur d'entrer le chemin
+     * vers le fichier de sauvegarde.
+     */
     static String demanderFichier(){
         System.out.print("Entrez le chemin vers le fichier de sauvegarde: ");
         return new Scanner(System.in).nextLine();
     }
 
+    /**
+     * Charge un fichier à partir du chemin entré par l'utilisateur
+     */
     static JSONObject chargerFichier(){
         JSONObject partie = new JSONObject();
         try {
