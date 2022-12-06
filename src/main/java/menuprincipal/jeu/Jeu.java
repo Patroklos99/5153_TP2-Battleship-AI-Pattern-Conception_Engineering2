@@ -91,7 +91,7 @@ public class Jeu {
         do {
             coords = joueurs[joueur].demanderPlacerBateau(numeroBateau);
             estValide = estPlacementValide(coords, joueur);
-            if (!estValide) System.out.println(POSITION_INVALIDE);
+            if (!estValide && joueurs[joueur] instanceof Personne) System.out.println(POSITION_INVALIDE);
         } while (!estValide);
         return coords;
     }
