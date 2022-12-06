@@ -18,14 +18,6 @@ public abstract class Plateau {
             Arrays.fill(row, Case.AUCUN);
     }
 
-    /**
-     * @deprecated
-     *
-     * Utilisez la version qui prend un objet Coordonnee en paramètre.
-     * */
-    public void ajouterTir(Pair<Integer, Integer> coordonee) {
-        cases[coordonee.getValue()][coordonee.getKey()] = Case.TOUCHE;
-    }
 
     /**
      * Tirer sur une coordonnee du plateau. Retourne le type de case touché.
@@ -61,7 +53,10 @@ public abstract class Plateau {
     @Override
     public String toString() {
         String plateau = "";
+        int numero = 1;
         for(Case[] row : cases){
+            if (numero < 10) plateau += numero++ + "  ";
+            else plateau += numero++ + " ";
             for(Case c : row){
                 if(c == Case.AUCUN) {
                     plateau += "_ ";

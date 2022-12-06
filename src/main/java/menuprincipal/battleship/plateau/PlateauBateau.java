@@ -45,33 +45,6 @@ public class PlateauBateau extends Plateau {
         return caseTouche;
     }
 
-
-    /**
-     * @deprecated
-     *
-     * Utilisez la version qui prend un objet Coordonnee en paramètre.
-     * */
-    public void ajouterTir(Pair<Integer, Integer> coordonee) {
-        super.ajouterTir(coordonee);
-    }
-
-
-
-    /**
-     * @deprecated
-     *
-     * Utilisez placerNouveauBateau avec une liste de Coordonnee à la place.
-     * */
-    public void placerBateau(List<Pair<Integer, Integer>> coords) {
-        ArrayList<Coordonnee> c = new ArrayList<Coordonnee>();
-        for(Pair<Integer, Integer> coord : coords){
-            c.add(new Coordonnee(coord.getKey(),coord.getValue()));
-            cases[coord.getKey()][coord.getValue()] = Case.BATEAU;
-        }
-
-        bateaux.add(new Bateau(c));
-    }
-
     /**
      * Place un nouveau bateau situé sur les coordonnées dans la liste.
      *
@@ -110,7 +83,7 @@ public class PlateauBateau extends Plateau {
      *
      * @return true si tous les bateaux sont coulés, sinon false.
      * */
-    public boolean bateauxTousCoules(){
+    public boolean validerAllBateauCoules(){
         for(Bateau b : bateaux){
             if(!b.estCoule())
                 return false;

@@ -4,10 +4,7 @@ import javafx.util.Pair;
 import lombok.Data;
 import menuprincipal.battleship.joueur.Joueur;
 import menuprincipal.battleship.joueur.Personne;
-import menuprincipal.battleship.plateau.Case;
-import menuprincipal.battleship.plateau.PlateauBateau;
-import menuprincipal.battleship.plateau.PlateauTir;
-import menuprincipal.battleship.plateau.PlateauxFactory;
+import menuprincipal.battleship.plateau.*;
 import menuprincipal.frontend.AfficheurPartie;
 
 import java.util.List;
@@ -51,7 +48,7 @@ public class Jeu {
         while (gagnant == null) {
             effectuerProchaintour();
             gagnant = determinerGagnant();
-            if(gagnant != null) System.out.println(FIN_PARTIE);
+            if (gagnant != null) System.out.println(FIN_PARTIE);
         }
     }
 
@@ -70,55 +67,49 @@ public class Jeu {
 
     private void placerBateaux() {
         final int BATEAUX_MAX = 5;
-        List<Pair<Integer, Integer>> coords;
-        for(int i = 0; i < BATEAUX_MAX; ++i){
+        List<Coordonnee> coords;
+        for (int i = 0; i < BATEAUX_MAX; ++i) {
             AfficheurPartie.afficherPartie(plateauBateaux[0], plateauTirs[0]);
             coords = demanderPlacerBateau(JOUEUR_1, i);
-            plateauBateaux[JOUEUR_1].placerBateau(coords);
+            plateauBateaux[JOUEUR_1].placerNouveauBateau(coords);
 
-            //TODO Décommenter lorsque placer bateau pour l'ordinateur est implémenté
-            //coords = demanderPlacerBateau(JOUEUR_2, i);
-            //plateauBateaux[JOUEUR_2].placerBateau(coords);
-            demanderPlacerProchainBateau();
+            coords = demanderPlacerBateau(JOUEUR_2, i);
+            plateauBateaux[JOUEUR_2].placerNouveauBateau(coords);
         }
     }
-    
-    private void demanderPlacerProchainBateau(){
-            System.out.println(PLACER_PROCHAIN_BATEAU);
-    }
 
-    private List<Pair<Integer, Integer>> demanderPlacerBateau(int joueur, int numeroBateau){
-        List<Pair<Integer, Integer>> coords;
+    private List<Coordonnee> demanderPlacerBateau(int joueur, int numeroBateau) {
+        List<Coordonnee> coords;
         boolean estValide;
-        do{
+        do {
             coords = joueurs[joueur].demanderPlacerBateau(numeroBateau);
             estValide = estPlacementValide(coords, joueur);
-            if(!estValide) System.out.println(POSITION_INVALIDE);
-        }while(!estValide);
+            if (!estValide) System.out.println(POSITION_INVALIDE);
+        } while (!estValide);
         return coords;
     }
 
-    private boolean estPlacementValide(List<Pair<Integer, Integer>> coords, int joueur){
-        for(Pair<Integer, Integer> coord : coords){
-            if(!plateauBateaux[joueur].estCaseInnoccupee(coord)) return false;
+    private boolean estPlacementValide(List<Coordonnee> coords, int joueur) {
+        for (Coordonnee coord : coords) {
+            if (!plateauBateaux[joueur].estCaseInnoccupee(coord)) return false;
         }
         return true;
     }
 
     private void effectuerProchaintour() {
-        Pair<Integer, Integer> coordonnees_1 = demanderTirJoueur(0);
-        Pair<Integer, Integer> coordonnees_2 = demanderTirJoueur(1);
-        if (!plateauTirs[0].verifierTir(coordonnees_1, plateauBateaux[1]))
-            plateauBateaux[0].cases[coordonnees_1.getKey()][coordonnees_1.getValue()] = Case.BATEAU;
-        if (!plateauTirs[1].verifierTir(coordonnees_2, plateauBateaux[0]))
-            plateauBateaux[1].cases[coordonnees_2.getKey()][coordonnees_2.getValue()] = Case.BATEAU;
+        Coordonnee coordonnees_1 = demanderTirJoueur(0);
+        plateauTirs[0].ajouterTir(coordonnees_1);
+
+        Coordonnee coordonnees_2 = demanderTirJoueur(1);
+        plateauTirs[1].ajouterTir(coordonnees_2);
     }
 
-    private Pair<Integer, Integer> demanderTirJoueur(int numeroJoueur) {
-        Pair<Integer, Integer> coordonnees = joueurs[numeroJoueur].demanderTir();
+
+    private Coordonnee demanderTirJoueur(int numeroJoueur) {
+        Coordonnee coordonnees = joueurs[numeroJoueur].demanderTir();
 
         //TEMPORAIRE: À supprimer arpès que demanderTir() soit implémenté
-        coordonnees = new Pair<Integer,Integer>(2,2);
+        coordonnees = new Coordonnee(2, 2);
         plateauTirs[numeroJoueur].ajouterTir(coordonnees);
 
         if (joueurs[numeroJoueur] instanceof Personne) //Afficher si jouer humain,
@@ -127,9 +118,9 @@ public class Jeu {
     }
 
     private Joueur determinerGagnant() {
-        //TODO: Faire un check pour voir si un joueur est gagnant
-        //Retourner le joueur gagnant, sinon, retourne null.
-        //Retourne une Personne pour que le jeu s'arrête après avoir placé les bateaux
-        return new Personne();
+        if (plateauBateaux[0].validerAllBateauCoules() || plateauBateaux[1].validerAllBateauCoules())
+            return new Personne();
+        return null;
     }
+
 }
