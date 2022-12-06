@@ -1,6 +1,7 @@
 package menuprincipal.battleship.joueur;
 
 import javafx.util.Pair;
+import menuprincipal.battleship.plateau.Coordonnee;
 
 import java.util.List;
 import java.util.Objects;
@@ -24,21 +25,21 @@ public class Personne extends Joueur{
      * @param coordonneBateau les coordonnées du bateau
      * @return si c'est valide
      */
-    private boolean verifierPositionCoordBateau(List<Pair<Integer, Integer>> coordonneBateau){
+    private boolean verifierPositionCoordBateau(List<Coordonnee> coordonneBateau){
         boolean estCorrect = true;
         int precedent;
         int courant;
-        if(Objects.equals(coordonneBateau.get(0).getKey(), coordonneBateau.get(1).getKey())){
+        if(Objects.equals(coordonneBateau.get(0).posH, coordonneBateau.get(1).posH)){
             for (int i = 1; i < coordonneBateau.size(); i++){
-                precedent = coordonneBateau.get(i - 1).getValue();
-                courant = coordonneBateau.get(i).getValue();
+                precedent = coordonneBateau.get(i - 1).posV;
+                courant = coordonneBateau.get(i).posV;
                 if(precedent + 1 != courant)
                     estCorrect = false;
             }
-        }else if(Objects.equals(coordonneBateau.get(0).getValue(), coordonneBateau.get(1).getValue())){
+        }else if(Objects.equals(coordonneBateau.get(0).posV, coordonneBateau.get(1).posV)){
             for (int i = 1; i < coordonneBateau.size(); i++){
-                precedent = coordonneBateau.get(i - 1).getKey();
-                courant = coordonneBateau.get(i).getKey();
+                precedent = coordonneBateau.get(i - 1).posH;
+                courant = coordonneBateau.get(i).posH;
                 if(precedent + 1 != courant)
                     estCorrect = false;
             }
@@ -71,7 +72,7 @@ public class Personne extends Joueur{
      * @param plusieursCoordonnees l'entrée de l'utilisateur
      * @param coordonneBateau les coordonnées du bateau
      */
-    private void changerFormatEntreeBateau(String[] plusieursCoordonnees, List<Pair<Integer, Integer>> coordonneBateau){
+    private void changerFormatEntreeBateau(String[] plusieursCoordonnees, List<Coordonnee> coordonneBateau){
         int colonne;
         int rangee;
         for(String coor: plusieursCoordonnees){
@@ -82,7 +83,7 @@ public class Personne extends Joueur{
             else
                 rangee = coor.charAt(1) - '1';
             //_________________________________________________________________________________________________
-            coordonneBateau.add(new Pair<>(colonne, rangee));
+            coordonneBateau.add(new Coordonnee(colonne, rangee));
         }
     }
 
@@ -93,7 +94,7 @@ public class Personne extends Joueur{
      * @param coordonneBateau les coordonnées du bateau
      * @return si c'est correct
      */
-    private boolean verifierEntreeBateau(String[] plusieursCoordonnees, int tailleBateau, List<Pair<Integer, Integer>> coordonneBateau){
+    private boolean verifierEntreeBateau(String[] plusieursCoordonnees, int tailleBateau, List<Coordonnee> coordonneBateau){
         boolean estCorrect = true;
         if(plusieursCoordonnees.length != tailleBateau)
             estCorrect = false;
@@ -122,7 +123,7 @@ public class Personne extends Joueur{
     }
 
     @Override
-    protected void determinerPlacerBateau(List<Pair<Integer, Integer>> coordonneBateau, int numeroBateau) {
+    protected void determinerPlacerBateau(List<Coordonnee> coordonneBateau, int numeroBateau) {
         boolean estCorrect = false;
         String[] coordonnees;
         do{

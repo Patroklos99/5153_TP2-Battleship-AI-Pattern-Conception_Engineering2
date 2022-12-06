@@ -1,6 +1,7 @@
 package menuprincipal.battleship.joueur;
 
 import javafx.util.Pair;
+import menuprincipal.battleship.plateau.Coordonnee;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +16,13 @@ public abstract class Joueur {
      * @param caseDepart la case de départ du bateau
      * @param coordonneBateau les coordonnées du bateau à placer
      */
-    private void determinerAutresCases(int orientation, int tailleBateau, Pair<Integer,Integer> caseDepart, List<Pair<Integer,Integer>> coordonneBateau){
+    private void determinerAutresCases(int orientation, int tailleBateau, Coordonnee caseDepart, List<Coordonnee> coordonneBateau){
         for(int i = 1; i < tailleBateau; i++){
             if(orientation == 0){
                 // la colonne change (on reste sur la même rangée)
-                coordonneBateau.add(new Pair<>(caseDepart.getKey() + i, caseDepart.getValue()));
+                coordonneBateau.add(new Coordonnee(caseDepart.posH + i, caseDepart.posV));
             }else{
-                coordonneBateau.add(new Pair<>(caseDepart.getKey(), caseDepart.getValue() + i));
+                coordonneBateau.add(new Coordonnee(caseDepart.posH, caseDepart.posV + i));
             }
 
         }
@@ -34,7 +35,7 @@ public abstract class Joueur {
      * @param tailleBateau la taille du bateau demandé
      * @return la case de départ du bateau
      */
-    private Pair<Integer,Integer> determinerCaseDepart(int orientation, int tailleBateau){
+    private Coordonnee determinerCaseDepart(int orientation, int tailleBateau){
         Random randomNum = new Random();
         int colonne;
         int rangee;
@@ -46,7 +47,7 @@ public abstract class Joueur {
             colonne = randomNum.nextInt(9 + 1);
             rangee = randomNum.nextInt(9 - tailleBateau + 1 + 1);
         }
-        return new Pair<>(colonne,rangee);
+        return new Coordonnee(colonne,rangee);
     }
 
     /**
@@ -55,8 +56,8 @@ public abstract class Joueur {
      * @param coordonneBateau les coordonnées du bateau à placer
      * @param orientation l'orientation du bateau
      */
-    private void determinerBateau(int tailleBateau, List<Pair<Integer,Integer>> coordonneBateau, int orientation){
-        Pair<Integer,Integer> caseDepart = determinerCaseDepart(orientation,tailleBateau);
+    private void determinerBateau(int tailleBateau, List<Coordonnee> coordonneBateau, int orientation){
+        Coordonnee caseDepart = determinerCaseDepart(orientation,tailleBateau);
         coordonneBateau.add(caseDepart);
         determinerAutresCases(orientation,tailleBateau,caseDepart,coordonneBateau);
     }
@@ -70,24 +71,23 @@ public abstract class Joueur {
         return randomNum.nextInt(2);
     }
 
-    public Pair<Integer, Integer> determinerTir() {
-        Pair<Integer, Integer> tir = null;
+    protected Coordonnee determinerTir() {
+        Coordonnee tir = new Coordonnee(1,1);
         return null;
     }
 
-    public Pair<Integer, Integer> demanderTir() {
-        Pair<Integer, Integer> tir = null;
-        return null;
+    public Coordonnee demanderTir() {
+        return determinerTir();
     }
 
-    public List<Pair<Integer, Integer>> demanderPlacerBateau(int numeroBateau) {
-        List<Pair<Integer,Integer>> bateau = new ArrayList<>();
+    public List<Coordonnee> demanderPlacerBateau(int numeroBateau) {
+        List<Coordonnee> bateau = new ArrayList<>();
 
         this.determinerPlacerBateau(bateau, numeroBateau);
         return bateau;
     }
 
-    protected void determinerPlacerBateau(List<Pair<Integer,Integer>> coordonneBateau, int numeroBateau) {
+    protected void determinerPlacerBateau(List<Coordonnee> coordonneBateau, int numeroBateau) {
         //à modifier (c'est pour les IA)
         //modifier aussi les diagrammes pour enlever la méthode dans les IA
         //coordonneBateau.addAll(List.of(new Pair<>(0,0), new Pair<>(0,1), new Pair<>(0,2), new Pair<>(0,3), new Pair<>(0,4)));
