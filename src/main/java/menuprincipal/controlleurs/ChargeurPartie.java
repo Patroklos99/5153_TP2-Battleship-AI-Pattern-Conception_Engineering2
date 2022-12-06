@@ -17,7 +17,7 @@ public class ChargeurPartie {
         JSONObject partie = chargerFichier();
 
         try {
-            JSONObject plateaux = partie.getJSONObject("plateaux");
+            JSONArray plateaux = partie.getJSONArray("plateaux");
             JSONArray joueur1 = plateaux.getJSONArray("joueur1");
             JSONArray joueur2 = plateaux.getJSONArray("joueur2");
         }catch (JSONException e){

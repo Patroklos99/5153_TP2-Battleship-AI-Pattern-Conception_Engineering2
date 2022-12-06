@@ -36,7 +36,7 @@ public class EnregistreurPartie {
 
     static void ecrireFichier(String nomFichier, JSONObject etatJeu){
         try {
-            File partie = new File("./parties/"+ nomFichier);
+            File partie = new File("./sauvegardes/"+ nomFichier);
             FileWriter writer = new FileWriter(partie);
             writer.write(etatJeu.toString(2));
             writer.flush();
