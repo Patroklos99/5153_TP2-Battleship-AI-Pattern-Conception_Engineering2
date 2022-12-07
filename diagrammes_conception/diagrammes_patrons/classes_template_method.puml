@@ -2,10 +2,10 @@
 
 
 abstract class Joueur{
-    # determinerTir(): pair
-    + demanderTir(): pair
-    + demanderPlacerBateaux(): List<List<Pair<Integer, Integer>>>
-    # determinerPlacerBateaux(coordonneBateau: List<List<Pair<Integer, Integer>>>)
+    # determinerTir(): Coordonnee
+    + demanderTir(): Coordonnee
+    + demanderPlacerBateau(numeroBateau: int): List<Coordonnee>
+    # determinerPlacerBateau(coordonneBateau: List<Coordonnee>, numeroBateau: int)
 }
 
 
@@ -13,19 +13,17 @@ abstract class Joueur{
 
 
 class IADebutant {
-    # determinerTir(): pair
-    # determinerPlacerBateaux(coordonneBateau: List<List<Pair<Integer, Integer>>>)
+    # determinerTir(): Coordonnee
 }
 
 class IAAvance{
-    # determinerTir(): pair
-    # determinerPlacerBateaux(coordonneBateau: List<List<Pair<Integer, Integer>>>)
+    # determinerTir(): Coordonnee
 }
 
 
 class Personne {
     # determinerTir(): pair
-    # determinerPlacerBateaux(coordonneBateau: List<List<Pair<Integer, Integer>>>)
+    # determinerPlacerBateaux(coordonneBateau: List<Coordonnee>, numeroBateau: int>)
 }
 
 
