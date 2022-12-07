@@ -1,6 +1,7 @@
 package menuprincipal.battleship.joueur;
 
 import menuprincipal.battleship.plateau.Coordonnee;
+import menuprincipal.battleship.plateau.PlateauTir;
 
 import java.util.List;
 import java.util.Objects;
@@ -196,7 +197,7 @@ public class Personne extends Joueur{
     }
 
     @Override
-    protected Coordonnee determinerTir() {
+    public Coordonnee determinerTir(PlateauTir plateauTir) {
         boolean estCorrect;
         String coordonnee;
         Coordonnee coordonneeTir;

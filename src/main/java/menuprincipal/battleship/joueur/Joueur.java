@@ -1,7 +1,7 @@
 package menuprincipal.battleship.joueur;
 
-import javafx.util.Pair;
 import menuprincipal.battleship.plateau.Coordonnee;
+import menuprincipal.battleship.plateau.PlateauTir;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,10 +71,8 @@ public abstract class Joueur {
         return randomNum.nextInt(2);
     }
 
-    abstract protected Coordonnee determinerTir();
-
-    public Coordonnee demanderTir() {
-        return determinerTir();
+    public Coordonnee determinerTir(PlateauTir plateauTir) {
+        return null;
     }
 
     public List<Coordonnee> demanderPlacerBateau(int numeroBateau) {

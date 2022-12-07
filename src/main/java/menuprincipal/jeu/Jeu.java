@@ -107,7 +107,6 @@ public class Jeu {
         Coordonnee coordonnees_1 = demanderTirJoueur(JOUEUR_1);
         plateauTirs[JOUEUR_1].ajouterTir(coordonnees_1);
 
-
         Coordonnee coordonnees_2 = demanderTirJoueur(JOUEUR_2);
         plateauTirs[JOUEUR_2].ajouterTir(coordonnees_2);
 
@@ -117,11 +116,10 @@ public class Jeu {
 
 
     private Coordonnee demanderTirJoueur(int numeroJoueur) {
-
         Coordonnee coord;
         boolean estValide;
         do {
-            coord = joueurs[numeroJoueur].demanderTir();
+            coord = joueurs[numeroJoueur].determinerTir(plateauTirs[numeroJoueur]);
             estValide = plateauBateaux[numeroJoueur].estCaseValide(coord);
             if (!estValide && joueurs[numeroJoueur] instanceof Personne) System.out.println(POSITION_INVALIDE);
         } while (!estValide);
