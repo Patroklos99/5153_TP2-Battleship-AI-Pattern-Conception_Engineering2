@@ -120,13 +120,14 @@ public class Personne extends Joueur{
      * @return la coordonnée
      */
     private Coordonnee changerFormatEntree(String coordonnee){
+        System.out.println(coordonnee);
         int colonne;
         int rangee;
-        colonne = coordonnee.charAt(0) - 'a';
+        rangee = coordonnee.charAt(0) - 'a';
         if(coordonnee.length() == 3)
-            rangee = 9;
+            colonne = 9;
         else
-            rangee = coordonnee.charAt(1) - '1';
+            colonne = coordonnee.charAt(1) - '1';
         return new Coordonnee(colonne, rangee);
     }
 

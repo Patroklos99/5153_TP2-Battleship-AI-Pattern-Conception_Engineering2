@@ -73,9 +73,13 @@ public class PlateauBateau extends Plateau {
      * @return true si inoccupée, false si occupée ou non-existante.
      * */
     public boolean estCaseInnoccupee(Coordonnee coord){
-        if(coord.posH >= TAILLE_PLATEAU || coord.posV >= TAILLE_PLATEAU ) return false;
+        if(!estCaseValide(coord)) return false;
         Case c = getCase(coord);
         return c == Case.AUCUN || c == Case.RATE;
+    }
+
+    public boolean estCaseValide(Coordonnee coord){
+       return coord.posH < TAILLE_PLATEAU && coord.posV < TAILLE_PLATEAU;
     }
 
     /**
