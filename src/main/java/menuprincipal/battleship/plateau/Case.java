@@ -1,5 +1,9 @@
 package menuprincipal.battleship.plateau;
 
-public class Case {
-
+public enum Case {
+    AUCUN,
+    RATE,
+    TOUCHE,
+    COULE,
+    BATEAU,
 }
