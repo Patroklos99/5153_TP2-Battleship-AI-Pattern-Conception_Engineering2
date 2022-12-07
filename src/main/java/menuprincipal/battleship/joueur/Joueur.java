@@ -71,10 +71,7 @@ public abstract class Joueur {
         return randomNum.nextInt(2);
     }
 
-    protected Coordonnee determinerTir() {
-        Coordonnee tir = new Coordonnee(1,1);
-        return null;
-    }
+    abstract protected Coordonnee determinerTir();
 
     public Coordonnee demanderTir() {
         return determinerTir();

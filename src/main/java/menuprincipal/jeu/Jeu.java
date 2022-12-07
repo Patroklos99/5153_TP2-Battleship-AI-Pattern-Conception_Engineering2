@@ -1,6 +1,5 @@
 package menuprincipal.jeu;
 
-import javafx.util.Pair;
 import lombok.Data;
 import menuprincipal.battleship.joueur.Joueur;
 import menuprincipal.battleship.joueur.Personne;
@@ -76,13 +75,14 @@ public class Jeu {
         final int BATEAUX_MAX = 5;
         List<Coordonnee> coords;
         for (int i = 0; i < BATEAUX_MAX; ++i) {
-            AfficheurPartie.afficherPartie(plateauBateaux[0], plateauTirs[0]);
+            AfficheurPartie.afficherPartie(plateauBateaux[JOUEUR_1], plateauTirs[JOUEUR_1]);
             coords = demanderPlacerBateau(JOUEUR_1, i);
             plateauBateaux[JOUEUR_1].placerNouveauBateau(coords);
 
             coords = demanderPlacerBateau(JOUEUR_2, i);
             plateauBateaux[JOUEUR_2].placerNouveauBateau(coords);
         }
+        AfficheurPartie.afficherPartie(plateauBateaux[JOUEUR_1], plateauTirs[JOUEUR_1]);
     }
 
     private List<Coordonnee> demanderPlacerBateau(int joueur, int numeroBateau) {
@@ -104,30 +104,34 @@ public class Jeu {
     }
 
     private void effectuerProchaintour() {
-        Coordonnee coordonnees_1 = demanderTirJoueur(0);
-        plateauTirs[0].ajouterTir(coordonnees_1);
+        Coordonnee coordonnees_1 = demanderTirJoueur(JOUEUR_1);
+        plateauTirs[JOUEUR_1].ajouterTir(coordonnees_1);
 
-        Coordonnee coordonnees_2 = demanderTirJoueur(1);
-        plateauTirs[1].ajouterTir(coordonnees_2);
-        visualiseurPartie.ajouterEtape(plateauBateaux[0], plateauTirs[0]);
+
+        Coordonnee coordonnees_2 = demanderTirJoueur(JOUEUR_2);
+        plateauTirs[JOUEUR_2].ajouterTir(coordonnees_2);
+
+        AfficheurPartie.afficherPartie(plateauBateaux[JOUEUR_1], plateauTirs[JOUEUR_1]);
+        visualiseurPartie.ajouterEtape(plateauBateaux[JOUEUR_1], plateauTirs[JOUEUR_1]);
     }
 
 
     private Coordonnee demanderTirJoueur(int numeroJoueur) {
-        Coordonnee coordonnees = joueurs[numeroJoueur].demanderTir();
 
-        //TEMPORAIRE: À supprimer arpès que demanderTir() soit implémenté
-        coordonnees = new Coordonnee(2, 2);
-        plateauTirs[numeroJoueur].ajouterTir(coordonnees);
+        Coordonnee coord;
+        boolean estValide;
+        do {
+            coord = joueurs[numeroJoueur].demanderTir();
+            estValide = plateauBateaux[numeroJoueur].estCaseValide(coord);
+            if (!estValide && joueurs[numeroJoueur] instanceof Personne) System.out.println(POSITION_INVALIDE);
+        } while (!estValide);
 
-        if (joueurs[numeroJoueur] instanceof Personne) //Afficher si jouer humain,
-            AfficheurPartie.afficherPartie(plateauBateaux[numeroJoueur], plateauTirs[numeroJoueur]);
-        return coordonnees;
+        return coord;
     }
 
     private Joueur determinerGagnant() {
-        if (plateauBateaux[0].validerAllBateauCoules() || plateauBateaux[1].validerAllBateauCoules())
-            return new Personne();
+        if (plateauBateaux[JOUEUR_1].validerAllBateauCoules() || plateauBateaux[JOUEUR_1].validerAllBateauCoules())
+            return joueurs[JOUEUR_1];
         return null;
     }
 
