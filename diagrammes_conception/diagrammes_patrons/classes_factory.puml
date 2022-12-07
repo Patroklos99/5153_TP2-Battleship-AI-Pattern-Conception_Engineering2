@@ -1,7 +1,6 @@
 @startuml
 class PlateauFactory{
-    - cases[][]: Case
-    + ajouterTir(coordonnee: pair): Tir
+    + makePlateau(typePlateau : Plateau[], plateauBateau : PlateauBateau): Plateau
 }
 
 abstract class Plateau {
@@ -13,7 +12,6 @@ abstract class Plateau {
 
 abstract class Joueur{
     # determinerTir(): pair
-    + demanderTir(): pair
     + demanderPlacerBateaux()
     # determinerPlacerBateaux()
 }
@@ -52,13 +50,6 @@ class Bateau {
     + estTouche(coordonnee: pair): Tir
 }
 
-enum TailleBateau {
-    + 2
-    + 3
-    + 4
-    + 5
-}
-
 class Case {
 }
 
@@ -71,12 +62,10 @@ enum Tir {
 
 class IADebutant {
     # determinerTir(): pair
-    # determinerPlacerBateaux()
 }
 
 class IAAvance{
     # determinerTir(): pair
-    # determinerPlacerBateaux()
 }
 
 class ChargeurPartie {
@@ -99,11 +88,10 @@ class EnregistreurPartie {
 
 class Personne {
     # determinerTir(): pair
-    # determinerPlacerBateaux()
+    # determinerPlacerBateaux(List<Coordonnee>, numeroBateau: int>)
 }
 
 PlateauBateau -- "5" Bateau
-Bateau -left- TailleBateau
 Plateau <|-- PlateauBateau
 Plateau <|-- PlateauTir
 Jeu -right-> EnregistreurPartie
@@ -120,6 +108,6 @@ Joueur <|-down- IAAvance
 Jeu *-left-- "2" Joueur
 PlateauBateau <- PlateauTir
 VisualiseurPartie --> AfficheurPartie
-PlateauFactory -left- Plateau
-Jeu -->  PlateauFactory
+PlateauFactory -left-> Plateau
+Jeu --  PlateauFactory
 @enduml
