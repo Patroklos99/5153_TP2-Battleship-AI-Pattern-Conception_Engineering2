@@ -1,6 +1,5 @@
 package menuprincipal.battleship.joueur;
 
-import javafx.util.Pair;
 import menuprincipal.battleship.plateau.Coordonnee;
 
 import java.util.List;
@@ -16,6 +15,8 @@ public class Personne extends Joueur{
     private static final String ENONCE_TORPILLEUR = "Veuillez entrer les coordonnées du torpilleur qui utilise 2 cases de gauche à droite ou de haut en bas (exemple: E1 E2):";
 
     private static final String MSG_ERREUR = "Erreur, votre entrée n'est pas valide!";
+
+    private static final String ENONCE_TIR = "Veuillez entrer la coordonnée du tir (exemple: A1):";
 
 
     //---------cette méthode n'a pas été testé (je suis trop lazy pour le faire lol), mais la logique est correcte--------------- -> à enlever après l'avoir testé
@@ -57,9 +58,7 @@ public class Personne extends Joueur{
     private boolean verifierFormatEntreeBateau(String[] plusieursCoordonnees){
         boolean estCorrect = true;
         for(String coor: plusieursCoordonnees){
-            if(!Character.isAlphabetic(coor.charAt(0)) || !Character.isDigit(coor.charAt(1)) || (coor.length() == 3 && !Character.isDigit(coor.charAt(2)))
-                    || (coor.length() != 2 && coor.length() != 3) || (coor.length() == 3 && !(coor.charAt(1) == '1' && coor.charAt(2) == '0'))
-                    || (coor.charAt(0) < 'a' && coor.charAt(0) > 'j' ) || (coor.length() == 2 && coor.charAt(1) == '0')){
+            if(!verifierEntree(coor)){
                 estCorrect = false;
                 break;
             }
@@ -67,23 +66,16 @@ public class Personne extends Joueur{
         return estCorrect;
     }
 
+
+
     /**
      * Reformater l'entrée de l'utilisateur pour que ce soit des coordonnées
      * @param plusieursCoordonnees l'entrée de l'utilisateur
      * @param coordonneBateau les coordonnées du bateau
      */
     private void changerFormatEntreeBateau(String[] plusieursCoordonnees, List<Coordonnee> coordonneBateau){
-        int colonne;
-        int rangee;
         for(String coor: plusieursCoordonnees){
-            //TODO cette partie va être refactor pour pouvoir être utilisé pour les tirs (Lysanne fera ça) (et oui, j'ai écrit à la 3e personne pour que ce soit clair que c'est moi qui l'a écrit XD)
-            colonne = coor.charAt(0) - 'a';
-            if(coor.length() == 3)
-                rangee = 9;
-            else
-                rangee = coor.charAt(1) - '1';
-            //_________________________________________________________________________________________________
-            coordonneBateau.add(new Coordonnee(colonne, rangee));
+            coordonneBateau.add(changerFormatEntree(coor));
         }
     }
 
@@ -120,6 +112,45 @@ public class Personne extends Joueur{
         coordonnee = coordonnee.toLowerCase();
 
         return coordonnee.split(" ");
+    }
+
+    /**
+     * Transforme l'entrée de l'utilisateur en une coordonnée
+     * @param coordonnee l'entrée de la coordonnée de l'utilisateur
+     * @return la coordonnée
+     */
+    private Coordonnee changerFormatEntree(String coordonnee){
+        int colonne;
+        int rangee;
+        colonne = coordonnee.charAt(0) - 'a';
+        if(coordonnee.length() == 3)
+            rangee = 9;
+        else
+            rangee = coordonnee.charAt(1) - '1';
+        return new Coordonnee(colonne, rangee);
+    }
+
+    /**
+     * Vérifie si l'entrée est valide
+     * @param coordonnee l'entrée de l'utilisateur
+     * @return si l'entrée est valide (coordonnée existe)
+     */
+    private boolean verifierEntree(String coordonnee){
+        return Character.isAlphabetic(coordonnee.charAt(0)) && Character.isDigit(coordonnee.charAt(1)) && (coordonnee.length() != 3 || Character.isDigit(coordonnee.charAt(2)))
+                && (coordonnee.length() == 2 || coordonnee.length() == 3) && (coordonnee.length() != 3 || coordonnee.charAt(1) == '1' && coordonnee.charAt(2) == '0')
+                && (coordonnee.charAt(0) >= 'a' || coordonnee.charAt(0) <= 'j') && (coordonnee.length() != 2 || coordonnee.charAt(1) != '0');
+    }
+
+    /**
+     * Obtient l'entrée de l'utilisateur de la coordonnée du tir
+     * @return l'entrée de l'utilisateur
+     */
+    private String obtenirEntreeUtilisateurTir(){
+        Scanner entreePersonne = new Scanner(System.in);
+        String coordonnee;
+        coordonnee = entreePersonne.nextLine();
+        coordonnee = coordonnee.toLowerCase();
+        return coordonnee;
     }
 
     @Override
@@ -161,5 +192,24 @@ public class Personne extends Joueur{
 
         }while(!estCorrect);
 
+    }
+
+    @Override
+    protected Coordonnee determinerTir() {
+        boolean estCorrect;
+        String coordonnee;
+        Coordonnee coordonneeTir;
+        do {
+            System.out.println(ENONCE_TIR);
+            coordonnee = obtenirEntreeUtilisateurTir();
+            estCorrect = verifierEntree(coordonnee);
+            coordonneeTir = changerFormatEntree(coordonnee);
+
+            if(!estCorrect){
+                System.out.println(MSG_ERREUR);
+            }
+            
+        }while(!estCorrect);
+        return coordonneeTir;
     }
 }
