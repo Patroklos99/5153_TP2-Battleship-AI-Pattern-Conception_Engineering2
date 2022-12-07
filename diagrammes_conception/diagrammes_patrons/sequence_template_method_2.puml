@@ -12,10 +12,10 @@ participant "afficheur: AfficheurPartie" as AfficheurPartie
 
 
 loop tant qu'il reste des bateaux a placer
-Jeu -> joueur : demanderPlacerBateau()
+Jeu -> joueur : demanderPlacerBateau(numeroBateau)
 activate Jeu
 activate joueur
-joueur -> personne : determinerTir()
+joueur -> personne : determinerPlacerBateau(coordonnees, numeroBateau)
 activate personne
 personne --> joueur
 joueur --> Jeu : coordonnees
