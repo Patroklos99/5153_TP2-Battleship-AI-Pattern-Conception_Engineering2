@@ -19,6 +19,13 @@ public class Coordonnee {
         posV = posVertical;
     }
 
+    public boolean isValid() {
+        if(posH < 0 || posH > 9)
+            return false;
+
+        return (posV >= 0 && posV <= 9);
+    }
+
     @Override
     public boolean equals(Object o){
 
