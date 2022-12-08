@@ -26,11 +26,11 @@ class MenuPrincipal{
 }
 
 class Jeu {
+    - {static} instanceJeu: Jeu
+    - Jeu()
+    + {static} getInstance(): Jeu
+    + chargerTirs(coordonnéesTirés: Liste<pair>)
     + jouer()
-    - determinerModeJeu()
-    - actualiserPlateaux(coordonnee: pair, plateau: Plateau)
-    - effectuerProchainTour()
-    - determinerGagnant()
 }
 
 class PlateauBateau {
@@ -68,7 +68,7 @@ class IAAvance{
 }
 
 class ChargeurPartie {
-    + {static} chargerPartie(nomFichier: String): Jeu
+    + {static} chargerPartie(nomFichier: String)
 }
 
 class VisualiseurPartie {
@@ -82,7 +82,7 @@ class AfficheurPartie {
 }
 
 class EnregistreurPartie {
-    + {static} enregistrerPartie(nomFichier: String, jeu: Jeu)
+    + {static} enregistrerPartie(nomFichier: String)
 }
 
 class Personne {
@@ -93,6 +93,7 @@ class Personne {
 PlateauBateau -- "5" Bateau
 Plateau <|-- PlateauBateau
 Plateau <|-- PlateauTir
+Jeu *-left- "2" Joueur
 Jeu -right-> EnregistreurPartie
 Jeu -right-> VisualiseurPartie
 Jeu -right-> AfficheurPartie
@@ -100,10 +101,9 @@ MenuPrincipal -> ChargeurPartie
 MenuPrincipal ---> Jeu
 Jeu --- "4" Plateau
 Plateau -down- "*" Case
-Joueur <|-right- Personne
-Joueur <|-down- IADebutant
-Joueur <|-down- IAAvance
-Jeu *-left-- "2" Joueur
+Joueur <|-up- IADebutant
+Joueur <|-up- IAAvance
+Joueur <|-left-- Personne
 PlateauBateau <- PlateauTir
 VisualiseurPartie --> AfficheurPartie
 PlateauFactory -left-> Plateau
