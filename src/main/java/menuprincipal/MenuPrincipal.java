@@ -28,8 +28,7 @@ public class MenuPrincipal {
             try {
                 choix = new Scanner(System.in).nextInt();
             } catch (InputMismatchException e) {
-                System.out.print(ERREUR);
-                System.exit(1);
+                choix = -1;
             }
 
             switch (choix) {

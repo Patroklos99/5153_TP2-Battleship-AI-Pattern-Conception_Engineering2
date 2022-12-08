@@ -27,12 +27,12 @@ public class SelecteurModeJeu {
 
     private static Joueur determinerDifficulte() {
         int choix = -1;
-        System.out.print(DEMANDER_DIFFICULTE);
         while (true) {
+            System.out.println(DEMANDER_DIFFICULTE);
             try {
                 choix = new Scanner(System.in).nextInt();
             } catch (InputMismatchException e) {
-                System.out.print(CHOIX_INVALIDE);
+                System.out.println(CHOIX_INVALIDE);
             }
             switch (choix) {
                 case 1 : return new IADebutant();
@@ -44,12 +44,11 @@ public class SelecteurModeJeu {
     public static Joueur determinerModeJeu() {
         int choix = -1;
         while (true) {
-            System.out.print(DEMANDER_MODE_JEU);
+            System.out.println(DEMANDER_MODE_JEU);
             try {
                 choix = new Scanner(System.in).nextInt();
             } catch (InputMismatchException e) {
-                System.out.print(CHOIX_INVALIDE);
-                System.exit(1);
+                choix = -1;
             }
 
             switch (choix) {
@@ -57,7 +56,7 @@ public class SelecteurModeJeu {
                     return determinerDifficulte();
                 case 2:
                     System.out.println(METHODE_NON_IMP);
-                    System.exit(1);
+                    break;
                 default:
                     System.out.println(CHOIX_INVALIDE);
             }
