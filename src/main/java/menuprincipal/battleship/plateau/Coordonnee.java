@@ -22,7 +22,6 @@ public class Coordonnee {
     public boolean isValid() {
         if(posH < 0 || posH > 9)
             return false;
-
         return (posV >= 0 && posV <= 9);
     }
 
