@@ -1,5 +1,5 @@
 @startuml
-
+!pragma layout smetana
 class ChargeurPartie {
     + {static} chargerPartie(nomFichier: String)
 }

@@ -1,12 +1,18 @@
 @startuml
-interface Plateau{
-    - cases[][]: Case
-    + ajouterTir(coordonnee: pair): Tir
+!pragma layout smetana
+class PlateauFactory{
+    + makePlateau(typePlateau : Plateau[], plateauBateau : PlateauBateau): Plateau
 }
+
+abstract class Plateau {
+    # Plateau plateau
+    + PlateauDecorator (plateau : Plateau)
+    + ajouterTir ()
+}
+
 
 abstract class Joueur{
     # determinerTir(): pair
-    + demanderTir(): pair
     + demanderPlacerBateaux()
     # determinerPlacerBateaux()
 }
@@ -20,11 +26,11 @@ class MenuPrincipal{
 }
 
 class Jeu {
+    - {static} instanceJeu: Jeu
+    - Jeu()
+    + {static} getInstance(): Jeu
+    + chargerTirs(coordonnéesTirés: Liste<pair>)
     + jouer()
-    - determinerModeJeu()
-    - actualiserPlateaux(coordonnee: pair, plateau: Plateau)
-    - effectuerProchainTour()
-    - determinerGagnant()
 }
 
 class PlateauBateau {
@@ -45,35 +51,24 @@ class Bateau {
     + estTouche(coordonnee: pair): Tir
 }
 
-enum TailleBateau {
-    + 2
-    + 3
-    + 4
-    + 5
-}
-
-class Case {
-}
-
-enum Tir {
+enum Case {
     + aucun
     + rate
     + touche
     + coule
+    + Bateau
 }
 
 class IADebutant {
     # determinerTir(): pair
-    # determinerPlacerBateaux()
 }
 
 class IAAvance{
     # determinerTir(): pair
-    # determinerPlacerBateaux()
 }
 
 class ChargeurPartie {
-    + {static} chargerPartie(nomFichier: String): Jeu
+    + {static} chargerPartie(nomFichier: String)
 }
 
 class VisualiseurPartie {
@@ -87,29 +82,18 @@ class AfficheurPartie {
 }
 
 class EnregistreurPartie {
-    + {static} enregistrerPartie(nomFichier: String, jeu: Jeu)
+    + {static} enregistrerPartie(nomFichier: String)
 }
 
 class Personne {
     # determinerTir(): pair
-    # determinerPlacerBateaux()
+    # determinerPlacerBateaux(List<Coordonnee>, numeroBateau: int>)
 }
-
-class PlateauDecorator {
-    # Plateau plateau
-    + PlateauDecorator (plateau : Plateau)
-    + ajouterTir ()
-}
-
-class PlateauStandard {
-     + ajouterTir()
-}
-
 
 PlateauBateau -- "5" Bateau
-Bateau -left- TailleBateau
-PlateauDecorator <|-- PlateauBateau
-PlateauDecorator <|-- PlateauTir
+Plateau <|-- PlateauBateau
+Plateau <|-- PlateauTir
+Jeu *-left- "2" Joueur
 Jeu -right-> EnregistreurPartie
 Jeu -right-> VisualiseurPartie
 Jeu -right-> AfficheurPartie
@@ -117,14 +101,11 @@ MenuPrincipal -> ChargeurPartie
 MenuPrincipal ---> Jeu
 Jeu --- "4" Plateau
 Plateau -down- "*" Case
-PlateauDecorator -|> Plateau
-Case -- Tir
-Joueur <|-right- Personne
-Joueur <|-down- IADebutant
-Joueur <|-down- IAAvance
-Jeu *-left-- "2" Joueur
+Joueur <|-up- IADebutant
+Joueur <|-up- IAAvance
+Joueur <|-left-- Personne
 PlateauBateau <- PlateauTir
 VisualiseurPartie --> AfficheurPartie
-PlateauStandard -left|> Plateau
-
+PlateauFactory -left-> Plateau
+Jeu --  PlateauFactory
 @enduml
