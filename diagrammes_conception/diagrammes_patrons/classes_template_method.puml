@@ -22,7 +22,7 @@ class IAAvance{
 
 
 class Personne {
-    # determinerTir(): pair
+    # determinerTir(): Coordonnee
     # determinerPlacerBateaux(coordonneBateau: List<Coordonnee>, numeroBateau: int>)
 }
 
