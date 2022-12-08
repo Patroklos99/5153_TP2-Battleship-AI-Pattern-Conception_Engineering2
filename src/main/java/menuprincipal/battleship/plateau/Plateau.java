@@ -46,7 +46,7 @@ public abstract class Plateau {
      *
      * @return État de la case.
      * */
-    protected Case getCase(Coordonnee coordonnee){
+    public Case getCase(Coordonnee coordonnee){
         return cases[coordonnee.posH][coordonnee.posV];
     }
 
