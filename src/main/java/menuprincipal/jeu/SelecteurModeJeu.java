@@ -32,11 +32,12 @@ public class SelecteurModeJeu {
             try {
                 choix = new Scanner(System.in).nextInt();
             } catch (InputMismatchException e) {
-                System.out.println(CHOIX_INVALIDE);
+                choix = -1;
             }
             switch (choix) {
                 case 1 : return new IADebutant();
                 case 2 : return new IAAvance();
+                default: System.out.println(CHOIX_INVALIDE);
             }
         }
     }
