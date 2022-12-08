@@ -55,31 +55,63 @@ public class IAAvance extends Joueur {
 
     private Coordonnee trouverProchaineCible(PlateauTir pt){
         Random randomNum = new Random();
-        int axeChoisi;
 
+        int axeChoisi = choisirAxeTir();
+        int directionChoisi = choisirDirectionTir();
+
+        //Si ça fait deux foix qu'on change la direction du tir...
+        if(compteurChangementDirection == 2){
+            //Changer l'axe de tir.
+            changerOrientationBateau();
+            axeChoisi = orientationBateau;
+        }
+
+        return determinerProchaineCible(axeChoisi,directionChoisi,pt);
+    }
+
+    private void reinitialiserEtat() {
+        tirPivot = null;
+        orientationBateau = -1;
+        compteurChangementDirection = 0;
+        directionTir = 0;
+    }
+
+    private int choisirAxeTir() {
+        int axeChoisi;
+        Random randomNum = new Random();
         //Si on ne connait pas encore l'orientation du bateau, choisir un axe par où tirer.
         if( orientationBateau == -1) {
             axeChoisi = randomNum.nextInt(2);
         } else
             axeChoisi = orientationBateau;
+        return axeChoisi;
+    }
+
+    private int choisirDirectionTir() {
 
         // Choisir dans quelle direction tirer (direction positive ou négative dans l'axe)
         int directionTirTemp;
+        Random randomNum = new Random();
+
+        //Si direction du Tir indéterminé
         if(directionTir == 0)
+            //Choisir aléatoirement
             directionTirTemp = randomNum.nextBoolean() ? 1 : -1;
         else {
+            //sinon...
+
+            //Si résultat du tir précédent est raté...
             if (resultatTirPrecedent == Case.RATE) {
+                //Changer la direction du tir
                 directionTir *= -1;
                 compteurChangementDirection += 1;
             }
             directionTirTemp = directionTir;
         }
+        return directionTirTemp;
+    }
 
-        if(compteurChangementDirection == 2){
-            changerOrientationBateau();
-            axeChoisi = orientationBateau;
-        }
-
+    private Coordonnee determinerProchaineCible(int axeChoisi, int directionChoisi, PlateauTir pt) {
         Case etatCase = Case.TOUCHE;
         Coordonnee coordCible = new Coordonnee(tirPivot.posH, tirPivot.posV);
 
@@ -88,8 +120,8 @@ public class IAAvance extends Joueur {
 
             //incrémenter la coordonnée cible
             switch (axeChoisi) {
-                case ORIENTATION_HORIZONTALE -> coordCible.posH += directionTirTemp;
-                case ORIENTATION_VERTICALE -> coordCible.posV += directionTirTemp;
+                case ORIENTATION_HORIZONTALE -> coordCible.posH += directionChoisi;
+                case ORIENTATION_VERTICALE -> coordCible.posV += directionChoisi;
             }
 
             //Si on pointe toujours à l'intérieur du plateau
@@ -97,7 +129,8 @@ public class IAAvance extends Joueur {
                 //stocker l'état de la case pointé
                 etatCase = pt.getCase(coordCible);
             } else {
-                //sinon, recommencer du début.
+                //Sinon, on recommence le procédé du début.
+                //Cela évite que l'IA reste dans une boucle infinie.
                 directionTir = 0;
                 orientationBateau = -1;
                 compteurChangementDirection = 0;
@@ -109,12 +142,6 @@ public class IAAvance extends Joueur {
         return coordCible;
     }
 
-    private void reinitialiserEtat() {
-        tirPivot = null;
-        orientationBateau = -1;
-        compteurChangementDirection = 0;
-        directionTir = 0;
-    }
 
     private void changerOrientationBateau(){
         switch (orientationBateau) {
