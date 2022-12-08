@@ -6,6 +6,11 @@ import java.util.Arrays;
 
 public abstract class Plateau {
 
+    private final static String COULEUR_AUCUN = "\u001B[34m\u001B[40m";
+    private final static String COULEUR_RATE = "\u001B[37m\u001B[47m";
+    private final static String COULEUR_TOUCHE = "\u001B[31m\u001B[41m";
+    private final static String COULEUR_BATEAU = "\u001B[32m\u001B[40m";
+    private final static String COULEUR_NORMAL = "\u001B[0m";
     protected static final int TAILLE_PLATEAU = 10;
 
     public Case[][] cases = new Case[TAILLE_PLATEAU][TAILLE_PLATEAU];
@@ -55,22 +60,23 @@ public abstract class Plateau {
         String plateau = "";
         int numero = 1;
         for(Case[] row : cases){
+            plateau += COULEUR_NORMAL;
             if (numero < 10) plateau += numero++ + "  ";
             else plateau += numero++ + " ";
             for(Case c : row){
                 if(c == Case.AUCUN) {
-                    plateau += "_ ";
+                    plateau +=  COULEUR_AUCUN + "_ ";
                 }else if(c == Case.BATEAU){
-                    plateau += "B ";
+                    plateau += COULEUR_BATEAU + "B ";
                 }else if(c == Case.TOUCHE){
-                    plateau += "X ";
+                    plateau += COULEUR_TOUCHE + "X ";
                 }else if(c == Case.COULE){
-                    plateau += "X ";
+                    plateau += COULEUR_TOUCHE + "X ";
                 }else if(c == Case.RATE){
-                    plateau += "O ";
+                    plateau += COULEUR_RATE + "O ";
                 }
             }
-            plateau += "\n";
+            plateau += COULEUR_NORMAL + "\n";
         }
         return plateau;
     }
