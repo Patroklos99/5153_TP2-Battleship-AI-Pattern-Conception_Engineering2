@@ -25,23 +25,27 @@ public class IAAvance extends Joueur {
         Coordonnee coordTir;
 
         if(tirPrecedent != null) {
-            resultatTirPrecedent = pt.getCase(tirPrecedent);
-            if(resultatTirPrecedent == Case.COULE) {
-                reinitialiserEtat();
-                printDebug("TOUCHÉ COULÉ!");
-            }
 
+            resultatTirPrecedent = pt.getCase(tirPrecedent);
+
+            //Si la case précédente était un touché
             if(resultatTirPrecedent == Case.TOUCHE) {
-                printDebug("TOUCHÉ");
+                //Attribuer le tir pivot à la même coordonnée que le tir précédent
                 tirPivot = tirPrecedent;
+            } else if(resultatTirPrecedent == Case.COULE) {
+                //Sinon, si c'était un touché-coulé, on réinitialise l'état, pour que l'IA recommence
+                // à chercher aléatoirement.
+                reinitialiserEtat();
             }
         }
 
         if(tirPivot != null){
-            coordTir = trouverProchaineCible(pt);
-        }
+            //Si tirPivot n'est pas nul, cela veut dire que l'IA a trouvé un bateau et
+            //  il essaiera activement de le couler en cherchant autour de la case tirPivot.
 
-        else {
+            coordTir = trouverProchaineCible(pt);
+        } else {
+            //Sinon, tirer sur une case aléatoire.
             do {
                 int colonne = randomNum.nextInt(9 + 1);
                 int rangee = randomNum.nextInt(9 + 1);
@@ -59,7 +63,7 @@ public class IAAvance extends Joueur {
         int axeChoisi = choisirAxeTir();
         int directionChoisi = choisirDirectionTir();
 
-        //Si ça fait deux foix qu'on change la direction du tir...
+        //Si ça fait deux fois qu'on change la direction du tir...
         if(compteurChangementDirection == 2){
             //Changer l'axe de tir.
             changerOrientationBateau();
@@ -149,9 +153,4 @@ public class IAAvance extends Joueur {
             case ORIENTATION_VERTICALE -> orientationBateau = ORIENTATION_HORIZONTALE;
         }
     }
-
-    private void printDebug(String message){
-        System.out.println(message);
-    }
-
 }
