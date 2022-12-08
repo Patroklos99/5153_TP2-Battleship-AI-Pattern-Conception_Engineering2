@@ -9,11 +9,15 @@ public class IADebutant extends Joueur{
 
     @Override
     public Coordonnee determinerTir(PlateauTir plateauTir) {
+        IAAvance ia = new IAAvance();
         Random randomNum = new Random();
         int colonne = randomNum.nextInt(9 + 1);
         int rangee = randomNum.nextInt(9 + 1);
         return new Coordonnee(colonne,rangee);
+
+
     }
+
 
 
 }
