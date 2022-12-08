@@ -50,14 +50,12 @@ class Bateau {
     + estTouche(coordonnee: pair): Tir
 }
 
-class Case {
-}
-
-enum Tir {
+enum Case {
     + aucun
     + rate
     + touche
     + coule
+    + Bateau
 }
 
 class IADebutant {
@@ -101,7 +99,6 @@ MenuPrincipal -> ChargeurPartie
 MenuPrincipal ---> Jeu
 Jeu --- "4" Plateau
 Plateau -down- "*" Case
-Case -- Tir
 Joueur <|-right- Personne
 Joueur <|-down- IADebutant
 Joueur <|-down- IAAvance
