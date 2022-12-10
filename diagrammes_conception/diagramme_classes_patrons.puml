@@ -26,11 +26,10 @@ class MenuPrincipal{
 }
 
 class Jeu {
-    - {static} instanceJeu: Jeu
-    - Jeu()
-    + {static} getInstance(): Jeu
-    + chargerTirs(coordonnéesTirés: Liste<pair>)
+    - etat: EtatJeu
     + jouer()
+    + prochaineAction()
+    + changerPhase(phase: PhaseJeu)
 }
 
 class PlateauBateau {
@@ -89,6 +88,28 @@ class Personne {
     # determinerTir(): pair
     # determinerPlacerBateaux(List<Coordonnee>, numeroBateau: int>)
 }
+
+interface PhaseJeu {
+    - jeu: Jeu
+    + EtatJeu(jeu)
+    + prochaineAction()
+}
+
+class PhaseSelectionnerJoueur {}
+
+class PhasePlacerBateaux {}
+
+class PhaseJouer {}
+
+class PhaseFinJeu {}
+
+PhaseJeu <-left-o Jeu
+
+PhaseSelectionnerJoueur -up-|> PhaseJeu
+PhasePlacerBateaux -up-|> PhaseJeu
+PhaseJouer -up-|> PhaseJeu
+PhaseFinJeu -up-|> PhaseJeu
+
 
 PlateauBateau -- "5" Bateau
 Plateau <|-- PlateauBateau

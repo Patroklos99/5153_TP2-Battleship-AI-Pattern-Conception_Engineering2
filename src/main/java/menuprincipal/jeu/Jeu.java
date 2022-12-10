@@ -114,7 +114,6 @@ public class Jeu {
         visualiseurPartie.ajouterEtape(plateauBateaux[JOUEUR_1], plateauTirs[JOUEUR_1]);
     }
 
-
     private Coordonnee demanderTirJoueur(int numeroJoueur) {
         Coordonnee coord;
         boolean estValide;

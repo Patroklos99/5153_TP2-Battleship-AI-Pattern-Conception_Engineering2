@@ -1,0 +1,38 @@
+@startuml
+class MenuPrincipal{
+    + {static} main(args: String[])
+    + afficherMenu()
+}
+
+class Jeu {
+    - etat: EtatJeu
+    + jouer()
+    + prochaineAction()
+    + changerPhase(phase: PhaseJeu)
+}
+
+interface PhaseJeu {
+    - jeu: Jeu
+    + EtatJeu(jeu)
+    + prochaineAction()
+}
+
+class PhaseSelectionnerJoueur {}
+
+class PhasePlacerBateaux {}
+
+class PhaseJouer {}
+
+class PhaseFinJeu {}
+
+
+PhaseJeu <-left-o Jeu
+
+PhaseSelectionnerJoueur -up-|> PhaseJeu
+PhasePlacerBateaux -up-|> PhaseJeu
+PhaseJouer -up-|> PhaseJeu
+PhaseFinJeu -up-|> PhaseJeu
+
+MenuPrincipal --> Jeu
+
+@enduml
