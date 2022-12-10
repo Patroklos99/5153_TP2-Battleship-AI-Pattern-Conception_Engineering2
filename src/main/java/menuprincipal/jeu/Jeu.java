@@ -81,10 +81,7 @@ public class Jeu {
             plateauBateaux[JOUEUR_2].placerNouveauBateau(coords);
         }
         AfficheurPartie.afficherPartie(plateauBateaux[JOUEUR_1], plateauTirs[JOUEUR_1]);
-    }
-
-    public void ajouterEtapeVisualiseur(){
-        visualiseurPartie.ajouterEtape(plateauBateaux[JOUEUR_1], plateauTirs[JOUEUR_1]);
+        ajouterEtapeVisualiseur();
     }
 
     public boolean effectuerProchaintour() {
@@ -142,6 +139,10 @@ public class Jeu {
         } while (!estValide);
 
         return coord;
+    }
+
+    private void ajouterEtapeVisualiseur(){
+        visualiseurPartie.ajouterEtape(plateauBateaux[JOUEUR_1], plateauTirs[JOUEUR_1]);
     }
 
     private void declarerGagnant(Integer JoueurId) {

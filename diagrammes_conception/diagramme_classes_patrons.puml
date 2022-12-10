@@ -26,10 +26,14 @@ class MenuPrincipal{
 }
 
 class Jeu {
-    - etat: EtatJeu
+    - phase: PhaseJeu
     + jouer()
     + prochaineAction()
-    + changerPhase(phase: PhaseJeu)
+    + effectuerPhase(phase: PhaseJeu)
+    + determinerModeJeu()
+    + initialiserPlateaux()
+    + placerBateaux()
+    + effectuerProchainTour()
 }
 
 class PlateauBateau {
@@ -89,9 +93,9 @@ class Personne {
     # determinerPlacerBateaux(List<Coordonnee>, numeroBateau: int>)
 }
 
-abstract PhaseJeu {
+interface PhaseJeu {
     - jeu: Jeu
-    + EtatJeu(jeu)
+    + PhaseJeu(jeu)
     + prochaineAction()
 }
 
