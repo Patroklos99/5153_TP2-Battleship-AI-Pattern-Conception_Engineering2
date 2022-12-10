@@ -28,7 +28,7 @@ public class SelecteurModeJeu {
     private static Joueur determinerDifficulte() {
         int choix = -1;
         while (true) {
-            System.out.println(DEMANDER_DIFFICULTE);
+            System.out.print(DEMANDER_DIFFICULTE);
             try {
                 choix = new Scanner(System.in).nextInt();
             } catch (InputMismatchException e) {
@@ -45,7 +45,7 @@ public class SelecteurModeJeu {
     public static Joueur determinerModeJeu() {
         int choix = -1;
         while (true) {
-            System.out.println(DEMANDER_MODE_JEU);
+            System.out.print(DEMANDER_MODE_JEU);
             try {
                 choix = new Scanner(System.in).nextInt();
             } catch (InputMismatchException e) {
