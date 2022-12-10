@@ -16,6 +16,8 @@ public class IAAvance extends Joueur {
     private final int DIR_POSIT = 1;
     private final int DIR_NEGAT = -1;
     private final int NON_DEFINED = 0;
+
+    Random randomNum;
     Coordonnee tirPivot;
     Coordonnee tirPrecedent;
     Case resultatTirPrecedent;
@@ -23,9 +25,18 @@ public class IAAvance extends Joueur {
     int directionTir = 0;
     int compteurChangementDirection = 0;
 
+    public IAAvance() {
+        super();
+        randomNum = new Random();
+    }
+
+    public IAAvance(Random randomNum_){
+        super();
+        randomNum = randomNum_;
+    }
+
     @Override
     public Coordonnee determinerTir(PlateauTir pt) {
-        Random randomNum = new Random();
         Coordonnee coordTir;
 
         if(tirPrecedent != null) {
@@ -51,7 +62,6 @@ public class IAAvance extends Joueur {
     }
 
     private Coordonnee trouverProchaineCible(PlateauTir pt){
-        Random randomNum = new Random();
         int axeChoisi = choisirAxeTir();
         int directionChoisi = choisirDirectionTir();
 
@@ -66,12 +76,11 @@ public class IAAvance extends Joueur {
         tirPivot = null;
         orientationBateau = -1;
         compteurChangementDirection = 0;
-        directionTir = 0;
+        directionTir = NON_DEFINED;
     }
 
     private int choisirAxeTir() {
         int axeChoisi;
-        Random randomNum = new Random();
         if(orientationBateau == -1) { //Si on connait pas l'orientation du bateau, choisir un axe par où tirer.
             axeChoisi = randomNum.nextInt(2);
         } else
@@ -80,18 +89,15 @@ public class IAAvance extends Joueur {
     }
 
     private int choisirDirectionTir() { //direction + ou - dans l'axe
-        int directionTirTemp;
-        Random randomNum = new Random();
         if(directionTir == NON_DEFINED) { //choisir aleatoirement
-            directionTirTemp = randomNum.nextBoolean() ? DIR_POSIT : DIR_NEGAT;
+            directionTir = randomNum.nextBoolean() ? DIR_POSIT : DIR_NEGAT;
         } else {
             if (resultatTirPrecedent == Case.RATE) { //changer direction du tir
-                directionTir *= DIR_NEGAT;
-                compteurChangementDirection += DIR_POSIT;
+                directionTir *= -1;
+                compteurChangementDirection++;
             }
-            directionTirTemp = directionTir;
         }
-        return directionTirTemp;
+        return directionTir;
     }
 
     private Coordonnee determinerProchaineCible(int axeChoisi, int directionChoisi, PlateauTir pt) {
@@ -122,4 +128,6 @@ public class IAAvance extends Joueur {
             case ORIENTATION_VERTICALE -> orientationBateau = ORIENTATION_HORIZONTALE;
         }
     }
+
+    public Coordonnee getTirPivot() {return tirPivot;}
 }
