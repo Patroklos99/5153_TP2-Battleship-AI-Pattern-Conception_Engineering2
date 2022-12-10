@@ -46,8 +46,4 @@ public class Coordonnee {
         return Objects.hash(posH,posV);
     }
 
-    @Override
-    public String toString() {
-        return posH.toString() + "," + posV.toString();
-    }
 }
