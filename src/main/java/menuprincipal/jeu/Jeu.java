@@ -7,63 +7,61 @@ import menuprincipal.battleship.plateau.*;
 import menuprincipal.controlleurs.EnregistreurPartie;
 import menuprincipal.controlleurs.VisualiseurPartie;
 import menuprincipal.frontend.AfficheurPartie;
+import menuprincipal.jeu.phasesJeu.PhaseJeu;
+import menuprincipal.jeu.phasesJeu.PhaseSelectionnerJoueurs;
 
 import java.util.List;
 
 @Data
 public class Jeu {
 
-    private static Jeu instanceJeu = null;
-
     private static final String FIN_PARTIE = "Fin de la partie.";
     private static final String POSITION_INVALIDE = "Position invalide.";
     private static final String PLACER_PROCHAIN_BATEAU = "Appuyez sur 1 pour placer le prochain bateau";
-
 
     final int MAX_JOUEURS = 2;
     final int MAX_PLATEAUX = 2;
     final int NB_BATEAUX = 5;
 
+
+    private PhaseJeu phase;
+
     private Joueur[] joueurs = new Joueur[MAX_JOUEURS];
     private PlateauBateau[] plateauBateaux = new PlateauBateau[MAX_PLATEAUX];
     private PlateauTir[] plateauTirs = new PlateauTir[MAX_PLATEAUX];
 
-    private final int JOUEUR_1 = 0;
-    private final int JOUEUR_2 = 1;
+    public final int JOUEUR_1 = 0;
+    public final int JOUEUR_2 = 1;
 
     private final VisualiseurPartie visualiseurPartie = new VisualiseurPartie();
 
-    private Jeu() {
-    }
-
-    public static Jeu getInstance() {
-        if (instanceJeu == null)
-            instanceJeu = new Jeu();
-        return instanceJeu;
-    }
-
     public void jouer() {
-        Joueur gagnant = null;
-        determinerModeJeu();
-        initialiserPlateaux();
-        placerBateaux();
-        visualiseurPartie.ajouterEtape(plateauBateaux[0], plateauTirs[0]);
+        effectuerPhase(new PhaseSelectionnerJoueurs(this));
+    }
 
-        while (gagnant == null) {
-            effectuerProchaintour();
-            gagnant = determinerGagnant();
-            if (gagnant != null) System.out.println(FIN_PARTIE);
-        }
+    public void enregistrer(){
         EnregistreurPartie.enregistrerPartie(visualiseurPartie);
+    }
+
+    public void visualiser() {
         visualiseurPartie.visualiserPartie();
     }
 
-    private void determinerModeJeu() {
+    public void prochaineAction(){
+        phase.prochaineAction();
+    }
+
+    public void effectuerPhase(PhaseJeu phase_){
+        this.phase = phase_;
+        prochaineAction();
+    }
+
+    public void determinerModeJeu() {
         joueurs[JOUEUR_1] = new Personne();
         joueurs[JOUEUR_2] = SelecteurModeJeu.determinerModeJeu();
     }
 
-    private void initialiserPlateaux() {
+    public void initialiserPlateaux() {
         PlateauxFactory plateauxFactory = new PlateauxFactory();
         plateauBateaux[0] = (PlateauBateau) plateauxFactory.makePlateau(plateauBateaux, plateauBateaux[1]);
         plateauBateaux[1] = (PlateauBateau) plateauxFactory.makePlateau(plateauBateaux, plateauBateaux[1]);
@@ -71,7 +69,7 @@ public class Jeu {
         plateauTirs[1] = (PlateauTir) plateauxFactory.makePlateau(plateauTirs, plateauBateaux[0]);
     }
 
-    private void placerBateaux() {
+    public void placerBateaux() {
         final int BATEAUX_MAX = 5;
         List<Coordonnee> coords;
         for (int i = 0; i < BATEAUX_MAX; ++i) {
@@ -83,6 +81,27 @@ public class Jeu {
             plateauBateaux[JOUEUR_2].placerNouveauBateau(coords);
         }
         AfficheurPartie.afficherPartie(plateauBateaux[JOUEUR_1], plateauTirs[JOUEUR_1]);
+        ajouterEtapeVisualiseur();
+    }
+
+    public boolean effectuerProchaintour() {
+        Integer gagnant = null;
+
+        if(effectuerTourJoueur(JOUEUR_1))
+            gagnant = JOUEUR_1;
+        else if (effectuerTourJoueur(JOUEUR_2)) {
+            gagnant = JOUEUR_2;
+        }
+
+        AfficheurPartie.afficherPartie(plateauBateaux[JOUEUR_1], plateauTirs[JOUEUR_1]);
+        visualiseurPartie.ajouterEtape(plateauBateaux[JOUEUR_1], plateauTirs[JOUEUR_1]);
+
+        if(gagnant != null) {
+            declarerGagnant(JOUEUR_1);
+            return true;
+        }
+
+        return false;
     }
 
     private List<Coordonnee> demanderPlacerBateau(int joueur, int numeroBateau) {
@@ -103,17 +122,12 @@ public class Jeu {
         return true;
     }
 
-    private void effectuerProchaintour() {
-        Coordonnee coordonnees_1 = demanderTirJoueur(JOUEUR_1);
-        plateauTirs[JOUEUR_1].ajouterTir(coordonnees_1);
+    private boolean effectuerTourJoueur(int joueurId) {
+        Coordonnee coordonnees = demanderTirJoueur(joueurId);
+        plateauTirs[joueurId].ajouterTir(coordonnees);
 
-        Coordonnee coordonnees_2 = demanderTirJoueur(JOUEUR_2);
-        plateauTirs[JOUEUR_2].ajouterTir(coordonnees_2);
-
-        AfficheurPartie.afficherPartie(plateauBateaux[JOUEUR_1], plateauTirs[JOUEUR_1]);
-        visualiseurPartie.ajouterEtape(plateauBateaux[JOUEUR_1], plateauTirs[JOUEUR_1]);
+        return plateauTirs[joueurId].aCouleTousBateaux();
     }
-
 
     private Coordonnee demanderTirJoueur(int numeroJoueur) {
         Coordonnee coord;
@@ -127,10 +141,14 @@ public class Jeu {
         return coord;
     }
 
-    private Joueur determinerGagnant() {
-        if (plateauBateaux[JOUEUR_1].validerAllBateauCoules() || plateauBateaux[JOUEUR_2].validerAllBateauCoules())
-            return joueurs[JOUEUR_1];
-        return null;
+    private void ajouterEtapeVisualiseur(){
+        visualiseurPartie.ajouterEtape(plateauBateaux[JOUEUR_1], plateauTirs[JOUEUR_1]);
+    }
+
+    private void declarerGagnant(Integer JoueurId) {
+        JoueurId++;
+        System.out.println(FIN_PARTIE);
+        System.out.println("Gagnant: Joueur " + JoueurId.toString() + ".");
     }
 
 }

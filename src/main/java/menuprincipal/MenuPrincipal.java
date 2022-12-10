@@ -23,6 +23,7 @@ public class MenuPrincipal {
 
     private static void choisirOption() {
         int choix = -1;
+        Jeu jeu = new Jeu();
         do {
             afficherMenu();
             try {
@@ -33,7 +34,7 @@ public class MenuPrincipal {
 
             switch (choix) {
                 case 1:
-                    Jeu.getInstance().jouer();
+                    jeu.jouer();
                     break;
                 case 2:
                     ChargeurPartie.chargerPartie();
