@@ -11,9 +11,9 @@ class Jeu {
     + changerPhase(phase: PhaseJeu)
 }
 
-interface PhaseJeu {
+abstract PhaseJeu {
     - jeu: Jeu
-    + EtatJeu(jeu)
+    + PhaseJeu(jeu)
     + prochaineAction()
 }
 

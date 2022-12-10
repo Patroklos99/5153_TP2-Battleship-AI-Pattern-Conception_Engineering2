@@ -7,39 +7,35 @@ import menuprincipal.battleship.plateau.*;
 import menuprincipal.controlleurs.EnregistreurPartie;
 import menuprincipal.controlleurs.VisualiseurPartie;
 import menuprincipal.frontend.AfficheurPartie;
+import menuprincipal.jeu.phasesJeu.PhaseJeu;
 
 import java.util.List;
 
 @Data
 public class Jeu {
 
-    private static Jeu instanceJeu = null;
-
     private static final String FIN_PARTIE = "Fin de la partie.";
     private static final String POSITION_INVALIDE = "Position invalide.";
     private static final String PLACER_PROCHAIN_BATEAU = "Appuyez sur 1 pour placer le prochain bateau";
-
 
     final int MAX_JOUEURS = 2;
     final int MAX_PLATEAUX = 2;
     final int NB_BATEAUX = 5;
 
+
+    private PhaseJeu phase;
+
     private Joueur[] joueurs = new Joueur[MAX_JOUEURS];
     private PlateauBateau[] plateauBateaux = new PlateauBateau[MAX_PLATEAUX];
     private PlateauTir[] plateauTirs = new PlateauTir[MAX_PLATEAUX];
 
-    private final int JOUEUR_1 = 0;
-    private final int JOUEUR_2 = 1;
+    public final int JOUEUR_1 = 0;
+    public final int JOUEUR_2 = 1;
 
     private final VisualiseurPartie visualiseurPartie = new VisualiseurPartie();
 
-    private Jeu() {
-    }
+    public Jeu() {
 
-    public static Jeu getInstance() {
-        if (instanceJeu == null)
-            instanceJeu = new Jeu();
-        return instanceJeu;
     }
 
     public void jouer() {
@@ -56,6 +52,14 @@ public class Jeu {
         }
         EnregistreurPartie.enregistrerPartie(visualiseurPartie);
         visualiseurPartie.visualiserPartie();
+    }
+
+    public void prochaineAction(){
+
+    }
+
+    public void changerPhase(PhaseJeu phase_){
+        this.phase = phase_;
     }
 
     private void determinerModeJeu() {

@@ -89,7 +89,7 @@ class Personne {
     # determinerPlacerBateaux(List<Coordonnee>, numeroBateau: int>)
 }
 
-interface PhaseJeu {
+abstract PhaseJeu {
     - jeu: Jeu
     + EtatJeu(jeu)
     + prochaineAction()
