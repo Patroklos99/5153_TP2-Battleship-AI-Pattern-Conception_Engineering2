@@ -83,9 +83,6 @@ public abstract class Joueur {
     }
 
     protected void determinerPlacerBateau(List<Coordonnee> coordonneBateau, int numeroBateau) {
-        //à modifier (c'est pour les IA)
-        //modifier aussi les diagrammes pour enlever la méthode dans les IA
-        //coordonneBateau.addAll(List.of(new Pair<>(0,0), new Pair<>(0,1), new Pair<>(0,2), new Pair<>(0,3), new Pair<>(0,4)));
         int orientation;
 
         switch (numeroBateau){

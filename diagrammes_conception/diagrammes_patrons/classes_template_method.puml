@@ -2,8 +2,7 @@
 
 
 abstract class Joueur{
-    # determinerTir(): Coordonnee
-    + demanderTir(): Coordonnee
+    # determinerTir(plateauTir: PlateauTir): Coordonnee
     + demanderPlacerBateau(numeroBateau: int): List<Coordonnee>
     # determinerPlacerBateau(coordonneBateau: List<Coordonnee>, numeroBateau: int)
 }
@@ -13,16 +12,16 @@ abstract class Joueur{
 
 
 class IADebutant {
-    # determinerTir(): Coordonnee
+    + determinerTir(plateauTir: PlateauTir): Coordonnee
 }
 
 class IAAvance{
-    # determinerTir(): Coordonnee
+    + determinerTir(plateauTir: PlateauTir): Coordonnee
 }
 
 
 class Personne {
-    # determinerTir(): Coordonnee
+    + determinerTir(): Coordonnee
     # determinerPlacerBateaux(coordonneBateau: List<Coordonnee>, numeroBateau: int>)
 }
 

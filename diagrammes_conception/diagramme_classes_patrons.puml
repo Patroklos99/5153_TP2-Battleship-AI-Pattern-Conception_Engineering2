@@ -12,8 +12,7 @@ abstract class Plateau {
 
 
 abstract class Joueur{
-    # determinerTir(): Coordonnee
-    + demanderTir(): Coordonnee
+    + determinerTir(plateauTir: PlateauTir): Coordonnee
     + demanderPlacerBateaux(numeroBateau: int): List<Coordonnee>
     # determinerPlacerBateaux(coordonneBateau: List<Coordonnee>, numeroBateau: int)
 }
@@ -61,11 +60,11 @@ enum Case {
 }
 
 class IADebutant {
-    # determinerTir(): Coordonnee
+    + determinerTir(plateauTir: PlateauTir): Coordonnee
 }
 
 class IAAvance{
-    # determinerTir(): Coordonnee
+    + determinerTir(plateauTir: PlateauTir): Coordonnee
 }
 
 class ChargeurPartie {
