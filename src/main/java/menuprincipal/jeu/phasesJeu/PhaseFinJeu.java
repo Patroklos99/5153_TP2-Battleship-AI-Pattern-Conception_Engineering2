@@ -10,6 +10,7 @@ public class PhaseFinJeu extends PhaseJeu{
 
     @Override
     public void prochaineAction() {
-
+        jeu.enregistrer();
+        jeu.visualiser();
     }
 }

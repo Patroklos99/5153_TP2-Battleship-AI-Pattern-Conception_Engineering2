@@ -21,4 +21,8 @@ public class PlateauTir extends Plateau {
         return resultat;
     }
 
+    public boolean aCouleTousBateaux(){
+        return plateauBateauAdversaire.validerAllBateauCoules();
+    }
+
 }

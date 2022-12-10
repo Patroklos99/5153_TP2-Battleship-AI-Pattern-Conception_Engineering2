@@ -10,6 +10,7 @@ public class PhaseSelectionnerJoueurs extends PhaseJeu{
 
     @Override
     public void prochaineAction() {
-
+        jeu.determinerModeJeu();
+        jeu.effectuerPhase(new PhasePlacerBateaux(jeu));
     }
 }

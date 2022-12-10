@@ -10,6 +10,9 @@ public class PhasePlacerBateaux extends PhaseJeu{
 
     @Override
     public void prochaineAction() {
-
+        jeu.initialiserPlateaux();
+        jeu.placerBateaux();
+        jeu.ajouterEtapeVisualiseur();
+        jeu.effectuerPhase(new PhaseJouer(jeu));
     }
 }
