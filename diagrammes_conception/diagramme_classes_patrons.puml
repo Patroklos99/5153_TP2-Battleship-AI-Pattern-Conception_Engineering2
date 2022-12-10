@@ -6,15 +6,15 @@ class PlateauFactory{
 
 abstract class Plateau {
     # Plateau plateau
-    + PlateauDecorator (plateau : Plateau)
-    + ajouterTir ()
+    + PlateauDecorator(plateau : Plateau)
+    + ajouterTir()
 }
 
 
 abstract class Joueur{
-    # determinerTir(): pair
-    + demanderPlacerBateaux()
-    # determinerPlacerBateaux()
+    + determinerTir(plateauTir: PlateauTir): Coordonnee
+    + demanderPlacerBateaux(numeroBateau: int): List<Coordonnee>
+    # determinerPlacerBateaux(coordonneBateau: List<Coordonnee>, numeroBateau: int)
 }
 
 class MenuPrincipal{
@@ -34,15 +34,15 @@ class Jeu {
 }
 
 class PlateauBateau {
-    + PlateauBateau (plateau : Plateau)
+    + PlateauBateau(plateau : Plateau)
     + placerBateau()
-    + ajouterTir ()
+    + ajouterTir()
 }
 
 class PlateauTir {
-    + PlateauTir (plateau : Plateau)
+    + PlateauTir(plateau : Plateau)
     - verifierTir(coordonnee: pair)
-    + ajouterTir ()
+    + ajouterTir()
 }
 
 class Bateau {
@@ -60,11 +60,11 @@ enum Case {
 }
 
 class IADebutant {
-    # determinerTir(): pair
+    + determinerTir(plateauTir: PlateauTir): Coordonnee
 }
 
 class IAAvance{
-    # determinerTir(): pair
+    + determinerTir(plateauTir: PlateauTir): Coordonnee
 }
 
 class ChargeurPartie {
@@ -72,7 +72,7 @@ class ChargeurPartie {
 }
 
 class VisualiseurPartie {
-    - timelinePlateaux [ ]
+    - timelinePlateaux[]
     + visualiserPartie(): pair<PlateauBateau,PlateauTir>
     + ajouterEtape(plateau : Plateau)
 }
@@ -87,7 +87,7 @@ class EnregistreurPartie {
 
 class Personne {
     # determinerTir(): pair
-    # determinerPlacerBateaux(List<Coordonnee>, numeroBateau: int>)
+    # determinerPlacerBateaux(coordonneBateau: List<Coordonnee>, numeroBateau: int)
 }
 
 PlateauBateau -- "5" Bateau
@@ -103,7 +103,7 @@ Jeu --- "4" Plateau
 Plateau -down- "*" Case
 Joueur <|-up- IADebutant
 Joueur <|-up- IAAvance
-Joueur <|-left-- Personne
+Joueur <|-down-- Personne
 PlateauBateau <- PlateauTir
 VisualiseurPartie --> AfficheurPartie
 PlateauFactory -left-> Plateau
