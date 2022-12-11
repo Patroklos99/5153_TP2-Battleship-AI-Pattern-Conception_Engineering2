@@ -25,7 +25,7 @@ public class SelecteurModeJeu {
     private static final String CHOIX_INVALIDE = "Choix invalide";
     private static final String METHODE_NON_IMP = "Cette fonction n'est pas encore implémentée.";
 
-    private static Joueur determinerDifficulte() {
+    public static Joueur determinerDifficulte() {
         int choix = -1;
         while (true) {
             System.out.print(DEMANDER_DIFFICULTE);
