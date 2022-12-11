@@ -62,7 +62,7 @@ public class ChargeurPartie {
             String sauvegarde = new String(Files.readAllBytes(Paths.get(demanderFichier())));
             partie = new JSONObject(sauvegarde);
         } catch (IOException e) {
-            System.out.println("Erreur lors du chargement.");
+            System.out.println("Erreur lors du chargement. Le programme se terminera maintenant");
             System.exit(1);
         }
         return partie;
