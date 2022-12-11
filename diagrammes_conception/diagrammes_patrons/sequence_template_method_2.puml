@@ -6,8 +6,6 @@ mainframe Placer navire
 actor Personne as personne
 participant "joueur: Joueur" as joueur
 participant "jeu: Jeu" as Jeu
-participant "plateauBat: PlateauBateau" as platBat
-participant "afficheur: AfficheurPartie" as AfficheurPartie
 
 
 
@@ -19,12 +17,5 @@ joueur -> personne : determinerPlacerBateau(coordonnees, numeroBateau)
 activate personne
 personne --> joueur
 joueur --> Jeu : coordonnees
-Jeu -> Jeu : actualiserPlateaux(coordonnees, plateauBateau)
-Jeu -> platBat : placerBateau()
-Jeu -> AfficheurPartie : afficherPartie(plateauBat, plateauTir)
-activate AfficheurPartie
-AfficheurPartie -> AfficheurPartie: Afficher Plateaux
-AfficheurPartie --> Jeu
-deactivate AfficheurPartie
-end
+
 @enduml
