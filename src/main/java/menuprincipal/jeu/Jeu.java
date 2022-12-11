@@ -104,7 +104,7 @@ public class Jeu {
         return false;
     }
 
-    private List<Coordonnee> demanderPlacerBateau(int joueur, int numeroBateau) {
+    public List<Coordonnee> demanderPlacerBateau(int joueur, int numeroBateau) {
         List<Coordonnee> coords;
         boolean estValide;
         do {
@@ -129,7 +129,7 @@ public class Jeu {
         return plateauTirs[joueurId].aCouleTousBateaux();
     }
 
-    private Coordonnee demanderTirJoueur(int numeroJoueur) {
+    public Coordonnee demanderTirJoueur(int numeroJoueur) {
         Coordonnee coord;
         boolean estValide;
         do {
