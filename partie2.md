@@ -88,6 +88,30 @@ Durant le déroulement du jeu, 4 états sont utilisés. Les voici en ordre d'ex�
 
 -----
 
+## Template Method
+
+### Problématique
+Les différents types de joueur ne décident pas de la même manière comment placer
+leurs bateaux et sur quelles cases ils vont tirer. On ne peut pas utiliser les 
+mêmes méthodes pour chaque type de joueur.
+
+### Solution
+![Diagramme Template Method](diagrammes_conception/images_diagrammes/diagrammes_patrons/classes_template_method.png)<br/>
+
+En utilisant le patron de comportement **template method**, on peut redéfinir 
+certaines étapes les fonctions pour placer des bateaux et tirer selon le type de
+joueur sans devoir créer de nouvelles fonctions pour ça.
+
+### Diagrammes de séquences
+
+On peut voir l'effet de ce patron dans les deux diagrammes de séquence suivants :
+
+![Diagramme séquence placerBateau](diagrammes_conception/images_diagrammes/diagrammes_patrons/sequence_template_method_2.png)<br/>
+
+![Diagrammr séquence tirer](diagrammes_conception/images_diagrammes/diagrammes_patrons/sequence_template_method_1.png)
+
+-----
+
 ## Facade
 
 ### Problématique
