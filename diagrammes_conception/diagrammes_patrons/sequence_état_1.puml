@@ -2,7 +2,7 @@
 'https://plantuml.com/sequence-diagram
 
 hide footbox
-mainframe Phase de sélection de joueur
+mainframe Sélection de joueur
 
 actor Personne_Main as personne
 participant Jeu
