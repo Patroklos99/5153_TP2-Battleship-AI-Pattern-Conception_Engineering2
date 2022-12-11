@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+mainframe Sélection de joueur
+
+actor Personne_Main as personne
+participant Jeu
+participant PhaseSelectionnerJoueur
+activate personne
+
+personne -> Jeu : jouer()
+activate Jeu
+
+Jeu -> Jeu : effectuerPhase(PhaseSelectionnerJoueur)
+
+create PhaseSelectionnerJoueur
+Jeu -> PhaseSelectionnerJoueur : new(this)
+Jeu <-- PhaseSelectionnerJoueur
+
+
+Jeu -> PhaseSelectionnerJoueur : prochaineAction()
+activate PhaseSelectionnerJoueur
+Jeu <- PhaseSelectionnerJoueur : determinerModeJeu()
+Jeu --> PhaseSelectionnerJoueur
+Jeu <- PhaseSelectionnerJoueur : effectuerPhase(PhasePlacerBateau)
+
+deactivate PhaseSelectionnerJoueur
+
+@enduml
