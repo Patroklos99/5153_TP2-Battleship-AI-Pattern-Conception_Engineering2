@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+mainframe Jouer
+
+participant Jeu
+participant PhaseJouer
+
+
+-> Jeu : effectuerPhase(PhaseJouer)
+activate Jeu
+create PhaseJouer
+Jeu -> PhaseJouer : new(this)
+Jeu <-- PhaseJouer
+Jeu -> PhaseJouer : prochaineAction()
+activate PhaseJouer
+
+loop tant qu'il n'y a pas encore de gagnant
+
+Jeu <- PhaseJouer : effectuerProchainTour()
+Jeu --> PhaseJouer
+
+end
+
+Jeu <- PhaseJouer : effectuerPhase(PhaseFinJeu)
+deactivate PhaseJouer
+
+
+@enduml
