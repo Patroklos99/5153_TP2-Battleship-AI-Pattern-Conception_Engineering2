@@ -24,7 +24,7 @@ class SelecteurModeJeuTest {
 
     @Test
     void determinerDifficulteAvance() {
-        System.setIn(new ByteArrayInputStream("1".getBytes()));
+        System.setIn(new ByteArrayInputStream("2".getBytes()));
         Assertions.assertInstanceOf(IAAvance.class, SelecteurModeJeu.determinerDifficulte());
     }
 
