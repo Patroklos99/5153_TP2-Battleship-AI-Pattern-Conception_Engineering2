@@ -85,3 +85,34 @@ Durant le déroulement du jeu, 4 états sont utilisés. Les voici en ordre d'ex�
 
 #### PhaseFinJeu
 ![Diagramme de classes](diagrammes_conception/images_diagrammes/diagrammes_patrons/sequence_état_4.png)<br/>
+
+-----
+
+## Facade
+
+### Problématique
+
+Les joueurs humains ne doivent pas avoir accès à l'implémentation des éléments
+du jeu. Ils ne doivent pas pouvoir contrôler directement, les plateaux, les bateaux
+ou encore la mécanique de vérification des tirs. C'est pourquoi il est naturel
+d'utiliser le patron façade sur la classe jeu.
+
+
+### Solution
+
+Ce patron est bien représenté dans le diagramme de classes général:
+
+![Diagramme de classes](diagrammes_conception/images_diagrammes/diagrammes_patrons/diagramme_classes_patrons.png)<br/>
+
+En utilisant le patron de conception **facade**, on peut cacher l'implémentation du jeu de l'utilisateur. Celui-ci dispose
+donc d'une interface avec laquelle il est facile d'interagir. Le jeu délègue ensuite les actions aux composants
+du programme appropriés.
+
+### Diagrammes de séquences
+
+On peut voir ce patron en action dans plusieurs diagrammes de séquence ou le joueur
+interragit avec le jeu, comme par-exemple :
+
+![Diagramme de seq](diagrammes_conception/images_diagrammes/placer_navire.png)<br/>
+
+![Diagramme de seq](diagrammes_conception/images_diagrammes/choisir_case.png)<br/>
