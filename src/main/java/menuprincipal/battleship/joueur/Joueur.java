@@ -71,10 +71,20 @@ public abstract class Joueur {
         return randomNum.nextInt(2);
     }
 
+    /**
+     * Retourne le tir du joueur
+     * @param plateauTir le plateau de tir du joueur
+     * @return la coordonnée du tir
+     */
     public Coordonnee determinerTir(PlateauTir plateauTir) {
         return null;
     }
 
+    /**
+     * Retourne les coordonnées du bateau du joueur
+     * @param numeroBateau le numéro de bateau à placer (0 à 4)
+     * @return les coordonnées du bateau du joueur
+     */
     public List<Coordonnee> demanderPlacerBateau(int numeroBateau) {
         List<Coordonnee> bateau = new ArrayList<>();
 
@@ -82,6 +92,11 @@ public abstract class Joueur {
         return bateau;
     }
 
+    /**
+     * Ajout des coordonnées du bateau dans la variable coordonneeBateau
+     * @param coordonneBateau les coordonnées du bateau
+     * @param numeroBateau le numéro du bateau
+     */
     protected void determinerPlacerBateau(List<Coordonnee> coordonneBateau, int numeroBateau) {
         int orientation;
 
