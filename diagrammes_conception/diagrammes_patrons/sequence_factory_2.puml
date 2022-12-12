@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+mainframe Création d'instance plateau
+
+participant Jeu
+participant PlateauFactory
+
+activate Jeu
+Jeu -> PlateauFactory : makePlateau(Plateau[] typePlateau, PlateauBateau plateauBateau)
+activate PlateauFactory
+alt if typePlateau instance of PlateauBateau
+    create PlateauBateau
+    PlateauFactory -> PlateauBateau : new(this)
+    PlateauBateau --> PlateauFactory :
+end
+PlateauFactory --> Jeu : plateaubateau
+
+
+Jeu -> PlateauFactory : makePlateau(Plateau[] typePlateau, PlateauBateau plateauBateau)
+alt if typePlateau instance of PlateauTir
+    create PlateauTir
+    PlateauFactory -> PlateauTir : new(plateauBateau)
+    PlateauTir --> PlateauFactory :
+end
+Jeu <-- PlateauFactory : PlateauTir
+
+@enduml

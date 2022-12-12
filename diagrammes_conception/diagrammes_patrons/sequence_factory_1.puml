@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+mainframe Création d'instance plateau
+
+actor Personne_Main as personne
+participant Jeu
+activate personne
+participant PlateauFactory
+
+
+personne -> Jeu : jouer()
+activate Jeu
+Jeu -> PlateauFactory : makePlateau(Plateau[] typePlateau, PlateauBateau plateaubateau)
+activate PlateauFactory
+Jeu <-- PlateauFactory : Plateau
+
+@enduml

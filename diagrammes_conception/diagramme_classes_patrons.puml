@@ -12,7 +12,7 @@ abstract class Plateau {
 
 
 abstract class Joueur{
-    + determinerTir(plateauTir: PlateauTir): Coordonnee
+    + determinerTir(plateauTir: ): Coordonnee
     + demanderPlacerBateaux(numeroBateau: int): List<Coordonnee>
     # determinerPlacerBateaux(coordonneBateau: List<Coordonnee>, numeroBateau: int)
 }

@@ -7,35 +7,17 @@ mainframe Tirer
 actor Personne_Main as personne
 participant "joueur: Joueur" as joueur
 participant "jeu: Jeu" as Jeu
-participant "plateauBat: PlateauBateau" as platBat
-participant "plateauTir: PlateauTir" as platTir
-participant "afficheur: AfficheurPartie" as AfficheurPartie
 
 
 
-Jeu -> joueur : demanderTir()
+Jeu -> joueur : determinerTir(plateauTir)
 activate joueur
 activate Jeu
-joueur -> personne : determinerTir()
+joueur -> personne : determinerTir(plateauTir)
 activate personne
 personne --> joueur
 joueur --> Jeu : coordonnees
-Jeu -> Jeu : actualiserPlateaux(coordonnees, plateauBateau)
-Jeu -> platTir : ajouterTir(coordonnee)
-activate platTir
-platTir -> platTir : verifierTir(coordonnee)
-platTir -> platBat : verifierCase
-deactivate platTir
-Jeu -> AfficheurPartie: afficherPartie(plateauBat, plateauTir)
-activate AfficheurPartie
-AfficheurPartie -> AfficheurPartie: Afficher Plateaux
-AfficheurPartie --> Jeu
-deactivate AfficheurPartie
-Jeu -> Jeu: determinerGagnant()
-alt Tous les bateaux de l'adversaire ont coulé
-Jeu --> joueur: Il est le gagnant de la partie
-else
-Jeu -> Jeu: effectuerProchainTour()
 
-end
+
+
 @enduml
