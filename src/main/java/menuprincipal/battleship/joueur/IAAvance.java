@@ -61,6 +61,11 @@ public class IAAvance extends Joueur {
         return coordTir;
     }
 
+    /**
+     * Détermine le prochain tir de l'IA
+     * @param pt le plateau tir
+     * @return la coordonnée du tir
+     */
     private Coordonnee trouverProchaineCible(PlateauTir pt){
         int axeChoisi = choisirAxeTir();
         int directionChoisi = choisirDirectionTir();
@@ -72,6 +77,9 @@ public class IAAvance extends Joueur {
         return determinerProchaineCible(axeChoisi,directionChoisi,pt);
     }
 
+    /**
+     * Réinitialise l'état du tir
+     */
     private void reinitialiserEtat() {
         tirPivot = null;
         orientationBateau = -1;
@@ -79,6 +87,10 @@ public class IAAvance extends Joueur {
         directionTir = NON_DEFINED;
     }
 
+    /**
+     * Choisi l'axe du tir
+     * @return l'axe du tir
+     */
     private int choisirAxeTir() {
         int axeChoisi;
         if(orientationBateau == -1) { //Si on connait pas l'orientation du bateau, choisir un axe par où tirer.
@@ -88,6 +100,10 @@ public class IAAvance extends Joueur {
         return axeChoisi;
     }
 
+    /**
+     * Choisi la direction du tir
+     * @return la direction du tir
+     */
     private int choisirDirectionTir() { //direction + ou - dans l'axe
         if(directionTir == NON_DEFINED) { //choisir aleatoirement
             directionTir = randomNum.nextBoolean() ? DIR_POSIT : DIR_NEGAT;
@@ -100,6 +116,13 @@ public class IAAvance extends Joueur {
         return directionTir;
     }
 
+    /**
+     * Choisi la prochaine cible pour l'IA
+     * @param axeChoisi l'axe choisi
+     * @param directionChoisi la direction choisie
+     * @param pt le plateau de tir
+     * @return la coordonnée du tir
+     */
     private Coordonnee determinerProchaineCible(int axeChoisi, int directionChoisi, PlateauTir pt) {
         Case etatCase = Case.TOUCHE;
         Coordonnee coordCible = new Coordonnee(tirPivot.posH, tirPivot.posV);
@@ -122,6 +145,9 @@ public class IAAvance extends Joueur {
         return coordCible;
     }
 
+    /**
+     * Change l'orientation du bateau
+     */
     private void changerOrientationBateau(){
         switch (orientationBateau) {
             case ORIENTATION_HORIZONTALE -> orientationBateau = ORIENTATION_VERTICALE;
@@ -129,5 +155,9 @@ public class IAAvance extends Joueur {
         }
     }
 
+    /**
+     * Retourne le tir
+     * @return le tir
+     */
     public Coordonnee getTirPivot() {return tirPivot;}
 }

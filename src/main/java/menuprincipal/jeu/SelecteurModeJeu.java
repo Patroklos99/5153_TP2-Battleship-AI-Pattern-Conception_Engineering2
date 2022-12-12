@@ -25,6 +25,10 @@ public class SelecteurModeJeu {
     private static final String CHOIX_INVALIDE = "Choix invalide";
     private static final String METHODE_NON_IMP = "Cette fonction n'est pas encore implémentée.";
 
+    /**
+     * Choisi la difficulté de l'intelligence artificielle
+     * @return L'IA que le joueur veut
+     */
     public static Joueur determinerDifficulte() {
         int choix = -1;
         while (true) {
@@ -42,6 +46,10 @@ public class SelecteurModeJeu {
         }
     }
 
+    /**
+     * Choisi si le deuxième joueur est une personne ou une IA
+     * @return le type de joueur souhaité
+     */
     public static Joueur determinerModeJeu() {
         int choix = -1;
         while (true) {
