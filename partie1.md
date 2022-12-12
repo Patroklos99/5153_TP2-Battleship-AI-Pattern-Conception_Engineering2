@@ -71,43 +71,43 @@ Il s'agit du menu au tout début du programme qui permet d'initialiser une parti
 Il s'agit donc d'un <u>créateur</u> de jeu.
 Le menu principal a aussi un <u>faible couplage</u> avec le reste du système, car le jeu ne dépend pas de celui-ci pour fonctionner.
 
-### Jeu:
+### jeu.Jeu:
 Une classe qui assure une <u>forte cohésion</u> dans le système, orchestrant les actions des autres classes.
 Cette classe sert essentiellement d'arbitre pour le jeu.
 
 
-### Joueur:
-La classe abstraite Joueur est <u>polymorphe</u>, elle peut jouer le rôle d'un joueur humain ou d'une intelligence artificielle.
+### battleship.Joueur:
+La classe abstraite battleship.Joueur est <u>polymorphe</u>, elle peut jouer le rôle d'un joueur humain ou d'une intelligence artificielle.
 Les méthodes *demanderTir()* et *demanderPlacerBateaux* auront des implémentations différentes tout dépendant du type d'IA ou si le joueur est humain.
 
 
-### Plateau:
-Plateau représente une grille où on peut soit placer un bateau ou visualiser les tirs effectués contre l'adversaire. Alors, chaque joueur
+### battleship.Plateau:
+battleship.Plateau représente une grille où on peut soit placer un bateau ou visualiser les tirs effectués contre l'adversaire. Alors, chaque joueur
 aura deux grilles assignées. Puisque les deux types de plateaux ont des responsabilités différentes, il s'agit d'une classe abstraite <u>polymorphe</u>.
-Plateau est aussi un <u>spécialiste de l'information</u> car il contient et gère les cases du jeu, ainsi que les bateaux s'il s'agit d'un PlateauBateau.
-Lorsqu'un tir est effectué, on appelle ajouterTir() du PlateauTir du joueur, qui appelle à son tour ajouterTir() du PlateauBateau de l'adversaire. On assure une <u>forte cohésion</u> de cette
+battleship.Plateau est aussi un <u>spécialiste de l'information</u> car il contient et gère les cases du jeu, ainsi que les bateaux s'il s'agit d'un battleship.PlateauBateau.
+Lorsqu'un tir est effectué, on appelle ajouterTir() du battleship.PlateauTir du joueur, qui appelle à son tour ajouterTir() du battleship.PlateauBateau de l'adversaire. On assure une <u>forte cohésion</u> de cette
 manière, car on est certain que les deux plateaux soient mise à jour en un appel.
 
-### Bateau:
+### battleship.Bateau:
 Représente les bateaux placés par le joueur. Classe à <u>faible couplage</u> simple qui retourne si une coordonnée le touche ou non.
 
-### Case:
+### battleship.Case:
 Classe à <u>faible couplage</u> simple. Représente l'état d'une case, soit s'il y a déjà eu un tir ou non, et si oui, si le tir a touché un bateau ou non.
 
 
-### VisualiseurPartie:
-Le VisualiseurPartie a la responsabilité d'afficher le déroulement de la partie à la fin de celle-ci. C'est un <u>spécialiste de l'information</u>
+### controlleurs.VisualiseurPartie:
+Le controlleurs.VisualiseurPartie a la responsabilité d'afficher le déroulement de la partie à la fin de celle-ci. C'est un <u>spécialiste de l'information</u>
 puisqu'il contient la liste des plateaux en ordre chronologique de la partie, et il ne s'occupe pas de l'affichage directement, ça sera plutôt la
-responsabilité de AfficheurPartie.
+responsabilité de frontend.AfficheurPartie.
 
-### AfficheurPartie:
-Classe statique à <u>faible couplage</u>. À comme seule tâche d'afficher à la console un PlateauBateau et un PlateauTir.
+### frontend.AfficheurPartie:
+Classe statique à <u>faible couplage</u>. À comme seule tâche d'afficher à la console un battleship.PlateauBateau et un battleship.PlateauTir.
 
 
-### EnregistreurPartie:
+### controlleurs.EnregistreurPartie:
 Classe statique à <u>faible couplage</u>. Sérialise un jeu en format JSON et le sauvegarde dans un fichier.
 
-### ChargeurPartie:
+### controlleurs.ChargeurPartie:
 Classe statique à <u>faible couplage</u>. Charge un fichier JSON et initialise un jeu avec les propriétés défini dans le fichier. 
 
 # Diagramme de packages du système
@@ -129,14 +129,14 @@ Classe statique à <u>faible couplage</u>. Charge un fichier JSON et initialise 
 Le joueur décide de jouer une partie existante, à partir d'un fichier JSON. On peut remarquer le
 <u>faible couplage</u> puisque chaque objet a sa propre responsabilité. Dans ce cas, le menu agit aussi comme
 un <u>contrôleur</u>, puisqu'il prend les commandes de l'acteur et délègue ensuite la responsabilité aux objets
-concernés. Le ChargeurPartie appelle ensuite des librairies pour effectuer la gestion du fichier, ce qui réduit
-d'avantage le couplage. Le Jeu est ensuite instancié à partir du fichier, et est retourné pour reprendre la partie.
+concernés. Le controlleurs.ChargeurPartie appelle ensuite des librairies pour effectuer la gestion du fichier, ce qui réduit
+d'avantage le couplage. Le jeu.Jeu est ensuite instancié à partir du fichier, et est retourné pour reprendre la partie.
 
 ## Choisir le mode de jeu
 ![Diagramme de séquence pour choisir le mode de jeu](diagrammes_conception/images_diagrammes/choisir_mode_jeu.png)<br/>
 Avant de commencer une partie, le joueur doit décider s'il veut jouer contre un humain ou un ordinateur. Lorsque le
-joueur envoie sa réponse, l'objet Jeu instancie alors les objets nécessaires. Dans le diagramme, on remarque que le Jeu
-instancie l'IAdebutant ou l'IAavance, ce qui respecte le patron <u>créateur</u>. Puisque le Jeu contient des instances
+joueur envoie sa réponse, l'objet jeu.Jeu instancie alors les objets nécessaires. Dans le diagramme, on remarque que le jeu.Jeu
+instancie l'IAdebutant ou l'IAavance, ce qui respecte le patron <u>créateur</u>. Puisque le jeu.Jeu contient des instances
 de ces classes, c'est celui-ci qui les instancie.
 
 ## Nouvelle partie

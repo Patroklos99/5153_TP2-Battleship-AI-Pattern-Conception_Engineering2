@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+mainframe Tirer
+
+actor Personne_Main as personne
+participant "joueur: Joueur" as joueur
+participant "jeu: Jeu" as Jeu
+
+
+
+Jeu -> joueur : determinerTir(plateauTir)
+activate joueur
+activate Jeu
+joueur -> personne : determinerTir(plateauTir)
+activate personne
+personne --> joueur
+joueur --> Jeu : coordonnees
+
+
+
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+
+
+abstract class Joueur{
+    # determinerTir(plateauTir: PlateauTir): Coordonnee
+    + demanderPlacerBateau(numeroBateau: int): List<Coordonnee>
+    # determinerPlacerBateau(coordonneBateau: List<Coordonnee>, numeroBateau: int)
+}
+
+
+
+
+
+class IADebutant {
+    + determinerTir(plateauTir: PlateauTir): Coordonnee
+}
+
+class IAAvance{
+    + determinerTir(plateauTir: PlateauTir): Coordonnee
+}
+
+
+class Personne {
+    + determinerTir(): Coordonnee
+    # determinerPlacerBateaux(coordonneBateau: List<Coordonnee>, numeroBateau: int>)
+}
+
+
+
+Joueur <|- Personne
+Joueur <|-down- IADebutant
+Joueur <|-down- IAAvance
+
+@enduml

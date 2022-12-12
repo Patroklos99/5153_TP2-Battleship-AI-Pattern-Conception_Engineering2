@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+mainframe Placer navire
+
+actor Personne as personne
+participant "joueur: Joueur" as joueur
+participant "jeu: Jeu" as Jeu
+
+
+
+loop tant qu'il reste des bateaux a placer
+Jeu -> joueur : demanderPlacerBateau(numeroBateau)
+activate Jeu
+activate joueur
+joueur -> personne : determinerPlacerBateau(coordonnees, numeroBateau)
+activate personne
+personne --> joueur
+joueur --> Jeu : coordonnees
+
+@enduml

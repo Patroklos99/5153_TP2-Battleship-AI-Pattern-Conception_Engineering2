@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+mainframe Placement de bateau
+
+participant Jeu
+participant PhasePlacerBateau
+
+
+-> Jeu : effectuerPhase(PhasePlacerBateau)
+activate Jeu
+create PhasePlacerBateau
+Jeu -> PhasePlacerBateau : new(this)
+
+Jeu <-- PhasePlacerBateau
+
+Jeu -> PhasePlacerBateau : prochaineAction()
+activate PhasePlacerBateau
+Jeu <- PhasePlacerBateau : initialiserPlateaux()
+Jeu --> PhasePlacerBateau
+Jeu <- PhasePlacerBateau : placerBateaux()
+Jeu --> PhasePlacerBateau
+
+Jeu <- PhasePlacerBateau : effectuerPhase(PhaseJouer)
+deactivate PhasePlacerBateau
+
+@enduml
