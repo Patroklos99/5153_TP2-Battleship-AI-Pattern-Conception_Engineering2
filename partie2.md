@@ -140,3 +140,30 @@ interragit avec le jeu, comme par-exemple :
 ![Diagramme de seq](diagrammes_conception/images_diagrammes/placer_navire.png)<br/>
 
 ![Diagramme de seq](diagrammes_conception/images_diagrammes/choisir_case.png)<br/>
+
+-----
+## Factory
+
+### Problématique
+
+La classe jeu contient la logique centrale du programme. La crátion de plusieurs d'autres 
+instances à partir de celle-ci rajoute une surcharge de tâches qui font perdre 
+la specialisation de la classee jeu et la force à devenir une classe Dieu et on garde 
+ainsi le principe d'Ouvert/Fermé de la programmation orientée objet. 
+
+### Solution
+![Diagramme de classes](diagrammes_conception/images_diagrammes/diagrammes_patrons/classes_factory_2.png)<br/>
+
+En utilisant le patron de conception **Factory**, on peut enlever la tâche de 
+création d'instances de la classe jeu. Ainsi cette dernière fera uniquement appel à 
+une autre classe laquelle lui fournira des intances prêtes à utiliser. Avec ce patron
+nous évitons donc un fort couplage entre la classe créatrice et les objets concréts.
+
+### Diagramme de séquences
+
+Le fonctionnement de ce patron et ces détails peut être visualisé dans les diagrammes de séquences suivants :
+
+![Diagramme de classes](diagrammes_conception/images_diagrammes/diagrammes_patrons/sequence_factory_1.png)<br/>
+
+![Diagramme de classes](diagrammes_conception/images_diagrammes/diagrammes_patrons/sequence_factory_2.png)<br/>
+
