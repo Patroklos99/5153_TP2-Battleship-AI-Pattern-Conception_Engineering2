@@ -1,7 +1,11 @@
 package menuprincipal.controlleurs;
 
+import menuprincipal.jeu.Jeu;
+import mockit.Mocked;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.Rule;
+import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,31 +15,34 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import static menuprincipal.controlleurs.ChargeurPartie.*;
+import static org.mockito.Mockito.mock;
+
 class ChargeurPartieTest {
 
+    @Rule
+    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
+
     @Test
-    void chargerPartie() throws IOException {
-        String sauvegarde = new String(Files.readAllBytes(Paths.get("sauvegardes/exemple.json")));
-        JSONObject partie = new JSONObject(sauvegarde);
-        JSONArray plateaux = partie.getJSONArray("plateaux");
-        Assertions.assertNotNull(plateaux);
+    void chargerPartieTest() throws IOException {
+        System.setIn(new ByteArrayInputStream("sauvegardes/exemple.json".getBytes()));
+        VisualiseurPartie v = new VisualiseurPartie();
+        Assertions.assertNotNull(v.timelinePlateau);
     }
 
     @Test
-    void visualiserPartie() {
+    void visualiserPartieTest() throws IOException {
     }
 
     @Test
-    void demanderFichier() {
-        ByteArrayInputStream in = new ByteArrayInputStream("sauvegardes/monfichier.json".getBytes());
-        String test = new Scanner(in).nextLine();
-        Assertions.assertEquals(test, "sauvegardes/monfichier.json");
+    void demanderFichierTest() {
+        System.setIn(new ByteArrayInputStream("fichier.test".getBytes()));
+       Assertions.assertEquals(ChargeurPartie.demanderFichier(), "fichier.test");
     }
 
     @Test
-    void chargerFichier() throws IOException {
-        String sauvegarde = new String(Files.readAllBytes(Paths.get("sauvegardes/exemple.json")));
-        JSONObject partie = new JSONObject(sauvegarde);
-        Assertions.assertNotNull(partie);
+    void chargerFichierTest() throws IOException {
+        System.setIn(new ByteArrayInputStream("sauvegardes/exemple.json".getBytes()));
+        Assertions.assertNotNull(chargerFichier());
     }
 }
