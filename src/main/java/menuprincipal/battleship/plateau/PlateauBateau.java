@@ -19,6 +19,12 @@ public class PlateauBateau extends Plateau {
     }
 
 
+    /**
+     * Ajoute le tir dans le tableau correspondant
+     *
+     * @param coordonnee Cordonnee à tirer.
+     * @return caseTouche le type d'enum de la case atteinte
+     */
     @Override
     public Case ajouterTir(Coordonnee coordonnee){
         Case caseTouche = getCase(coordonnee);
@@ -57,17 +63,6 @@ public class PlateauBateau extends Plateau {
     }
 
     /**
-     * @deprecated
-     *
-     * Utilisez la version qui prend un objet Coordonnee.
-     * */
-    public boolean estCaseInnoccupee(Pair<Integer, Integer> coord){
-        if(coord.getKey() >= TAILLE_PLATEAU || coord.getValue() >= TAILLE_PLATEAU ) return false;
-        Case c = cases[coord.getKey()][coord.getValue()];
-        return c == Case.AUCUN || c == Case.RATE;
-    }
-
-    /**
      * Vérifie si la case n'est pas occupée par un bateau ou un tir, et si elle existe.
      *
      * @return true si inoccupée, false si occupée ou non-existante.
@@ -78,6 +73,13 @@ public class PlateauBateau extends Plateau {
         return c == Case.AUCUN || c == Case.RATE;
     }
 
+
+    /**
+     * Verifie si la case est valide par rapport à la grandeur du plateau
+     *
+     * @param coord unités des référence du tir
+     * @return  si la case est valide
+     */
     public boolean estCaseValide(Coordonnee coord){
        return coord.posH < TAILLE_PLATEAU && coord.posV < TAILLE_PLATEAU;
     }

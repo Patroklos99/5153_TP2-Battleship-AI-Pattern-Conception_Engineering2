@@ -55,6 +55,11 @@ public abstract class Plateau {
         return cases[coordonnee.posH][coordonnee.posV];
     }
 
+    /**
+     * Modifie les valeurs desiŕees l'affichage en String des ceux-ci
+     *
+     * @return valeur de l'instance modifié pour l'affichage desiré
+     */
     @Override
     public String toString() {
         String plateau = "";
