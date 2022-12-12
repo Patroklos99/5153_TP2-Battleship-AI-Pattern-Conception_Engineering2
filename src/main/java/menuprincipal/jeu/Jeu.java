@@ -35,32 +35,55 @@ public class Jeu {
 
     private final VisualiseurPartie visualiseurPartie = new VisualiseurPartie();
 
+    /**
+     * Initialiser et commencer le jeu.
+     * */
     public void jouer() {
         effectuerPhase(new PhaseSelectionnerJoueurs(this));
     }
 
+    /**
+     * Enregistrer le déroulement de la partie dans un fichier externe.
+     * */
     public void enregistrer(){
         EnregistreurPartie.enregistrerPartie(visualiseurPartie);
     }
 
+    /**
+     * Visualiser le déroulement de la partie après la fin de la partie.
+     * */
     public void visualiser() {
         visualiseurPartie.visualiserPartie();
     }
 
+    /**
+     * Exécuter la prochaine action à effectuer, tout dépendant de la phase de Jeu.
+     * */
     public void prochaineAction(){
         phase.prochaineAction();
     }
 
+    /**
+     * Exécuter une phase de jeu.
+     *
+     * @param phase_ Prochaine phase à effectuer.
+     * */
     public void effectuerPhase(PhaseJeu phase_){
         this.phase = phase_;
         prochaineAction();
     }
 
+    /**
+     * Demander à l'utilisateur contre qui jouer : un humain ou une IA.
+     * */
     public void determinerModeJeu() {
         joueurs[JOUEUR_1] = new Personne();
         joueurs[JOUEUR_2] = SelecteurModeJeu.determinerModeJeu();
     }
 
+    /**
+     * Initialiser les plateaux de jeu des deux joueurs.
+     * */
     public void initialiserPlateaux() {
         PlateauxFactory plateauxFactory = new PlateauxFactory();
         plateauBateaux[0] = (PlateauBateau) plateauxFactory.makePlateau(plateauBateaux, plateauBateaux[1]);
@@ -69,6 +92,9 @@ public class Jeu {
         plateauTirs[1] = (PlateauTir) plateauxFactory.makePlateau(plateauTirs, plateauBateaux[0]);
     }
 
+    /**
+     * Demander au deux joueurs de placer leurs bateaux.
+     * */
     public void placerBateaux() {
         final int BATEAUX_MAX = 5;
         List<Coordonnee> coords;
@@ -84,6 +110,12 @@ public class Jeu {
         ajouterEtapeVisualiseur();
     }
 
+    /**
+     * Demander aux deux joueurs d'effectuer leur tir sur les bateaux de leur adversaire.
+     * Puis, tester s'il y a un gagnant et l'annoncer. Retourne vrai si un joueur est gagnant.
+     *
+     * @return Vrai si un des joueurs a coulé tous les bateaux de son adversaire.
+     * */
     public boolean effectuerProchaintour() {
         Integer gagnant = null;
 
@@ -104,13 +136,21 @@ public class Jeu {
         return false;
     }
 
-    public List<Coordonnee> demanderPlacerBateau(int joueur, int numeroBateau) {
+    /**
+     * Demander à un joueur de placer ses bateaux. Retourne la réponse du joueur.
+     *
+     * @param joueurId ID du joueur à faire la demande (0 ou 1)
+     * @param numeroBateau Le numero du bateau à placer, entre 0 à 4.
+     *
+     * @return Liste de coordonnées représentant la position des bateaux.
+     * */
+    public List<Coordonnee> demanderPlacerBateau(int joueurId, int numeroBateau) {
         List<Coordonnee> coords;
         boolean estValide;
         do {
-            coords = joueurs[joueur].demanderPlacerBateau(numeroBateau);
-            estValide = estPlacementValide(coords, joueur);
-            if (!estValide && joueurs[joueur] instanceof Personne) System.out.println(POSITION_INVALIDE);
+            coords = joueurs[joueurId].demanderPlacerBateau(numeroBateau);
+            estValide = estPlacementValide(coords, joueurId);
+            if (!estValide && joueurs[joueurId] instanceof Personne) System.out.println(POSITION_INVALIDE);
         } while (!estValide);
         return coords;
     }
@@ -129,6 +169,13 @@ public class Jeu {
         return plateauTirs[joueurId].aCouleTousBateaux();
     }
 
+    /**
+     * Demander à un joueur de tirer sur une case.
+     *
+     * @param numeroJoueur ID du joueur à faire la demande (0 ou 1)
+     *
+     * @return Coordonnée représentant la position d'un tir choisi par le joueur.
+     * */
     public Coordonnee demanderTirJoueur(int numeroJoueur) {
         Coordonnee coord;
         boolean estValide;

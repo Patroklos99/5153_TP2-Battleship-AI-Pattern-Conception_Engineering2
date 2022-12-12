@@ -17,10 +17,16 @@ public class MenuPrincipal {
                     " 3 - Quitter\n";
     private static final String ERREUR = "Veuillez entrer un choix valide\n";
 
+    /**
+     * Affiche le menu de sélection du jeu
+     */
     public static void afficherMenu() {
         System.out.print(MENU);
     }
 
+    /**
+     * Permet au joueur de choisir les options qui veut dans le jeu
+     */
     private static void choisirOption() {
         int choix = -1;
         Jeu jeu = new Jeu();

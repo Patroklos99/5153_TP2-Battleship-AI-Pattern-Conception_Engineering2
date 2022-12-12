@@ -9,6 +9,9 @@ public abstract class PhaseJeu {
         this.jeu = jeu_;
     }
 
+    /**
+     * Exécuter la prochaine action à effectuer pour Jeu.
+     * */
     abstract public void prochaineAction();
 
 }

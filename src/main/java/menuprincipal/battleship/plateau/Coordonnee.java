@@ -19,6 +19,11 @@ public class Coordonnee {
         posV = posVertical;
     }
 
+    /**
+     * Verifie si la cordonné est valide
+     *
+     * @return booleen correspondant
+     */
     public boolean isValid() {
         if(posH < 0 || posH > 9)
             return false;
